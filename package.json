@@ -1,0 +1,33 @@
+{
+  "name": "react-boilerplate",
+  "version": "0.1.0",
+  "description": "my faceook React.js boilerplate",
+  "main": "index.html",
+  "scripts": {
+    "dev": "beefy src/index.jsx:bundle.js --live -- -t reactify",
+    "build": "browserify src/index.jsx -t reactify > bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koba04/react-boilerplate"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "koba04",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koba04/react-boilerplate/issues"
+  },
+  "homepage": "https://github.com/koba04/react-boilerplate",
+  "devDependencies": {
+    "beefy": "^2.1.1",
+    "browserify": "^5.11.0",
+    "reactify": "^0.14.0"
+  },
+  "dependencies": {
+    "director": "^1.2.3",
+    "react": "^0.11.1",
+    "superagent": "^0.18.2"
+  }
+}
