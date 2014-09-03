@@ -26,8 +26,8 @@
     "reactify": "^0.14.0"
   },
   "dependencies": {
-    "director": "^1.2.3",
     "react": "^0.11.1",
-    "superagent": "^0.18.2"
+    "superagent": "^0.18.2",
+    "react-router": "~0.7.0"
   }
 }

@@ -1,12 +1,10 @@
 # My React Boilerplate
 
-* react.js
+* react
+  * react-router
 * browserify
   * beefy (auto build & livereload)
   * partialify
-  * coffeeify
-  * stylify
-* insert-css
 
 ## setup
 ```
