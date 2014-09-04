@@ -24156,11 +24156,14 @@ var React     = require('react'),
 
 var App = React.createClass({displayName: 'App',
   render: function() {
+    var Routes  = Router.Routes,
+        Route   = Router.Route
+    ;
     return (
-      Router.Routes(null, 
-        Router.Route({name: "top", handler: Top, path: "/"}), 
-        Router.Route({name: "artist", handler: Artist}), 
-        Router.Route({name: "country", handler: Country})
+      Routes(null, 
+        Route({name: "top", handler: Top, path: "/"}), 
+        Route({name: "artist", handler: Artist}), 
+        Route({name: "country", handler: Country})
       )
     );
   }
@@ -24172,14 +24175,14 @@ React.renderComponent(App(null), document.getElementById("app"));
 /** @jsx React.DOM */
 
 var React = require('react');
-var Router = require('react-router');
+var Link = require('react-router').Link;
 
 module.exports = React.createClass({displayName: 'exports',
   render: function() {
     return (
       React.DOM.ul({className: "nav nav-pills nav-justified"}, 
-        React.DOM.li(null, Router.Link({to: "artist"}, "Artist")), 
-        React.DOM.li(null, Router.Link({to: "country"}, "Country"))
+        React.DOM.li(null, Link({to: "artist"}, "Artist")), 
+        React.DOM.li(null, Link({to: "country"}, "Country"))
       )
     );
   }

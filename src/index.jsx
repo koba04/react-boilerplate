@@ -9,12 +9,15 @@ var React     = require('react'),
 
 var App = React.createClass({
   render: function() {
+    var Routes  = Router.Routes,
+        Route   = Router.Route
+    ;
     return (
-      <Router.Routes>
-        <Router.Route name="top"      handler={Top}     path="/" />
-        <Router.Route name="artist"   handler={Artist}           />
-        <Router.Route name="country"  handler={Country}          />
-      </Router.Routes>
+      <Routes>
+        <Route name="top"      handler={Top}     path="/" />
+        <Route name="artist"   handler={Artist}           />
+        <Route name="country"  handler={Country}          />
+      </Routes>
     );
   }
 });
