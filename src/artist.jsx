@@ -2,10 +2,26 @@
 
 var React   = require('react'),
     Nav     = require('./nav.jsx'),
-    Footer  = require('./footer.jsx')
+    Footer  = require('./footer.jsx'),
+    InputArtist = require('./input-artist.jsx'),
+    Tracks  = require('./tracks.jsx'),
+    request = require('superagent')
 ;
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      tracks: []
+    };
+  },
+  fetchArtist: function(artist) {
+    request.get(
+      "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&method=artist.gettoptracks&artist=" + artist,
+      function(res) {
+        this.setState({tracks: res.body.toptracks.track});
+      }.bind(this)
+    );
+  },
   render: function() {
     return (
       <div>
@@ -14,8 +30,8 @@ module.exports = React.createClass({
         </header>
         <Nav />
         <article className="main-content">
-          <div>input-artist</div>
-          <div>tracks</div>
+          <InputArtist onHandleSubmit={this.fetchArtist} />
+          <Tracks tracks={this.state.tracks} />
         </article>
         <Footer />
       </div>

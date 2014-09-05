@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "react": "^0.11.1",
-    "superagent": "^0.18.2",
-    "react-router": "~0.7.0"
+    "react-addons": "^0.9.0",
+    "react-router": "~0.7.0",
+    "superagent": "^0.18.2"
   }
 }
