@@ -1,28 +1,36 @@
 /** @jsx React.DOM */
 
-var React   = require('react/addons');
+var React = require('react');
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
   getInitialState: function() {
     return {
-      inputArtist: ''
+      selectCountry: ''
     };
   },
   handleSubmit: function() {
-    var artist = this.state.inputArtist;
-    if (artist) {
-      this.props.onHandleSubmit(artist);
+    var country = this.state.selectCountry;
+    if (country) {
+      this.props.onHandleSubmit(country);
     }
     return false;
   },
   render: function() {
+    var countries = ['Japan', 'United States', 'United Kingdom'].map(function(country) {
+      return (
+        <option value={country}>{country}</option>
+      );
+    });
+
     return (
       <form className="form-horizontal" role="form" onSubmit={this.handleSubmit} >
         <div className="form-group">
-          <label htmlFor="js-input-location" className="col-sm-1 control-label">Artist</label>
-          <div className="col-sm-11">
-            <input type="text" className="form-control" placeholder="Input Atrist Name" valueLink={this.linkState('inputArtist')} required />
+          <label htmlFor="inputCountry" className="col-sm-1 control-label">Country</label>
+          <div className="col-sm-5">
+            <select className="form-control" valueLink={this.linkState('selectCountry')}>
+              {countries}
+            </select>
           </div>
         </div>
         <div className="form-group">
@@ -34,4 +42,3 @@ module.exports = React.createClass({
     );
   }
 });
-
