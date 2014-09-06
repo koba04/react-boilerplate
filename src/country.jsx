@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 
+require('insert-css')(require('./country.styl'));
+
 var React         = require('react'),
     Nav           = require('./nav.jsx'),
     Footer        = require('./footer.jsx'),
@@ -24,7 +26,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="country">
         <header className="page-header">
           <h1>Country Top Tracks <small>by Last.FM</small></h1>
         </header>

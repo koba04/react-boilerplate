@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 
+require('insert-css')(require('./tracks.styl'));
+
 var React = require('react');
 
 module.exports = React.createClass({
@@ -15,9 +17,11 @@ module.exports = React.createClass({
       );
     });
     return (
-      <ul className="list-group">
-        {tracks}
-      </ul>
+      <div className="tracks">
+        <ul className="list-group">
+          {tracks}
+        </ul>
+      </div>
     );
   }
 });

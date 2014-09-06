@@ -4,8 +4,8 @@
   "description": "my faceook React.js boilerplate",
   "main": "index.html",
   "scripts": {
-    "dev": "beefy src/index.jsx:bundle.js --live -- -t reactify",
-    "build": "browserify src/index.jsx -t reactify > bundle.js"
+    "dev": "beefy src/index.jsx:bundle.js --live -- -t reactify -t stylify",
+    "build": "browserify src/index.jsx -t reactify -t stylify > bundle.js"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,10 @@
     "reactify": "^0.14.0"
   },
   "dependencies": {
+    "insert-css": "^0.2.0",
     "react": "^0.11.1",
     "react-router": "~0.7.0",
+    "stylify": "^0.1.6",
     "superagent": "^0.18.2"
   }
 }

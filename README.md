@@ -4,7 +4,9 @@
   * react-router
 * browserify
   * beefy (auto build & livereload)
-  * partialify
+  * reactify
+  * stylify
+* insert-css
 
 ## setup
 ```
