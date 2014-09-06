@@ -27176,7 +27176,7 @@ module.exports = React.createClass({displayName: 'exports',
         React.DOM.header({className: "page-header"}, 
           React.DOM.h1(null, "Artist Top Tracks ", React.DOM.small(null, "by Last.FM"))
         ), 
-        Nav(null), 
+        Nav({current: "artist"}), 
         React.DOM.article({className: "main-content"}, 
           InputArtist({onHandleSubmit: this.fetchArtist}), 
           Tracks({tracks: this.state.tracks})
@@ -27188,7 +27188,7 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./artist.styl":213,"./footer.jsx":216,"./input-artist.jsx":218,"./nav.jsx":219,"./tracks.jsx":224,"insert-css":6,"react":208,"superagent":209}],213:[function(require,module,exports){
+},{"./artist.styl":213,"./footer.jsx":216,"./input-artist.jsx":219,"./nav.jsx":220,"./tracks.jsx":225,"insert-css":6,"react":208,"superagent":209}],213:[function(require,module,exports){
 module.exports = ".artist h1{font-family:'Poiret One',cursive}";
 },{}],214:[function(require,module,exports){
 /** @jsx React.DOM */
@@ -27223,7 +27223,7 @@ module.exports = React.createClass({displayName: 'exports',
         React.DOM.header({className: "page-header"}, 
           React.DOM.h1(null, "Country Top Tracks ", React.DOM.small(null, "by Last.FM"))
         ), 
-        Nav(null), 
+        Nav({current: "country"}), 
         React.DOM.article({className: "main-content"}, 
           SelectCountry({onHandleSubmit: this.fetchTopTracks}), 
           Tracks({tracks: this.state.tracks})
@@ -27234,7 +27234,7 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"./country.styl":215,"./footer.jsx":216,"./nav.jsx":219,"./select-country.jsx":221,"./tracks.jsx":224,"insert-css":6,"react":208,"superagent":209}],215:[function(require,module,exports){
+},{"./country.styl":215,"./footer.jsx":216,"./nav.jsx":220,"./select-country.jsx":222,"./tracks.jsx":225,"insert-css":6,"react":208,"superagent":209}],215:[function(require,module,exports){
 module.exports = ".country h1{font-family:'Roboto Condensed',sans-serif}";
 },{}],216:[function(require,module,exports){
 /** @jsx React.DOM */
@@ -27258,7 +27258,9 @@ module.exports = React.createClass({displayName: 'exports',
 },{"react":208}],217:[function(require,module,exports){
 /** @jsx React.DOM */
 
-var React     = require('react'),
+require('insert-css')(require('./index.styl'));
+
+var React     = require('react/addons'),
     Router    = require('react-router'),
     Top       = require('./top.jsx'),
     Artist    = require('./artist.jsx'),
@@ -27267,22 +27269,34 @@ var React     = require('react'),
 
 var App = React.createClass({displayName: 'App',
   render: function() {
-    var Routes  = Router.Routes,
-        Route   = Router.Route
-    ;
+    var CSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
-      Routes(null, 
-        Route({name: "top", handler: Top, path: "/"}), 
-        Route({name: "artist", handler: Artist}), 
-        Route({name: "country", handler: Country})
+      CSSTransitionGroup({transitionName: "route"}, 
+        this.props.activeRouteHandler()
       )
     );
   }
 });
 
-React.renderComponent(App(null), document.getElementById("app"));
+var Routes  = Router.Routes,
+    Route   = Router.Route
+;
 
-},{"./artist.jsx":212,"./country.jsx":214,"./top.jsx":222,"react":208,"react-router":15}],218:[function(require,module,exports){
+var route = (
+  Routes(null, 
+    Route({handler: App}, 
+      Route({name: "top", handler: Top, path: "/"}), 
+      Route({name: "artist", handler: Artist}), 
+      Route({name: "country", handler: Country})
+    )
+  )
+);
+
+React.renderComponent(route, document.getElementById("app"));
+
+},{"./artist.jsx":212,"./country.jsx":214,"./index.styl":218,"./top.jsx":223,"insert-css":6,"react-router":15,"react/addons":49}],218:[function(require,module,exports){
+module.exports = ".route-enter{opacity:.1;transition:opacity 1s ease-in}.route-enter.route-enter-active{opacity:1}.route-leave{opacity:1;transition:opacity 1s ease-in}.route-leave.route-leave-active{opacity:.1}";
+},{}],219:[function(require,module,exports){
 /** @jsx React.DOM */
 
 var React   = require('react/addons');
@@ -27321,21 +27335,27 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"react/addons":49}],219:[function(require,module,exports){
+},{"react/addons":49}],220:[function(require,module,exports){
 /** @jsx React.DOM */
 
 require('insert-css')(require('./nav.styl'));
 
-var React = require('react');
+var React = require('react/addons');
 var Link = require('react-router').Link;
 
 module.exports = React.createClass({displayName: 'exports',
   render: function() {
+    var artistClassName = React.addons.classSet({
+      active: this.props.current === "artist"
+    });
+    var countryClassName = React.addons.classSet({
+      active: this.props.current === "country"
+    });
     return (
       React.DOM.div({className: "nav-content"}, 
         React.DOM.ul({className: "nav nav-pills nav-justified"}, 
-          React.DOM.li(null, Link({to: "artist"}, "Artist")), 
-          React.DOM.li(null, Link({to: "country"}, "Country"))
+          React.DOM.li({className: artistClassName}, Link({to: "artist"}, "Artist")), 
+          React.DOM.li({className: countryClassName}, Link({to: "country"}, "Country"))
         )
       )
     );
@@ -27343,9 +27363,9 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./nav.styl":220,"insert-css":6,"react":208,"react-router":15}],220:[function(require,module,exports){
+},{"./nav.styl":221,"insert-css":6,"react-router":15,"react/addons":49}],221:[function(require,module,exports){
 module.exports = ".nav-content .nav{margin-bottom:20px;border-bottom:solid #eee}";
-},{}],221:[function(require,module,exports){
+},{}],222:[function(require,module,exports){
 /** @jsx React.DOM */
 
 var React = require('react');
@@ -27392,7 +27412,7 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"react":208}],222:[function(require,module,exports){
+},{"react":208}],223:[function(require,module,exports){
 /** @jsx React.DOM */
 
 require('insert-css')(require('./top.styl'));
@@ -27420,9 +27440,9 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./footer.jsx":216,"./nav.jsx":219,"./top.styl":223,"insert-css":6,"react":208}],223:[function(require,module,exports){
+},{"./footer.jsx":216,"./nav.jsx":220,"./top.styl":224,"insert-css":6,"react":208}],224:[function(require,module,exports){
 module.exports = ".top h1{font-family:'Playfair Display SC',serif}";
-},{}],224:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 /** @jsx React.DOM */
 
 require('insert-css')(require('./tracks.styl'));
@@ -27452,6 +27472,6 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./tracks.styl":225,"insert-css":6,"react":208}],225:[function(require,module,exports){
+},{"./tracks.styl":226,"insert-css":6,"react":208}],226:[function(require,module,exports){
 module.exports = ".tracks .track{font-size:20px;margin-right:10px}.tracks .artist{font-size:14px;margin-right:10px}";
 },{}]},{},[217]);
