@@ -30,7 +30,7 @@ module.exports = React.createClass({
         <header className="page-header">
           <h1>Country Top Tracks <small>by Last.FM</small></h1>
         </header>
-        <Nav />
+        <Nav current="country" />
         <article className="main-content">
           <SelectCountry onHandleSubmit={this.fetchTopTracks} />
           <Tracks tracks={this.state.tracks} />
