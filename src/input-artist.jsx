@@ -6,7 +6,7 @@ module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
   getInitialState: function() {
     return {
-      inputArtist: ''
+      inputArtist: 'radiohead'
     };
   },
   handleSubmit: function() {

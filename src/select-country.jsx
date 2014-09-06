@@ -4,9 +4,10 @@ var React = require('react');
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
+  countries: ['Japan', 'United States', 'United Kingdom'],
   getInitialState: function() {
     return {
-      selectCountry: ''
+      selectCountry: this.countries[0]
     };
   },
   handleSubmit: function() {
@@ -17,7 +18,7 @@ module.exports = React.createClass({
     return false;
   },
   render: function() {
-    var countries = ['Japan', 'United States', 'United Kingdom'].map(function(country) {
+    var countries = this.countries.map(function(country) {
       return (
         <option value={country}>{country}</option>
       );
