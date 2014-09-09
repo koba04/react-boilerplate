@@ -27,9 +27,9 @@ var Routes  = Router.Routes,
 var route = (
   <Routes>
     <Route handler={App}>
-      <Route name="top"      handler={Top}     path="/" />
-      <Route name="artist"   handler={Artist}           />
-      <Route name="country"  handler={Country}          />
+      <Route name="top"      handler={Top}     addHandlerKey={true} path="/" />
+      <Route name="artist"   handler={Artist}  addHandlerKey={true}          />
+      <Route name="country"  handler={Country} addHandlerKey={true}          />
     </Route>
   </Routes>
 );
