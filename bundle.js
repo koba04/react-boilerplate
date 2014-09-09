@@ -27285,9 +27285,9 @@ var Routes  = Router.Routes,
 var route = (
   Routes(null, 
     Route({handler: App}, 
-      Route({name: "top", handler: Top, path: "/"}), 
-      Route({name: "artist", handler: Artist}), 
-      Route({name: "country", handler: Country})
+      Route({name: "top", handler: Top, addHandlerKey: true, path: "/"}), 
+      Route({name: "artist", handler: Artist, addHandlerKey: true}), 
+      Route({name: "country", handler: Country, addHandlerKey: true})
     )
   )
 );
@@ -27295,7 +27295,7 @@ var route = (
 React.renderComponent(route, document.getElementById("app"));
 
 },{"./artist.jsx":212,"./country.jsx":214,"./index.styl":218,"./top.jsx":223,"insert-css":6,"react-router":15,"react/addons":49}],218:[function(require,module,exports){
-module.exports = ".route-enter{opacity:.1;transition:opacity 1s ease-in}.route-enter.route-enter-active{opacity:1}.route-leave{opacity:1;transition:opacity 1s ease-in}.route-leave.route-leave-active{opacity:.1}";
+module.exports = "#app .route-enter{-webkit-animation:fadein .5s;-webkit-animation-delay:.2s;animation:fadein .5s;animation-delay:.2s;opacity:0}#app .route-leave{-webkit-animation:fadeout .2s;animation:fadeout .2s}@-moz-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-webkit-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-o-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-moz-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-o-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}";
 },{}],219:[function(require,module,exports){
 /** @jsx React.DOM */
 
