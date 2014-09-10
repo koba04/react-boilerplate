@@ -8,8 +8,8 @@ module.exports = React.createClass({
   propTypes: {
     tracks: React.PropTypes.array.isRequired
   },
-  render: function() {
-    var tracks = this.props.tracks.map(function(track, index) {
+  render() {
+    var tracks = this.props.tracks.map( (track, index) => {
       return (
         <li className="list-group-item">
           <span className="label label-info">{index+1}</span>

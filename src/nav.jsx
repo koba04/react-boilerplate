@@ -9,7 +9,7 @@ module.exports = React.createClass({
   propTypes: {
     current: React.PropTypes.string
   },
-  render: function() {
+  render() {
     var artistClassName = React.addons.classSet({
       active: this.props.current === "artist"
     });

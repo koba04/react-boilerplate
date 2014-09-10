@@ -7,19 +7,19 @@ module.exports = React.createClass({
   propTypes: {
     onHandleSubmit: React.PropTypes.func.isRequired
   },
-  getInitialState: function() {
+  getInitialState() {
     return {
       inputArtist: 'radiohead'
     };
   },
-  handleSubmit: function() {
+  handleSubmit() {
     var artist = this.state.inputArtist;
     if (artist) {
       this.props.onHandleSubmit(artist);
     }
     return false;
   },
-  render: function() {
+  render() {
     return (
       <form className="form-horizontal" role="form" onSubmit={this.handleSubmit} >
         <div className="form-group">

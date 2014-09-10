@@ -27157,20 +27157,20 @@ var React   = require('react'),
 ;
 
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState: function() {
+  getInitialState:function() {
     return {
       tracks: []
     };
   },
-  fetchArtist: function(artist) {
+  fetchArtist:function(artist) {
     request.get(
       "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&method=artist.gettoptracks&artist=" + artist,
-      function(res) {
+      function(res)  {
         this.setState({tracks: res.body.toptracks.track});
       }.bind(this)
     );
   },
-  render: function() {
+  render:function() {
     return (
       React.DOM.div({className: "artist"}, 
         React.DOM.header({className: "page-header"}, 
@@ -27204,20 +27204,20 @@ var React         = require('react'),
 ;
 
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState: function() {
+  getInitialState:function() {
     return {
       tracks: []
     };
   },
-  fetchTopTracks: function(country) {
+  fetchTopTracks:function(country) {
     request.get(
       "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&method=geo.gettoptracks&country=" + encodeURIComponent(country),
-      function(res) {
+      function(res)  {
         this.setState({tracks: res.body.toptracks.track});
       }.bind(this)
     );
   },
-  render: function() {
+  render:function() {
     return (
       React.DOM.div({className: "country"}, 
         React.DOM.header({className: "page-header"}, 
@@ -27242,7 +27242,7 @@ module.exports = ".country h1{font-family:'Roboto Condensed',sans-serif}";
 var React = require('react');
 
 module.exports = React.createClass({displayName: 'exports',
-  render: function() {
+  render:function() {
     return (
       React.DOM.footer(null, 
         React.DOM.div({className: "well well-lg"}, 
@@ -27271,7 +27271,7 @@ var App = React.createClass({displayName: 'App',
   propTypes: {
     activeRouteHandler: React.PropTypes.func.isRequired
   },
-  render: function() {
+  render:function() {
     var CSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
       CSSTransitionGroup({transitionName: "route"}, 
@@ -27309,19 +27309,19 @@ module.exports = React.createClass({displayName: 'exports',
   propTypes: {
     onHandleSubmit: React.PropTypes.func.isRequired
   },
-  getInitialState: function() {
+  getInitialState:function() {
     return {
       inputArtist: 'radiohead'
     };
   },
-  handleSubmit: function() {
+  handleSubmit:function() {
     var artist = this.state.inputArtist;
     if (artist) {
       this.props.onHandleSubmit(artist);
     }
     return false;
   },
-  render: function() {
+  render:function() {
     return (
       React.DOM.form({className: "form-horizontal", role: "form", onSubmit: this.handleSubmit}, 
         React.DOM.div({className: "form-group"}, 
@@ -27353,7 +27353,7 @@ module.exports = React.createClass({displayName: 'exports',
   propTypes: {
     current: React.PropTypes.string
   },
-  render: function() {
+  render:function() {
     var artistClassName = React.addons.classSet({
       active: this.props.current === "artist"
     });
@@ -27385,20 +27385,20 @@ module.exports = React.createClass({displayName: 'exports',
     onHandleSubmit: React.PropTypes.func.isRequired
   },
   countries: ['Japan', 'United States', 'United Kingdom'],
-  getInitialState: function() {
+  getInitialState:function() {
     return {
       selectCountry: this.countries[0]
     };
   },
-  handleSubmit: function() {
+  handleSubmit:function() {
     var country = this.state.selectCountry;
     if (country) {
       this.props.onHandleSubmit(country);
     }
     return false;
   },
-  render: function() {
-    var countries = this.countries.map(function(country) {
+  render:function() {
+    var countries = this.countries.map( function(country)  {
       return (
         React.DOM.option({value: country}, country)
       );
@@ -27435,7 +27435,7 @@ var React = require('react'),
 ;
 
 module.exports = React.createClass({displayName: 'exports',
-  render: function() {
+  render:function() {
     return (
       React.DOM.div({className: "top"}, 
         React.DOM.header({className: "page-header"}, 
@@ -27465,8 +27465,8 @@ module.exports = React.createClass({displayName: 'exports',
   propTypes: {
     tracks: React.PropTypes.array.isRequired
   },
-  render: function() {
-    var tracks = this.props.tracks.map(function(track, index) {
+  render:function() {
+    var tracks = this.props.tracks.map( function(track, index)  {
       return (
         React.DOM.li({className: "list-group-item"}, 
           React.DOM.span({className: "label label-info"}, index+1), 

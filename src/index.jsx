@@ -13,7 +13,7 @@ var App = React.createClass({
   propTypes: {
     activeRouteHandler: React.PropTypes.func.isRequired
   },
-  render: function() {
+  render() {
     var CSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
       <CSSTransitionGroup transitionName="route">

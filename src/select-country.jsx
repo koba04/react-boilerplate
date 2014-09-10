@@ -8,20 +8,20 @@ module.exports = React.createClass({
     onHandleSubmit: React.PropTypes.func.isRequired
   },
   countries: ['Japan', 'United States', 'United Kingdom'],
-  getInitialState: function() {
+  getInitialState() {
     return {
       selectCountry: this.countries[0]
     };
   },
-  handleSubmit: function() {
+  handleSubmit() {
     var country = this.state.selectCountry;
     if (country) {
       this.props.onHandleSubmit(country);
     }
     return false;
   },
-  render: function() {
-    var countries = this.countries.map(function(country) {
+  render() {
+    var countries = this.countries.map( (country) => {
       return (
         <option value={country}>{country}</option>
       );

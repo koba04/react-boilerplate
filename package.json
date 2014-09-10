@@ -4,8 +4,8 @@
   "description": "my faceook React.js boilerplate",
   "main": "index.html",
   "scripts": {
-    "dev": "beefy src/index.jsx:bundle.js --live -- -t reactify -t stylify",
-    "build": "browserify src/index.jsx -t reactify -t stylify > bundle.js"
+    "dev": "beefy src/index.jsx:bundle.js --live",
+    "build": "browserify src/index.jsx > bundle.js"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,11 @@
     "react-router": "~0.7.0",
     "stylify": "^0.1.6",
     "superagent": "^0.18.2"
+  },
+  "browserify": {
+    "transform": [
+      [ "reactify", { "es6": true } ],
+      [ "stylify" ]
+    ]
   }
 }

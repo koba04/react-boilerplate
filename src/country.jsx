@@ -11,20 +11,20 @@ var React         = require('react'),
 ;
 
 module.exports = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {
       tracks: []
     };
   },
-  fetchTopTracks: function(country) {
+  fetchTopTracks(country) {
     request.get(
       "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&method=geo.gettoptracks&country=" + encodeURIComponent(country),
-      function(res) {
+      (res) => {
         this.setState({tracks: res.body.toptracks.track});
-      }.bind(this)
+      }
     );
   },
-  render: function() {
+  render() {
     return (
       <div className="country">
         <header className="page-header">
