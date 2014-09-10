@@ -5,6 +5,9 @@ require('insert-css')(require('./tracks.styl'));
 var React = require('react');
 
 module.exports = React.createClass({
+  propTypes: {
+    tracks: React.PropTypes.array.isRequired
+  },
   render: function() {
     var tracks = this.props.tracks.map(function(track, index) {
       return (

@@ -27268,6 +27268,9 @@ var React     = require('react/addons'),
 ;
 
 var App = React.createClass({displayName: 'App',
+  propTypes: {
+    activeRouteHandler: React.PropTypes.func.isRequired
+  },
   render: function() {
     var CSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
@@ -27303,6 +27306,9 @@ var React   = require('react/addons');
 
 module.exports = React.createClass({displayName: 'exports',
   mixins: [React.addons.LinkedStateMixin],
+  propTypes: {
+    onHandleSubmit: React.PropTypes.func.isRequired
+  },
   getInitialState: function() {
     return {
       inputArtist: 'radiohead'
@@ -27344,6 +27350,9 @@ var React = require('react/addons');
 var Link = require('react-router').Link;
 
 module.exports = React.createClass({displayName: 'exports',
+  propTypes: {
+    current: React.PropTypes.string
+  },
   render: function() {
     var artistClassName = React.addons.classSet({
       active: this.props.current === "artist"
@@ -27372,6 +27381,9 @@ var React = require('react');
 
 module.exports = React.createClass({displayName: 'exports',
   mixins: [React.addons.LinkedStateMixin],
+  propTypes: {
+    onHandleSubmit: React.PropTypes.func.isRequired
+  },
   countries: ['Japan', 'United States', 'United Kingdom'],
   getInitialState: function() {
     return {
@@ -27450,6 +27462,9 @@ require('insert-css')(require('./tracks.styl'));
 var React = require('react');
 
 module.exports = React.createClass({displayName: 'exports',
+  propTypes: {
+    tracks: React.PropTypes.array.isRequired
+  },
   render: function() {
     var tracks = this.props.tracks.map(function(track, index) {
       return (

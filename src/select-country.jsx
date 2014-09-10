@@ -4,6 +4,9 @@ var React = require('react');
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
+  propTypes: {
+    onHandleSubmit: React.PropTypes.func.isRequired
+  },
   countries: ['Japan', 'United States', 'United Kingdom'],
   getInitialState: function() {
     return {

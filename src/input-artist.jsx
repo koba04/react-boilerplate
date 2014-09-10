@@ -4,6 +4,9 @@ var React   = require('react/addons');
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
+  propTypes: {
+    onHandleSubmit: React.PropTypes.func.isRequired
+  },
   getInitialState: function() {
     return {
       inputArtist: 'radiohead'

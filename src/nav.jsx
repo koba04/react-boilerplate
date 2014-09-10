@@ -6,6 +6,9 @@ var React = require('react/addons');
 var Link = require('react-router').Link;
 
 module.exports = React.createClass({
+  propTypes: {
+    current: React.PropTypes.string
+  },
   render: function() {
     var artistClassName = React.addons.classSet({
       active: this.props.current === "artist"

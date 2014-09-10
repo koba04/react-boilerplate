@@ -10,6 +10,9 @@ var React     = require('react/addons'),
 ;
 
 var App = React.createClass({
+  propTypes: {
+    activeRouteHandler: React.PropTypes.func.isRequired
+  },
   render: function() {
     var CSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
