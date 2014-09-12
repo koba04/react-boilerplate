@@ -5,12 +5,12 @@ var React = require('react');
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
   propTypes: {
-    onHandleSubmit: React.PropTypes.func.isRequired
+    onHandleSubmit: React.PropTypes.func.isRequired,
+    countries:      React.PropTypes.array.isRequired
   },
-  countries: ['Japan', 'United States', 'United Kingdom'],
   getInitialState() {
     return {
-      selectCountry: this.countries[0]
+      selectCountry: this.props.countries[0]
     };
   },
   handleSubmit() {
@@ -21,9 +21,9 @@ module.exports = React.createClass({
     return false;
   },
   render() {
-    var countries = this.countries.map( (country) => {
+    var countries = this.props.countries.map( (country) => {
       return (
-        <option value={country}>{country}</option>
+        <option value={country} key={country}>{country}</option>
       );
     });
 

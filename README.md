@@ -2,6 +2,7 @@
 
 * react
   * react-router
+* backbone
 * browserify
   * beefy (auto build & livereload)
   * reactify

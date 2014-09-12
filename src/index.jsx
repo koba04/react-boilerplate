@@ -4,9 +4,9 @@ require('insert-css')(require('./index.styl'));
 
 var React     = require('react/addons'),
     Router    = require('react-router'),
-    Top       = require('./top.jsx'),
-    Artist    = require('./artist.jsx'),
-    Country   = require('./country.jsx')
+    Top       = require('./component/top.jsx'),
+    Artist    = require('./component/artist.jsx'),
+    Country   = require('./component/country.jsx')
 ;
 
 var App = React.createClass({

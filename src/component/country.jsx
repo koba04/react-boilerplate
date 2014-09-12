@@ -7,22 +7,13 @@ var React         = require('react'),
     Footer        = require('./footer.jsx'),
     SelectCountry = require('./select-country.jsx'),
     Tracks        = require('./tracks.jsx'),
-    request       = require('superagent')
+    TracksMixin   = require('../tracks-mixin.jsx')
 ;
 
 module.exports = React.createClass({
-  getInitialState() {
-    return {
-      tracks: []
-    };
-  },
+  mixins: [TracksMixin],
   fetchTopTracks(country) {
-    request.get(
-      "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&method=geo.gettoptracks&country=" + encodeURIComponent(country),
-      (res) => {
-        this.setState({tracks: res.body.toptracks.track});
-      }
-    );
+    this.tracks.fetchByCountry(country);
   },
   render() {
     return (
@@ -32,7 +23,7 @@ module.exports = React.createClass({
         </header>
         <Nav current="country" />
         <article className="main-content">
-          <SelectCountry onHandleSubmit={this.fetchTopTracks} />
+          <SelectCountry onHandleSubmit={this.fetchTopTracks} countries={this.tracks.countries} />
           <Tracks tracks={this.state.tracks} />
         </article>
         <Footer />
