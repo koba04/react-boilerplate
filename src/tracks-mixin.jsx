@@ -8,10 +8,10 @@ module.exports = {
     this.setState({ tracks: [] });
   },
   componentDidMount() {
-    tracks.on("all", this.setTracks, this);
+    tracks.on("all", this.setTracks);
   },
   componentWillUnmount() {
-    tracks.off("all", this.setTracks, this);
+    tracks.off("all", this.setTracks);
   },
   setTracks() {
     this.setState({

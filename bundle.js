@@ -30509,10 +30509,10 @@ module.exports = {
     this.setState({ tracks: [] });
   },
   componentDidMount:function() {
-    tracks.on("all", this.setTracks, this);
+    tracks.on("all", this.setTracks);
   },
   componentWillUnmount:function() {
-    tracks.off("all", this.setTracks, this);
+    tracks.off("all", this.setTracks);
   },
   setTracks:function() {
     this.setState({
