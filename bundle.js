@@ -30533,13 +30533,13 @@ var Tracks = Backbone.Collection.extend({
   countries: ['Japan', 'United States', 'United Kingdom'],
   fetchByArtist:function(artist) {
     request.get(
-      this.urlRoot + "method=artist.gettoptracks&artist=" + encodeURIComponent(artist),
+      (this.urlRoot + "method=artist.gettoptracks&artist=" + encodeURIComponent(artist)),
       function(res)  { this.reset(res.body.toptracks.track); }.bind(this)
     );
   },
   fetchByCountry:function(country) {
     request.get(
-      this.urlRoot + "method=geo.gettoptracks&country=" + encodeURIComponent(country),
+      (this.urlRoot + "method=geo.gettoptracks&country=" + encodeURIComponent(country)),
       function(res)  { this.reset(res.body.toptracks.track); }.bind(this)
     );
   }
