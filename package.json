@@ -35,7 +35,7 @@
   },
   "browserify": {
     "transform": [
-      [ "reactify", { "es6": true }, { "everything": true } ],
+      [ "reactify", { "harmony": true }, { "everything": true } ],
       [ "stylify" ]
     ]
   }
