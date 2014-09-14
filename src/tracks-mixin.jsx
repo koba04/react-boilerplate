@@ -6,8 +6,6 @@ module.exports = {
   componentWillMount() {
     this.tracks = tracks;
     this.setState({ tracks: [] });
-  },
-  componentDidMount() {
     tracks.on("all", this.setTracks);
   },
   componentWillUnmount() {

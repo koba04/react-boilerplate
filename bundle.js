@@ -30507,8 +30507,6 @@ module.exports = {
   componentWillMount:function() {
     this.tracks = tracks;
     this.setState({ tracks: [] });
-  },
-  componentDidMount:function() {
     tracks.on("all", this.setTracks);
   },
   componentWillUnmount:function() {
