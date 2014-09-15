@@ -3,9 +3,13 @@
 var tracks = require('./tracks');
 
 module.exports = {
+  getInitialState() {
+    return {
+      tracks: []
+    };
+  },
   componentWillMount() {
     this.tracks = tracks;
-    this.setState({ tracks: [] });
     tracks.on("all", this.setTracks);
   },
   componentWillUnmount() {

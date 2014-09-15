@@ -30504,9 +30504,13 @@ module.exports = "#app .route-enter{-webkit-animation:fadein .5s;-webkit-animati
 var tracks = require('./tracks');
 
 module.exports = {
+  getInitialState:function() {
+    return {
+      tracks: []
+    };
+  },
   componentWillMount:function() {
     this.tracks = tracks;
-    this.setState({ tracks: [] });
     tracks.on("all", this.setTracks);
   },
   componentWillUnmount:function() {
