@@ -16,8 +16,10 @@ module.exports = {
     tracks.off("all", this.setTracks);
   },
   setTracks() {
-    this.setState({
-      tracks: tracks.map( (track) => { return track.attributes } )
-    });
+    if (this.isMounted()) {
+      this.setState({
+        tracks: tracks.map( (track) => { return track.attributes } )
+      });
+    }
   },
 };

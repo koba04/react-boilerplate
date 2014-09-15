@@ -30517,9 +30517,11 @@ module.exports = {
     tracks.off("all", this.setTracks);
   },
   setTracks:function() {
-    this.setState({
-      tracks: tracks.map( function(track)  { return track.attributes } )
-    });
+    if (this.isMounted()) {
+      this.setState({
+        tracks: tracks.map( function(track)  { return track.attributes } )
+      });
+    }
   },
 };
 
