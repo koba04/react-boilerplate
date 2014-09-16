@@ -13,12 +13,12 @@ module.exports = React.createClass({
       selectCountry: this.props.countries[0]
     };
   },
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     var country = this.state.selectCountry;
     if (country) {
       this.props.onHandleSubmit(country);
     }
-    return false;
   },
   render() {
     var countries = this.props.countries.map( (country) => {

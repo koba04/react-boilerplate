@@ -12,12 +12,12 @@ module.exports = React.createClass({
       inputArtist: 'radiohead'
     };
   },
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     var artist = this.state.inputArtist;
     if (artist) {
       this.props.onHandleSubmit(artist);
     }
-    return false;
   },
   render() {
     return (

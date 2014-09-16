@@ -30279,12 +30279,12 @@ module.exports = React.createClass({displayName: 'exports',
       inputArtist: 'radiohead'
     };
   },
-  handleSubmit:function() {
+  handleSubmit:function(e) {
+    e.preventDefault();
     var artist = this.state.inputArtist;
     if (artist) {
       this.props.onHandleSubmit(artist);
     }
-    return false;
   },
   render:function() {
     return (
@@ -30355,12 +30355,12 @@ module.exports = React.createClass({displayName: 'exports',
       selectCountry: this.props.countries[0]
     };
   },
-  handleSubmit:function() {
+  handleSubmit:function(e) {
+    e.preventDefault();
     var country = this.state.selectCountry;
     if (country) {
       this.props.onHandleSubmit(country);
     }
-    return false;
   },
   render:function() {
     var countries = this.props.countries.map( function(country)  {
