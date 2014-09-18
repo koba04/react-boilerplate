@@ -26,3 +26,7 @@ npm run dev
 ```
 npm run build
 ```
+
+## ServerSide Rendering
+
+https://github.com/koba04/react-boilerplate/tree/serverside-rendering
