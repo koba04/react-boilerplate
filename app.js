@@ -17,4 +17,6 @@ app.get('/country', handler('country'));
 
 app.use(express.static(__dirname));
 
-app.listen(3000);
+var port = process.env.PORT || 5000;
+console.log("listening..." + port);
+app.listen(port);
