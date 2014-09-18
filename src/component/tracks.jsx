@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 
-require('insert-css')(require('./tracks.styl'));
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./tracks.styl'));
+}
 
 var React = require('react');
 

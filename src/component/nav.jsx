@@ -1,9 +1,12 @@
 /** @jsx React.DOM */
 
-require('insert-css')(require('./nav.styl'));
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./nav.styl'));
+}
 
-var React = require('react/addons');
-var Link = require('react-router').Link;
+var React = require('react/addons'),
+    Link  = require('react-router-component').Link
+;
 
 module.exports = React.createClass({
   propTypes: {
@@ -19,8 +22,8 @@ module.exports = React.createClass({
     return (
       <div className="nav-content">
         <ul className="nav nav-pills nav-justified">
-          <li className={artistClassName}><Link to="artist">Artist</Link></li>
-          <li className={countryClassName}><Link to="country">Country</Link></li>
+          <li className={artistClassName}><Link href="/artist">Artist</Link></li>
+          <li className={countryClassName}><Link href="/country">Country</Link></li>
         </ul>
       </div>
     );

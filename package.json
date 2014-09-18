@@ -4,7 +4,7 @@
   "description": "my faceook React.js boilerplate",
   "main": "index.html",
   "scripts": {
-    "dev": "beefy src/index.jsx:bundle.js --live",
+    "dev": "watchify src/index.jsx -o bundle.js -v",
     "build": "browserify src/index.jsx > bundle.js"
   },
   "repository": {
@@ -23,20 +23,34 @@
   "devDependencies": {
     "beefy": "^2.1.1",
     "browserify": "^5.11.0",
-    "reactify": "^0.14.0"
+    "reactify": "^0.14.0",
+    "watchify": "~1.0.2"
   },
   "dependencies": {
     "insert-css": "^0.2.0",
     "react": "^0.11.1",
-    "react-router": "~0.7.0",
     "stylify": "^0.1.6",
     "superagent": "^0.18.2",
-    "backbone": "~1.1.2"
+    "backbone": "~1.1.2",
+    "react-async": "~1.0.2",
+    "react-router-component": "~0.20.1",
+    "express": "~4.9.2",
+    "express-react-views": "~0.5.0"
   },
   "browserify": {
     "transform": [
-      [ "reactify", { "harmony": true }, { "everything": true } ],
-      [ "stylify" ]
+      [
+        "reactify",
+        {
+          "harmony": true
+        },
+        {
+          "everything": true
+        }
+      ],
+      [
+        "stylify"
+      ]
     ]
   }
 }

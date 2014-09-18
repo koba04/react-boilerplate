@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 
-require('insert-css')(require('./artist.styl'));
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./artist.styl'));
+}
 
 var React       = require('react'),
     Nav         = require('./nav.jsx'),

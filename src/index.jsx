@@ -1,40 +1,35 @@
 /** @jsx React.DOM */
 
-require('insert-css')(require('./index.styl'));
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./index.styl'));
+}
 
-var React     = require('react/addons'),
-    Router    = require('react-router'),
-    Top       = require('./component/top.jsx'),
-    Artist    = require('./component/artist.jsx'),
-    Country   = require('./component/country.jsx')
+var React               = require('react/addons'),
+    Router              = require('react-router-component'),
+    AnimationLocations  = require('./animation-locations.jsx'),
+    Top                 = require('./component/top.jsx'),
+    Artist              = require('./component/artist.jsx'),
+    Country             = require('./component/country.jsx')
 ;
 
 var App = React.createClass({
-  propTypes: {
-    activeRouteHandler: React.PropTypes.func.isRequired
-  },
   render() {
-    var CSSTransitionGroup = React.addons.CSSTransitionGroup;
+    var CSSTransitionGroup = React.addons.CSSTransitionGroup,
+        Location   = Router.Location
+    ;
     return (
-      <CSSTransitionGroup transitionName="route">
-        {this.props.activeRouteHandler()}
-      </CSSTransitionGroup>
+        <AnimationLocations path={this.props.path} transitionName="route">
+          <Location path="/"        handler={Top}     />
+          <Location path="/artist"  handler={Artist}  />
+          <Location path="/country" handler={Country} />
+        </AnimationLocations>
     );
   }
 });
 
-var Routes  = Router.Routes,
-    Route   = Router.Route
-;
+if (typeof window !== "undefined") {
+  React.renderComponent(App(), document.getElementById("app"));
+} else {
+  module.exports = App;
+}
 
-var route = (
-  <Routes>
-    <Route handler={App}>
-      <Route name="top"      handler={Top}     addHandlerKey={true} path="/" />
-      <Route name="artist"   handler={Artist}  addHandlerKey={true}          />
-      <Route name="country"  handler={Country} addHandlerKey={true}          />
-    </Route>
-  </Routes>
-);
-
-React.renderComponent(route, document.getElementById("app"));

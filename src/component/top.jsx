@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 
-require('insert-css')(require('./top.styl'));
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./top.styl'));
+}
 
 var React = require('react'),
     Nav   = require('./nav.jsx'),

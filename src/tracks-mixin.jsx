@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var tracks = require('./tracks');
+var tracks = require('./tracks.jsx');
 
 module.exports = {
   getInitialState() {

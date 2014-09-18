@@ -1,10 +1,12 @@
-# My React Boilerplate
+# My React Boilerplate (ServerSideRendering)
 
 * react
-  * react-router
+  * react-router-component
+* express
+  * express-react-views
 * backbone
 * browserify
-  * beefy (auto build & livereload)
+  * watchify
   * reactify
   * stylify
 * insert-css
@@ -14,11 +16,14 @@
 npm install
 ```
 
-## start develop
-* livereload and autobuild
-  * not created bundle.js
+## watch and autobuild
 ```
 npm run dev
+```
+
+## run server
+```
+node app.js
 ```
 
 ## build
