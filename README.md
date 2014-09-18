@@ -2,6 +2,8 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/koba04/react-boilerplate)
 
+http://react-serverside-rendering.herokuapp.com/
+
 * react
   * react-router-component
 * express
