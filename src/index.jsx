@@ -28,7 +28,7 @@ var App = React.createClass({
 });
 
 if (typeof window !== "undefined") {
-  React.renderComponent(App(), document.getElementById("app"));
+  React.renderComponent(<App />, document.getElementById("app"));
 } else {
   module.exports = App;
 }
