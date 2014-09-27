@@ -7,7 +7,6 @@ http://react-serverside-rendering.herokuapp.com/
 * react
   * react-router-component
 * express
-  * express-react-views
 * backbone
 * browserify
   * watchify
