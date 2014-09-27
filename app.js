@@ -1,13 +1,17 @@
 var express = require('express'),
-    app     = express()
+    app     = express(),
+    React   = require('react')
 ;
 
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine({jsx: { harmony: true } }));
+require('node-jsx').install({ harmony: true });
+var App = require('./src/index.jsx');
 
 var handler = function(name) {
   return function(req, res) {
-    res.render('index', { path: "/"+name });
+    var html = React.renderComponentToString(App({
+      path: "/" + name
+    }));
+    res.send(html);
   };
 };
 

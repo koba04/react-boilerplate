@@ -27,15 +27,15 @@
     "watchify": "~1.0.2"
   },
   "dependencies": {
-    "insert-css": "^0.2.0",
-    "react": "^0.11.1",
-    "stylify": "^0.1.6",
-    "superagent": "^0.18.2",
     "backbone": "~1.1.2",
+    "express": "~4.9.2",
+    "insert-css": "^0.2.0",
+    "node-jsx": "^0.11.0",
+    "react": "^0.11.1",
     "react-async": "~1.0.2",
     "react-router-component": "~0.20.1",
-    "express": "~4.9.2",
-    "express-react-views": "~0.5.0"
+    "stylify": "^0.1.6",
+    "superagent": "^0.18.2"
   },
   "browserify": {
     "transform": [
