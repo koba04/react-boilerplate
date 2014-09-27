@@ -4,12 +4,14 @@ if (typeof window !== "undefined") {
   require('insert-css')(require('./top.styl'));
 }
 
-var React = require('react'),
-    Nav   = require('./nav.jsx'),
-    Footer  = require('./footer.jsx')
+var React   = require('react'),
+    Nav     = require('./nav.jsx'),
+    Footer  = require('./footer.jsx'),
+    SetTitleMixin = require('../set-title-mixin.jsx')
 ;
 
 module.exports = React.createClass({
+  mixins: [SetTitleMixin],
   render() {
     return (
       <div className="top">

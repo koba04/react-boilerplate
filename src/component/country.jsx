@@ -9,11 +9,12 @@ var React         = require('react'),
     Footer        = require('./footer.jsx'),
     SelectCountry = require('./select-country.jsx'),
     Tracks        = require('./tracks.jsx'),
-    TracksMixin   = require('../tracks-mixin.jsx')
+    TracksMixin   = require('../tracks-mixin.jsx'),
+    SetTitleMixin = require('../set-title-mixin.jsx')
 ;
 
 module.exports = React.createClass({
-  mixins: [TracksMixin],
+  mixins: [SetTitleMixin, TracksMixin],
   fetchTopTracks(country) {
     this.tracks.fetchByCountry(country);
   },

@@ -9,11 +9,12 @@ var React       = require('react'),
     Footer      = require('./footer.jsx'),
     InputArtist = require('./input-artist.jsx'),
     Tracks      = require('./tracks.jsx'),
-    TracksMixin = require('../tracks-mixin.jsx')
+    TracksMixin = require('../tracks-mixin.jsx'),
+    SetTitleMixin = require('../set-title-mixin.jsx')
 ;
 
 module.exports = React.createClass({
-  mixins: [TracksMixin],
+  mixins: [SetTitleMixin, TracksMixin],
   fetchArtist(artist) {
     this.tracks.fetchByArtist(artist);
   },
