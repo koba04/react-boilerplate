@@ -23,20 +23,32 @@
   "devDependencies": {
     "beefy": "^2.1.1",
     "browserify": "^5.11.0",
-    "reactify": "^0.14.0"
+    "reactify": "^0.15.2"
   },
   "dependencies": {
+    "backbone": "~1.1.2",
+    "express": "^4.10.1",
     "insert-css": "^0.2.0",
-    "react": "^0.11.1",
-    "react-router": "~0.7.0",
+    "node-jsx": "^0.12.0",
+    "react": "^0.12.0",
+    "react-router-component": "STRML/react-router-component#react-0.12",
     "stylify": "^0.1.6",
-    "superagent": "^0.18.2",
-    "backbone": "~1.1.2"
+    "superagent": "^0.18.2"
   },
   "browserify": {
     "transform": [
-      [ "reactify", { "harmony": true }, { "everything": true } ],
-      [ "stylify" ]
+      [
+        "reactify",
+        {
+          "harmony": true
+        },
+        {
+          "everything": true
+        }
+      ],
+      [
+        "stylify"
+      ]
     ]
   }
 }

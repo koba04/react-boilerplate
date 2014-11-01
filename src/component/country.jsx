@@ -1,6 +1,6 @@
-/** @jsx React.DOM */
-
-require('insert-css')(require('./country.styl'));
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./country.styl'));
+}
 
 var React         = require('react'),
     Nav           = require('./nav.jsx'),

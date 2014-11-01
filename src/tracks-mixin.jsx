@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var tracks = require('./tracks');
 
 module.exports = {
