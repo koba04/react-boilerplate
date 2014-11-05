@@ -1,10 +1,15 @@
-# My React Boilerplate
+# My React Boilerplate (ServerSideRendering)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/koba04/react-boilerplate)
+
+http://react-serverside-rendering.herokuapp.com/
 
 * react
-  * react-router
+  * react-router-component
+* express
 * backbone
 * browserify
-  * beefy (auto build & livereload)
+  * watchify
   * reactify
   * stylify
 * insert-css
@@ -14,19 +19,18 @@
 npm install
 ```
 
-## start develop
-* livereload and autobuild
-  * not created bundle.js
+## watch and autobuild
 ```
-npm run dev
+npm run watch
 ```
 
-## build
+## run server
+```
+node server.js
+```
+
+## manual build
 * create bundle.js
 ```
 npm run build
 ```
-
-## ServerSide Rendering
-
-https://github.com/koba04/react-boilerplate/tree/serverside-rendering
