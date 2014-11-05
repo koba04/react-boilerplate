@@ -25724,42 +25724,6 @@ module.exports = function(arr, fn, initial){
   return curr;
 };
 },{}],192:[function(require,module,exports){
-// Taken from https://github.com/andreypopp/react-router-page-transition
-var React              = require('react/addons'),
-    CSSTransitionGroup = React.addons.CSSTransitionGroup,
-    Router             = require('react-router-component')
-;
-
-module.exports = React.createClass({displayName: 'exports',
-    mixins: [Router.RouterMixin, Router.AsyncRouteRenderingMixin],
-
-    getRoutes:function() {
-      return this.props.children;
-    },
-
-    render:function() {
-      var handler = this.renderRouteHandler();
-      var isPopState = this.state.navigation.isPopState;
-      var enabled = isPopState ?
-                    !!this.props.popStateTransitionName :
-                    !this.state.navigation.noTransition;
-      var props = {
-        component: React.DOM.div,
-        transitionEnter: enabled,
-        transitionLeave: enabled,
-      };
-      if (isPopState && this.props.popStateTransitionName) {
-        props.transitionName = this.props.popStateTransitionName;
-      } else if (this.state.navigation.transitionName) {
-        props.transitionName = this.state.navigation.transitionName;
-      }
-
-      handler.props.key = this.state.match.path;
-      return this.transferPropsTo(CSSTransitionGroup(props, handler));
-    }
-});
-
-},{"react-router-component":5,"react/addons":27}],193:[function(require,module,exports){
 if (typeof window !== "undefined") {
   require('insert-css')(require('./artist.styl'));
 }
@@ -25795,9 +25759,9 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"../tracks-mixin.jsx":208,"./artist.styl":194,"./footer.jsx":197,"./input-artist.jsx":198,"./nav.jsx":199,"./tracks.jsx":204,"insert-css":4,"react":188}],194:[function(require,module,exports){
+},{"../tracks-mixin.jsx":207,"./artist.styl":193,"./footer.jsx":196,"./input-artist.jsx":197,"./nav.jsx":198,"./tracks.jsx":203,"insert-css":4,"react":188}],193:[function(require,module,exports){
 module.exports = ".artist h1{font-family:'Poiret One',cursive}";
-},{}],195:[function(require,module,exports){
+},{}],194:[function(require,module,exports){
 if (typeof window !== "undefined") {
   require('insert-css')(require('./country.styl'));
 }
@@ -25832,9 +25796,9 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"../tracks-mixin.jsx":208,"./country.styl":196,"./footer.jsx":197,"./nav.jsx":199,"./select-country.jsx":201,"./tracks.jsx":204,"insert-css":4,"react":188}],196:[function(require,module,exports){
+},{"../tracks-mixin.jsx":207,"./country.styl":195,"./footer.jsx":196,"./nav.jsx":198,"./select-country.jsx":200,"./tracks.jsx":203,"insert-css":4,"react":188}],195:[function(require,module,exports){
 module.exports = ".country h1{font-family:'Roboto Condensed',sans-serif}";
-},{}],197:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 var React = require('react');
 var Link = require('react-router-component').Link;
 
@@ -25852,7 +25816,7 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"react":188,"react-router-component":5}],198:[function(require,module,exports){
+},{"react":188,"react-router-component":5}],197:[function(require,module,exports){
 var React   = require('react/addons');
 
 module.exports = React.createClass({displayName: 'exports',
@@ -25892,7 +25856,7 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"react/addons":27}],199:[function(require,module,exports){
+},{"react/addons":27}],198:[function(require,module,exports){
 if (typeof window !== "undefined") {
   require('insert-css')(require('./nav.styl'));
 }
@@ -25923,9 +25887,9 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./nav.styl":200,"insert-css":4,"react-router-component":5,"react/addons":27}],200:[function(require,module,exports){
+},{"./nav.styl":199,"insert-css":4,"react-router-component":5,"react/addons":27}],199:[function(require,module,exports){
 module.exports = ".nav-content .nav{margin-bottom:20px;border-bottom:solid #eee}";
-},{}],201:[function(require,module,exports){
+},{}],200:[function(require,module,exports){
 var React = require('react');
 
 module.exports = React.createClass({displayName: 'exports',
@@ -25973,7 +25937,7 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"react":188}],202:[function(require,module,exports){
+},{"react":188}],201:[function(require,module,exports){
 if (typeof window !== "undefined") {
   require('insert-css')(require('./top.styl'));
 }
@@ -26001,9 +25965,9 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./footer.jsx":197,"./nav.jsx":199,"./top.styl":203,"insert-css":4,"react":188}],203:[function(require,module,exports){
+},{"./footer.jsx":196,"./nav.jsx":198,"./top.styl":202,"insert-css":4,"react":188}],202:[function(require,module,exports){
 module.exports = ".top h1{font-family:'Playfair Display SC',serif}";
-},{}],204:[function(require,module,exports){
+},{}],203:[function(require,module,exports){
 if (typeof window !== "undefined") {
   require('insert-css')(require('./tracks.styl'));
 }
@@ -26036,16 +26000,15 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./tracks.styl":205,"insert-css":4,"react":188}],205:[function(require,module,exports){
+},{"./tracks.styl":204,"insert-css":4,"react":188}],204:[function(require,module,exports){
 module.exports = ".tracks .track{font-size:20px;margin-right:10px}.tracks .artist{font-size:14px;margin-right:10px}";
-},{}],206:[function(require,module,exports){
+},{}],205:[function(require,module,exports){
 if (typeof window !== "undefined") {
   require('insert-css')(require('./index.styl'));
 }
 
-var React               = require('react/addons'),
+var React               = require('react'),
     Router              = require('react-router-component'),
-    AnimationLocations  = require('./animation-locations.jsx'),
     Top                 = require('./component/top.jsx'),
     Artist              = require('./component/artist.jsx'),
     Country             = require('./component/country.jsx')
@@ -26053,9 +26016,8 @@ var React               = require('react/addons'),
 
 var App = React.createClass({displayName: 'App',
   render:function() {
-    var CSSTransitionGroup = React.addons.CSSTransitionGroup,
-        Location   = Router.Location
-    ;
+    var Locations  = Router.Locations;
+    var Location   = Router.Location;
     var title = ("Artist Top Tracks (" +  this.props.path + ")");
     return (
       React.createElement("html", {lang: "ja"}, 
@@ -26070,7 +26032,7 @@ var App = React.createClass({displayName: 'App',
       ), 
       React.createElement("body", null, 
         React.createElement("div", {id: "app", className: "container"}, 
-          React.createElement(AnimationLocations, {path: this.props.path, transitionName: "route"}, 
+          React.createElement(Locations, {path: this.props.path}, 
             React.createElement(Location, {path: "/", handler: Top}), 
             React.createElement(Location, {path: "/artist", handler: Artist}), 
             React.createElement(Location, {path: "/country", handler: Country})
@@ -26089,9 +26051,9 @@ if (typeof window !== "undefined") {
   module.exports = App;
 }
 
-},{"./animation-locations.jsx":192,"./component/artist.jsx":193,"./component/country.jsx":195,"./component/top.jsx":202,"./index.styl":207,"insert-css":4,"react-router-component":5,"react/addons":27}],207:[function(require,module,exports){
+},{"./component/artist.jsx":192,"./component/country.jsx":194,"./component/top.jsx":201,"./index.styl":206,"insert-css":4,"react":188,"react-router-component":5}],206:[function(require,module,exports){
 module.exports = "#app .route-enter{-webkit-animation:fadein .5s;-webkit-animation-delay:.2s;animation:fadein .5s;animation-delay:.2s;opacity:0}#app .route-leave{-webkit-animation:fadeout .2s;animation:fadeout .2s}@-moz-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-webkit-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-o-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-moz-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-o-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}";
-},{}],208:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 var tracks = require('./tracks');
 
 module.exports = {
@@ -26116,9 +26078,7 @@ module.exports = {
   },
 };
 
-},{"./tracks":209}],209:[function(require,module,exports){
-/** @jsx React.DOM */
-
+},{"./tracks":208}],208:[function(require,module,exports){
 var Backbone = require('backbone'),
     request = require('superagent')
 ;
@@ -26142,4 +26102,4 @@ var Tracks = Backbone.Collection.extend({
 module.exports = new Tracks();
 
 
-},{"backbone":1,"superagent":189}]},{},[206]);
+},{"backbone":1,"superagent":189}]},{},[205]);

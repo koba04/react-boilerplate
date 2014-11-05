@@ -2,9 +2,8 @@ if (typeof window !== "undefined") {
   require('insert-css')(require('./index.styl'));
 }
 
-var React               = require('react/addons'),
+var React               = require('react'),
     Router              = require('react-router-component'),
-    AnimationLocations  = require('./animation-locations.jsx'),
     Top                 = require('./component/top.jsx'),
     Artist              = require('./component/artist.jsx'),
     Country             = require('./component/country.jsx')
@@ -12,9 +11,8 @@ var React               = require('react/addons'),
 
 var App = React.createClass({
   render() {
-    var CSSTransitionGroup = React.addons.CSSTransitionGroup,
-        Location   = Router.Location
-    ;
+    var Locations  = Router.Locations;
+    var Location   = Router.Location;
     var title = `Artist Top Tracks (${ this.props.path })`;
     return (
       <html lang="ja">
@@ -29,11 +27,11 @@ var App = React.createClass({
       </head>
       <body>
         <div id="app" className="container">
-          <AnimationLocations path={this.props.path} transitionName="route">
+          <Locations path={this.props.path}>
             <Location path="/"        handler={Top}     />
             <Location path="/artist"  handler={Artist}  />
             <Location path="/country" handler={Country} />
-          </AnimationLocations>
+          </Locations>
         </div>
       </body>
       <script src="bundle.js"></script>

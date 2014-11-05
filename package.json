@@ -4,8 +4,9 @@
   "description": "my faceook React.js boilerplate",
   "main": "index.html",
   "scripts": {
-    "dev": "beefy src/index.jsx:bundle.js --live",
-    "build": "browserify src/index.jsx > bundle.js"
+    "watch": "watchify src/index.jsx -o bundle.js -v",
+    "build": "browserify src/index.jsx > bundle.js",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,9 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
-    "beefy": "^2.1.1",
     "browserify": "^5.11.0",
-    "reactify": "^0.15.2"
+    "reactify": "^0.15.2",
+    "watchify": "^2.1.1"
   },
   "dependencies": {
     "backbone": "~1.1.2",

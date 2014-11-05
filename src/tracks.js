@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Backbone = require('backbone'),
     request = require('superagent')
 ;
