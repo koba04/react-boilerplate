@@ -3,11 +3,11 @@ if (typeof window !== "undefined") {
 }
 
 var React       = require('react'),
-    Nav         = require('./nav.jsx'),
-    Footer      = require('./footer.jsx'),
-    InputArtist = require('./input-artist.jsx'),
-    Tracks      = require('./tracks.jsx'),
-    TracksMixin = require('../tracks-mixin.jsx')
+    Nav         = require('./nav'),
+    Footer      = require('./footer'),
+    InputArtist = require('./input-artist'),
+    Tracks      = require('./tracks'),
+    TracksMixin = require('../tracks-mixin')
 ;
 
 module.exports = React.createClass({

@@ -4,7 +4,7 @@ var express = require('express'),
 ;
 
 require('node-jsx').install({ harmony: true });
-var App = require('./src/index.jsx');
+var App = require('./components/index');
 
 var handler = function(name) {
   return function(req, res) {
@@ -19,7 +19,7 @@ app.get('/',        handler(''));
 app.get('/artist',  handler('artist'));
 app.get('/country', handler('country'));
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname+'/dist'));
 
 var port = process.env.PORT || 5000;
 console.log("listening..." + port);

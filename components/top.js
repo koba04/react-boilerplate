@@ -3,8 +3,8 @@ if (typeof window !== "undefined") {
 }
 
 var React = require('react'),
-    Nav   = require('./nav.jsx'),
-    Footer  = require('./footer.jsx')
+    Nav   = require('./nav'),
+    Footer  = require('./footer')
 ;
 
 module.exports = React.createClass({

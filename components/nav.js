@@ -2,7 +2,7 @@ if (typeof window !== "undefined") {
   require('insert-css')(require('./nav.styl'));
 }
 
-var React = require('react/addons');
+var React = require('react');
 var Link = require('react-router-component').Link;
 
 module.exports = React.createClass({

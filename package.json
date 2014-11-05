@@ -4,8 +4,8 @@
   "description": "my faceook React.js boilerplate",
   "main": "index.html",
   "scripts": {
-    "watch": "watchify src/index.jsx -o bundle.js -v",
-    "build": "browserify src/index.jsx > bundle.js",
+    "watch": "watchify components/index.js -o dist/bundle.js -v",
+    "build": "browserify components/index.js > dist/bundle.js",
     "server": "node server.js"
   },
   "repository": {

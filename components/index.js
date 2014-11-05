@@ -4,9 +4,9 @@ if (typeof window !== "undefined") {
 
 var React               = require('react'),
     Router              = require('react-router-component'),
-    Top                 = require('./component/top.jsx'),
-    Artist              = require('./component/artist.jsx'),
-    Country             = require('./component/country.jsx')
+    Top                 = require('./top'),
+    Artist              = require('./artist'),
+    Country             = require('./country')
 ;
 
 var App = React.createClass({

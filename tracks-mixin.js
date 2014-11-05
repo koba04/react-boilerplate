@@ -1,4 +1,6 @@
-var tracks = require('./tracks');
+var React   = require('react'),
+    tracks = require('./tracks')
+;
 
 module.exports = {
   getInitialState() {
