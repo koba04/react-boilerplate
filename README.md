@@ -1,13 +1,14 @@
-# My React Boilerplate (ServerSideRendering)
+# My React Boilerplate
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/koba04/react-boilerplate)
 
 http://react-serverside-rendering.herokuapp.com/
 
+sever side rendering & Flux
+
 * react
   * react-router-component
 * express
-* backbone
 * browserify
   * watchify
   * reactify

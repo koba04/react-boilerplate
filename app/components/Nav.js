@@ -1,5 +1,5 @@
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./nav.styl'));
+  require('insert-css')(require('./Nav.styl'));
 }
 
 var React = require('react');

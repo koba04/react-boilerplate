@@ -1,10 +1,13 @@
-var React = require('react');
+var React = require('react'),
+    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
+;
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
-  propTypes: {
-    onHandleSubmit: React.PropTypes.func.isRequired,
-    countries:      React.PropTypes.array.isRequired
+  getDefaultProps: function() {
+    return {
+      countries: ['Japan', 'United States', 'United Kingdom']
+    };
   },
   getInitialState() {
     return {
@@ -15,7 +18,7 @@ module.exports = React.createClass({
     e.preventDefault();
     var country = this.state.selectCountry;
     if (country) {
-      this.props.onHandleSubmit(country);
+      AppTracksActionCreators.fetchByCountry(country);
     }
   },
   render() {

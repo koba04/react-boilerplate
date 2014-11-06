@@ -1,10 +1,10 @@
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./top.styl'));
+  require('insert-css')(require('./Top.styl'));
 }
 
 var React = require('react'),
-    Nav   = require('./nav'),
-    Footer  = require('./footer')
+    Nav   = require('./Nav'),
+    Footer  = require('./Footer')
 ;
 
 module.exports = React.createClass({

@@ -1,109 +1,51 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./artist.styl'));
-}
-
-var React       = require('react'),
-    Nav         = require('./nav'),
-    Footer      = require('./footer'),
-    InputArtist = require('./input-artist'),
-    Tracks      = require('./tracks'),
-    TracksMixin = require('../tracks-mixin')
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js":[function(require,module,exports){
+var request = require('superagent'),
+    AppDispatcher = require('../dispatcher/AppDispatcher'),
+    AppConstants  = require('../constants/AppConstants')
 ;
 
-module.exports = React.createClass({displayName: 'exports',
-  mixins: [TracksMixin],
-  fetchArtist:function(artist) {
-    this.tracks.fetchByArtist(artist);
+var ActionTypes = AppConstants.ActionTypes;
+var urlRoot = "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&";
+
+// TODO Loading
+module.exports = {
+  fetchByArtist: function(artist) {
+    request.get(
+      urlRoot + 'method=artist.gettoptracks&artist=' + encodeURIComponent(artist),
+      function(res) {
+        AppDispatcher.handleViewAction({
+          type: ActionTypes.RECEIVE_TRACKS_BY_ARTIST,
+          tracks: res.body.toptracks.track
+        });
+      }.bind(this)
+    );
   },
-  render:function() {
-    return (
-      React.createElement("div", {className: "artist"}, 
-        React.createElement("header", {className: "page-header"}, 
-          React.createElement("h1", null, "Artist Top Tracks ", React.createElement("small", null, "by Last.FM"))
-        ), 
-        React.createElement(Nav, {current: "artist"}), 
-        React.createElement("article", {className: "main-content"}, 
-          React.createElement(InputArtist, {onHandleSubmit: this.fetchArtist}), 
-          React.createElement(Tracks, {tracks: this.state.tracks})
-        ), 
-        React.createElement(Footer, null)
-      )
+  fetchByCountry: function(country) {
+    request.get(
+      urlRoot + 'method=geo.gettoptracks&country=' + encodeURIComponent(country),
+      function(res) {
+        AppDispatcher.handleViewAction({
+          type: ActionTypes.RECEIVE_TRACKS_BY_ARTIST,
+          tracks: res.body.toptracks.track
+        });
+      }.bind(this)
     );
   }
-});
+};
 
-
-},{"../tracks-mixin":207,"./artist.styl":2,"./footer":5,"./input-artist":8,"./nav":9,"./tracks":14,"insert-css":19,"react":203}],2:[function(require,module,exports){
-module.exports = ".artist h1{font-family:'Poiret One',cursive}";
-},{}],3:[function(require,module,exports){
+},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","superagent":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/lib/client.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/App.js":[function(require,module,exports){
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./country.styl'));
-}
-
-var React         = require('react'),
-    Nav           = require('./nav'),
-    Footer        = require('./footer'),
-    SelectCountry = require('./select-country'),
-    Tracks        = require('./tracks'),
-    TracksMixin   = require('../tracks-mixin')
-;
-
-module.exports = React.createClass({displayName: 'exports',
-  mixins: [TracksMixin],
-  fetchTopTracks:function(country) {
-    this.tracks.fetchByCountry(country);
-  },
-  render:function() {
-    return (
-      React.createElement("div", {className: "country"}, 
-        React.createElement("header", {className: "page-header"}, 
-          React.createElement("h1", null, "Country Top Tracks ", React.createElement("small", null, "by Last.FM"))
-        ), 
-        React.createElement(Nav, {current: "country"}), 
-        React.createElement("article", {className: "main-content"}, 
-          React.createElement(SelectCountry, {onHandleSubmit: this.fetchTopTracks, countries: this.tracks.countries}), 
-          React.createElement(Tracks, {tracks: this.state.tracks})
-        ), 
-        React.createElement(Footer, null)
-      )
-    );
-  }
-});
-
-},{"../tracks-mixin":207,"./country.styl":4,"./footer":5,"./nav":9,"./select-country":11,"./tracks":14,"insert-css":19,"react":203}],4:[function(require,module,exports){
-module.exports = ".country h1{font-family:'Roboto Condensed',sans-serif}";
-},{}],5:[function(require,module,exports){
-var React = require('react');
-var Link = require('react-router-component').Link;
-
-module.exports = React.createClass({displayName: 'exports',
-  render:function() {
-    return (
-      React.createElement("footer", null, 
-        React.createElement("div", {className: "well well-lg"}, 
-          React.createElement(Link, {href: "/"}, "TOP"), " | ", 
-          React.createElement("a", {href: "https://github.com/koba04/react-boilerplate"}, "github")
-        )
-      )
-    );
-  }
-});
-
-
-},{"react":203,"react-router-component":20}],6:[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./index.styl'));
+  require('insert-css')(require('./App.styl'));
 }
 
 var React               = require('react'),
     Router              = require('react-router-component'),
-    Top                 = require('./top'),
-    Artist              = require('./artist'),
-    Country             = require('./country')
+    Top                 = require('./Top'),
+    Artist              = require('./Artist'),
+    Country             = require('./Country')
 ;
 
-var App = React.createClass({displayName: 'App',
+module.exports = React.createClass({displayName: 'exports',
   render:function() {
     var Locations  = Router.Locations;
     var Location   = Router.Location;
@@ -134,22 +76,128 @@ var App = React.createClass({displayName: 'App',
   }
 });
 
+},{"./App.styl":"/Users/koba04/work/github/react-boilerplate/app/components/App.styl","./Artist":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js","./Country":"/Users/koba04/work/github/react-boilerplate/app/components/Country.js","./Top":"/Users/koba04/work/github/react-boilerplate/app/components/Top.js","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/App.styl":[function(require,module,exports){
+module.exports = "#app .route-enter{-webkit-animation:fadein .5s;-webkit-animation-delay:.2s;animation:fadein .5s;animation-delay:.2s;opacity:0}#app .route-leave{-webkit-animation:fadeout .2s;animation:fadeout .2s}@-moz-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-webkit-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-o-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-moz-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-o-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}";
+},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js":[function(require,module,exports){
 if (typeof window !== "undefined") {
-  React.render(React.createElement(App, {path: window.location.pathname}), document);
-} else {
-  module.exports = App;
+  require('insert-css')(require('./Artist.styl'));
 }
 
-},{"./artist":1,"./country":3,"./index.styl":7,"./top":12,"insert-css":19,"react":203,"react-router-component":20}],7:[function(require,module,exports){
-module.exports = "#app .route-enter{-webkit-animation:fadein .5s;-webkit-animation-delay:.2s;animation:fadein .5s;animation-delay:.2s;opacity:0}#app .route-leave{-webkit-animation:fadeout .2s;animation:fadeout .2s}@-moz-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-webkit-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-o-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-moz-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-o-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}";
-},{}],8:[function(require,module,exports){
-var React   = require('react/addons');
+var React       = require('react'),
+    Nav         = require('./Nav'),
+    Footer      = require('./Footer'),
+    InputArtist = require('./InputArtist'),
+    Tracks      = require('./Tracks'),
+    TrackStore  = require('../stores/TrackStore')
+;
+
+module.exports = React.createClass({displayName: 'exports',
+  getInitialState:function() {
+    return {
+      tracks: TrackStore.getAll(),
+    };
+  },
+  componentDidMount: function() {
+    TrackStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    TrackStore.removeChangeListener(this._onChange);
+  },
+  _onChange: function() {
+    this.setState({ tracks: TrackStore.getAll() });
+  },
+  render:function() {
+    return (
+      React.createElement("div", {className: "artist"}, 
+        React.createElement("header", {className: "page-header"}, 
+          React.createElement("h1", null, "Artist Top Tracks ", React.createElement("small", null, "by Last.FM"))
+        ), 
+        React.createElement(Nav, {current: "artist"}), 
+        React.createElement("article", {className: "main-content"}, 
+          React.createElement(InputArtist, {onHandleSubmit: this.fetchArtist}), 
+          React.createElement(Tracks, {tracks: this.state.tracks})
+        ), 
+        React.createElement(Footer, null)
+      )
+    );
+  }
+});
+
+
+},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Artist.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.styl","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./InputArtist":"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.styl":[function(require,module,exports){
+module.exports = ".artist h1{font-family:'Poiret One',cursive}";
+},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.js":[function(require,module,exports){
+if (typeof window !== "undefined") {
+  require('insert-css')(require('./Country.styl'));
+}
+
+var React         = require('react'),
+    Nav           = require('./Nav'),
+    Footer        = require('./Footer'),
+    SelectCountry = require('./SelectCountry'),
+    Tracks        = require('./Tracks'),
+    TrackStore  = require('../stores/TrackStore')
+;
+
+module.exports = React.createClass({displayName: 'exports',
+  getInitialState:function() {
+    return {
+      tracks: TrackStore.getAll(),
+    };
+  },
+  componentDidMount: function() {
+    TrackStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    TrackStore.removeChangeListener(this._onChange);
+  },
+  _onChange: function() {
+    this.setState({ tracks: TrackStore.getAll() });
+  },
+  render:function() {
+    return (
+      React.createElement("div", {className: "country"}, 
+        React.createElement("header", {className: "page-header"}, 
+          React.createElement("h1", null, "Country Top Tracks ", React.createElement("small", null, "by Last.FM"))
+        ), 
+        React.createElement(Nav, {current: "country"}), 
+        React.createElement("article", {className: "main-content"}, 
+          React.createElement(SelectCountry, null), 
+          React.createElement(Tracks, {tracks: this.state.tracks})
+        ), 
+        React.createElement(Footer, null)
+      )
+    );
+  }
+});
+
+},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Country.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Country.styl","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./SelectCountry":"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.styl":[function(require,module,exports){
+module.exports = ".country h1{font-family:'Roboto Condensed',sans-serif}";
+},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js":[function(require,module,exports){
+var React = require('react');
+var Link = require('react-router-component').Link;
+
+module.exports = React.createClass({displayName: 'exports',
+  render:function() {
+    return (
+      React.createElement("footer", null, 
+        React.createElement("div", {className: "well well-lg"}, 
+          React.createElement(Link, {href: "/"}, "TOP"), " | ", 
+          React.createElement("a", {href: "https://github.com/koba04/react-boilerplate"}, "github")
+        )
+      )
+    );
+  }
+});
+
+
+},{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js":[function(require,module,exports){
+var React   = require('react/addons'),
+    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
+;
 
 module.exports = React.createClass({displayName: 'exports',
   mixins: [React.addons.LinkedStateMixin],
-  propTypes: {
-    onHandleSubmit: React.PropTypes.func.isRequired
-  },
   getInitialState:function() {
     return {
       inputArtist: 'radiohead'
@@ -159,7 +207,7 @@ module.exports = React.createClass({displayName: 'exports',
     e.preventDefault();
     var artist = this.state.inputArtist;
     if (artist) {
-      this.props.onHandleSubmit(artist);
+      AppTracksActionCreators.fetchByArtist(artist);
     }
   },
   render:function() {
@@ -182,9 +230,9 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"react/addons":42}],9:[function(require,module,exports){
+},{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react/addons":"/Users/koba04/work/github/react-boilerplate/node_modules/react/addons.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js":[function(require,module,exports){
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./nav.styl'));
+  require('insert-css')(require('./Nav.styl'));
 }
 
 var React = require('react');
@@ -213,16 +261,19 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./nav.styl":10,"insert-css":19,"react":203,"react-router-component":20}],10:[function(require,module,exports){
+},{"./Nav.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Nav.styl":[function(require,module,exports){
 module.exports = ".nav-content .nav{margin-bottom:20px;border-bottom:solid #eee}";
-},{}],11:[function(require,module,exports){
-var React = require('react');
+},{}],"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js":[function(require,module,exports){
+var React = require('react'),
+    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
+;
 
 module.exports = React.createClass({displayName: 'exports',
   mixins: [React.addons.LinkedStateMixin],
-  propTypes: {
-    onHandleSubmit: React.PropTypes.func.isRequired,
-    countries:      React.PropTypes.array.isRequired
+  getDefaultProps: function() {
+    return {
+      countries: ['Japan', 'United States', 'United Kingdom']
+    };
   },
   getInitialState:function() {
     return {
@@ -233,7 +284,7 @@ module.exports = React.createClass({displayName: 'exports',
     e.preventDefault();
     var country = this.state.selectCountry;
     if (country) {
-      this.props.onHandleSubmit(country);
+      AppTracksActionCreators.fetchByCountry(country);
     }
   },
   render:function() {
@@ -263,14 +314,14 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{"react":203}],12:[function(require,module,exports){
+},{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Top.js":[function(require,module,exports){
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./top.styl'));
+  require('insert-css')(require('./Top.styl'));
 }
 
 var React = require('react'),
-    Nav   = require('./nav'),
-    Footer  = require('./footer')
+    Nav   = require('./Nav'),
+    Footer  = require('./Footer')
 ;
 
 module.exports = React.createClass({displayName: 'exports',
@@ -291,11 +342,11 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./footer":5,"./nav":9,"./top.styl":13,"insert-css":19,"react":203}],13:[function(require,module,exports){
+},{"./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Top.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Top.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Top.styl":[function(require,module,exports){
 module.exports = ".top h1{font-family:'Playfair Display SC',serif}";
-},{}],14:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js":[function(require,module,exports){
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./tracks.styl'));
+  require('insert-css')(require('./Tracks.styl'));
 }
 
 var React = require('react');
@@ -326,3101 +377,414 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./tracks.styl":15,"insert-css":19,"react":203}],15:[function(require,module,exports){
+},{"./Tracks.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl":[function(require,module,exports){
 module.exports = ".tracks .track{font-size:20px;margin-right:10px}.tracks .artist{font-size:14px;margin-right:10px}";
-},{}],16:[function(require,module,exports){
-//     Backbone.js 1.1.2
-
-//     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Backbone may be freely distributed under the MIT license.
-//     For all details and documentation:
-//     http://backbonejs.org
-
-(function(root, factory) {
-
-  // Set up Backbone appropriately for the environment. Start with AMD.
-  if (typeof define === 'function' && define.amd) {
-    define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
-      // Export global even in AMD case in case this script is loaded with
-      // others that may still expect a global Backbone.
-      root.Backbone = factory(root, exports, _, $);
-    });
-
-  // Next for Node.js or CommonJS. jQuery may not be needed as a module.
-  } else if (typeof exports !== 'undefined') {
-    var _ = require('underscore');
-    factory(root, exports, _);
-
-  // Finally, as a browser global.
-  } else {
-    root.Backbone = factory(root, {}, root._, (root.jQuery || root.Zepto || root.ender || root.$));
-  }
-
-}(this, function(root, Backbone, _, $) {
-
-  // Initial Setup
-  // -------------
-
-  // Save the previous value of the `Backbone` variable, so that it can be
-  // restored later on, if `noConflict` is used.
-  var previousBackbone = root.Backbone;
-
-  // Create local references to array methods we'll want to use later.
-  var array = [];
-  var push = array.push;
-  var slice = array.slice;
-  var splice = array.splice;
-
-  // Current version of the library. Keep in sync with `package.json`.
-  Backbone.VERSION = '1.1.2';
-
-  // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
-  // the `$` variable.
-  Backbone.$ = $;
-
-  // Runs Backbone.js in *noConflict* mode, returning the `Backbone` variable
-  // to its previous owner. Returns a reference to this Backbone object.
-  Backbone.noConflict = function() {
-    root.Backbone = previousBackbone;
-    return this;
-  };
-
-  // Turn on `emulateHTTP` to support legacy HTTP servers. Setting this option
-  // will fake `"PATCH"`, `"PUT"` and `"DELETE"` requests via the `_method` parameter and
-  // set a `X-Http-Method-Override` header.
-  Backbone.emulateHTTP = false;
-
-  // Turn on `emulateJSON` to support legacy servers that can't deal with direct
-  // `application/json` requests ... will encode the body as
-  // `application/x-www-form-urlencoded` instead and will send the model in a
-  // form param named `model`.
-  Backbone.emulateJSON = false;
-
-  // Backbone.Events
-  // ---------------
-
-  // A module that can be mixed in to *any object* in order to provide it with
-  // custom events. You may bind with `on` or remove with `off` callback
-  // functions to an event; `trigger`-ing an event fires all callbacks in
-  // succession.
-  //
-  //     var object = {};
-  //     _.extend(object, Backbone.Events);
-  //     object.on('expand', function(){ alert('expanded'); });
-  //     object.trigger('expand');
-  //
-  var Events = Backbone.Events = {
-
-    // Bind an event to a `callback` function. Passing `"all"` will bind
-    // the callback to all events fired.
-    on: function(name, callback, context) {
-      if (!eventsApi(this, 'on', name, [callback, context]) || !callback) return this;
-      this._events || (this._events = {});
-      var events = this._events[name] || (this._events[name] = []);
-      events.push({callback: callback, context: context, ctx: context || this});
-      return this;
-    },
-
-    // Bind an event to only be triggered a single time. After the first time
-    // the callback is invoked, it will be removed.
-    once: function(name, callback, context) {
-      if (!eventsApi(this, 'once', name, [callback, context]) || !callback) return this;
-      var self = this;
-      var once = _.once(function() {
-        self.off(name, once);
-        callback.apply(this, arguments);
-      });
-      once._callback = callback;
-      return this.on(name, once, context);
-    },
-
-    // Remove one or many callbacks. If `context` is null, removes all
-    // callbacks with that function. If `callback` is null, removes all
-    // callbacks for the event. If `name` is null, removes all bound
-    // callbacks for all events.
-    off: function(name, callback, context) {
-      var retain, ev, events, names, i, l, j, k;
-      if (!this._events || !eventsApi(this, 'off', name, [callback, context])) return this;
-      if (!name && !callback && !context) {
-        this._events = void 0;
-        return this;
-      }
-      names = name ? [name] : _.keys(this._events);
-      for (i = 0, l = names.length; i < l; i++) {
-        name = names[i];
-        if (events = this._events[name]) {
-          this._events[name] = retain = [];
-          if (callback || context) {
-            for (j = 0, k = events.length; j < k; j++) {
-              ev = events[j];
-              if ((callback && callback !== ev.callback && callback !== ev.callback._callback) ||
-                  (context && context !== ev.context)) {
-                retain.push(ev);
-              }
-            }
-          }
-          if (!retain.length) delete this._events[name];
-        }
-      }
-
-      return this;
-    },
-
-    // Trigger one or many events, firing all bound callbacks. Callbacks are
-    // passed the same arguments as `trigger` is, apart from the event name
-    // (unless you're listening on `"all"`, which will cause your callback to
-    // receive the true name of the event as the first argument).
-    trigger: function(name) {
-      if (!this._events) return this;
-      var args = slice.call(arguments, 1);
-      if (!eventsApi(this, 'trigger', name, args)) return this;
-      var events = this._events[name];
-      var allEvents = this._events.all;
-      if (events) triggerEvents(events, args);
-      if (allEvents) triggerEvents(allEvents, arguments);
-      return this;
-    },
-
-    // Tell this object to stop listening to either specific events ... or
-    // to every object it's currently listening to.
-    stopListening: function(obj, name, callback) {
-      var listeningTo = this._listeningTo;
-      if (!listeningTo) return this;
-      var remove = !name && !callback;
-      if (!callback && typeof name === 'object') callback = this;
-      if (obj) (listeningTo = {})[obj._listenId] = obj;
-      for (var id in listeningTo) {
-        obj = listeningTo[id];
-        obj.off(name, callback, this);
-        if (remove || _.isEmpty(obj._events)) delete this._listeningTo[id];
-      }
-      return this;
-    }
-
-  };
-
-  // Regular expression used to split event strings.
-  var eventSplitter = /\s+/;
-
-  // Implement fancy features of the Events API such as multiple event
-  // names `"change blur"` and jQuery-style event maps `{change: action}`
-  // in terms of the existing API.
-  var eventsApi = function(obj, action, name, rest) {
-    if (!name) return true;
-
-    // Handle event maps.
-    if (typeof name === 'object') {
-      for (var key in name) {
-        obj[action].apply(obj, [key, name[key]].concat(rest));
-      }
-      return false;
-    }
-
-    // Handle space separated event names.
-    if (eventSplitter.test(name)) {
-      var names = name.split(eventSplitter);
-      for (var i = 0, l = names.length; i < l; i++) {
-        obj[action].apply(obj, [names[i]].concat(rest));
-      }
-      return false;
-    }
-
-    return true;
-  };
-
-  // A difficult-to-believe, but optimized internal dispatch function for
-  // triggering events. Tries to keep the usual cases speedy (most internal
-  // Backbone events have 3 arguments).
-  var triggerEvents = function(events, args) {
-    var ev, i = -1, l = events.length, a1 = args[0], a2 = args[1], a3 = args[2];
-    switch (args.length) {
-      case 0: while (++i < l) (ev = events[i]).callback.call(ev.ctx); return;
-      case 1: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1); return;
-      case 2: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1, a2); return;
-      case 3: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1, a2, a3); return;
-      default: while (++i < l) (ev = events[i]).callback.apply(ev.ctx, args); return;
-    }
-  };
-
-  var listenMethods = {listenTo: 'on', listenToOnce: 'once'};
-
-  // Inversion-of-control versions of `on` and `once`. Tell *this* object to
-  // listen to an event in another object ... keeping track of what it's
-  // listening to.
-  _.each(listenMethods, function(implementation, method) {
-    Events[method] = function(obj, name, callback) {
-      var listeningTo = this._listeningTo || (this._listeningTo = {});
-      var id = obj._listenId || (obj._listenId = _.uniqueId('l'));
-      listeningTo[id] = obj;
-      if (!callback && typeof name === 'object') callback = this;
-      obj[implementation](name, callback, this);
-      return this;
-    };
-  });
-
-  // Aliases for backwards compatibility.
-  Events.bind   = Events.on;
-  Events.unbind = Events.off;
-
-  // Allow the `Backbone` object to serve as a global event bus, for folks who
-  // want global "pubsub" in a convenient place.
-  _.extend(Backbone, Events);
-
-  // Backbone.Model
-  // --------------
-
-  // Backbone **Models** are the basic data object in the framework --
-  // frequently representing a row in a table in a database on your server.
-  // A discrete chunk of data and a bunch of useful, related methods for
-  // performing computations and transformations on that data.
-
-  // Create a new model with the specified attributes. A client id (`cid`)
-  // is automatically generated and assigned for you.
-  var Model = Backbone.Model = function(attributes, options) {
-    var attrs = attributes || {};
-    options || (options = {});
-    this.cid = _.uniqueId('c');
-    this.attributes = {};
-    if (options.collection) this.collection = options.collection;
-    if (options.parse) attrs = this.parse(attrs, options) || {};
-    attrs = _.defaults({}, attrs, _.result(this, 'defaults'));
-    this.set(attrs, options);
-    this.changed = {};
-    this.initialize.apply(this, arguments);
-  };
-
-  // Attach all inheritable methods to the Model prototype.
-  _.extend(Model.prototype, Events, {
-
-    // A hash of attributes whose current and previous value differ.
-    changed: null,
-
-    // The value returned during the last failed validation.
-    validationError: null,
-
-    // The default name for the JSON `id` attribute is `"id"`. MongoDB and
-    // CouchDB users may want to set this to `"_id"`.
-    idAttribute: 'id',
-
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
-    initialize: function(){},
-
-    // Return a copy of the model's `attributes` object.
-    toJSON: function(options) {
-      return _.clone(this.attributes);
-    },
-
-    // Proxy `Backbone.sync` by default -- but override this if you need
-    // custom syncing semantics for *this* particular model.
-    sync: function() {
-      return Backbone.sync.apply(this, arguments);
-    },
-
-    // Get the value of an attribute.
-    get: function(attr) {
-      return this.attributes[attr];
-    },
-
-    // Get the HTML-escaped value of an attribute.
-    escape: function(attr) {
-      return _.escape(this.get(attr));
-    },
-
-    // Returns `true` if the attribute contains a value that is not null
-    // or undefined.
-    has: function(attr) {
-      return this.get(attr) != null;
-    },
-
-    // Set a hash of model attributes on the object, firing `"change"`. This is
-    // the core primitive operation of a model, updating the data and notifying
-    // anyone who needs to know about the change in state. The heart of the beast.
-    set: function(key, val, options) {
-      var attr, attrs, unset, changes, silent, changing, prev, current;
-      if (key == null) return this;
-
-      // Handle both `"key", value` and `{key: value}` -style arguments.
-      if (typeof key === 'object') {
-        attrs = key;
-        options = val;
-      } else {
-        (attrs = {})[key] = val;
-      }
-
-      options || (options = {});
-
-      // Run validation.
-      if (!this._validate(attrs, options)) return false;
-
-      // Extract attributes and options.
-      unset           = options.unset;
-      silent          = options.silent;
-      changes         = [];
-      changing        = this._changing;
-      this._changing  = true;
-
-      if (!changing) {
-        this._previousAttributes = _.clone(this.attributes);
-        this.changed = {};
-      }
-      current = this.attributes, prev = this._previousAttributes;
-
-      // Check for changes of `id`.
-      if (this.idAttribute in attrs) this.id = attrs[this.idAttribute];
-
-      // For each `set` attribute, update or delete the current value.
-      for (attr in attrs) {
-        val = attrs[attr];
-        if (!_.isEqual(current[attr], val)) changes.push(attr);
-        if (!_.isEqual(prev[attr], val)) {
-          this.changed[attr] = val;
-        } else {
-          delete this.changed[attr];
-        }
-        unset ? delete current[attr] : current[attr] = val;
-      }
-
-      // Trigger all relevant attribute changes.
-      if (!silent) {
-        if (changes.length) this._pending = options;
-        for (var i = 0, l = changes.length; i < l; i++) {
-          this.trigger('change:' + changes[i], this, current[changes[i]], options);
-        }
-      }
-
-      // You might be wondering why there's a `while` loop here. Changes can
-      // be recursively nested within `"change"` events.
-      if (changing) return this;
-      if (!silent) {
-        while (this._pending) {
-          options = this._pending;
-          this._pending = false;
-          this.trigger('change', this, options);
-        }
-      }
-      this._pending = false;
-      this._changing = false;
-      return this;
-    },
-
-    // Remove an attribute from the model, firing `"change"`. `unset` is a noop
-    // if the attribute doesn't exist.
-    unset: function(attr, options) {
-      return this.set(attr, void 0, _.extend({}, options, {unset: true}));
-    },
-
-    // Clear all attributes on the model, firing `"change"`.
-    clear: function(options) {
-      var attrs = {};
-      for (var key in this.attributes) attrs[key] = void 0;
-      return this.set(attrs, _.extend({}, options, {unset: true}));
-    },
-
-    // Determine if the model has changed since the last `"change"` event.
-    // If you specify an attribute name, determine if that attribute has changed.
-    hasChanged: function(attr) {
-      if (attr == null) return !_.isEmpty(this.changed);
-      return _.has(this.changed, attr);
-    },
-
-    // Return an object containing all the attributes that have changed, or
-    // false if there are no changed attributes. Useful for determining what
-    // parts of a view need to be updated and/or what attributes need to be
-    // persisted to the server. Unset attributes will be set to undefined.
-    // You can also pass an attributes object to diff against the model,
-    // determining if there *would be* a change.
-    changedAttributes: function(diff) {
-      if (!diff) return this.hasChanged() ? _.clone(this.changed) : false;
-      var val, changed = false;
-      var old = this._changing ? this._previousAttributes : this.attributes;
-      for (var attr in diff) {
-        if (_.isEqual(old[attr], (val = diff[attr]))) continue;
-        (changed || (changed = {}))[attr] = val;
-      }
-      return changed;
-    },
-
-    // Get the previous value of an attribute, recorded at the time the last
-    // `"change"` event was fired.
-    previous: function(attr) {
-      if (attr == null || !this._previousAttributes) return null;
-      return this._previousAttributes[attr];
-    },
-
-    // Get all of the attributes of the model at the time of the previous
-    // `"change"` event.
-    previousAttributes: function() {
-      return _.clone(this._previousAttributes);
-    },
-
-    // Fetch the model from the server. If the server's representation of the
-    // model differs from its current attributes, they will be overridden,
-    // triggering a `"change"` event.
-    fetch: function(options) {
-      options = options ? _.clone(options) : {};
-      if (options.parse === void 0) options.parse = true;
-      var model = this;
-      var success = options.success;
-      options.success = function(resp) {
-        if (!model.set(model.parse(resp, options), options)) return false;
-        if (success) success(model, resp, options);
-        model.trigger('sync', model, resp, options);
-      };
-      wrapError(this, options);
-      return this.sync('read', this, options);
-    },
-
-    // Set a hash of model attributes, and sync the model to the server.
-    // If the server returns an attributes hash that differs, the model's
-    // state will be `set` again.
-    save: function(key, val, options) {
-      var attrs, method, xhr, attributes = this.attributes;
-
-      // Handle both `"key", value` and `{key: value}` -style arguments.
-      if (key == null || typeof key === 'object') {
-        attrs = key;
-        options = val;
-      } else {
-        (attrs = {})[key] = val;
-      }
-
-      options = _.extend({validate: true}, options);
-
-      // If we're not waiting and attributes exist, save acts as
-      // `set(attr).save(null, opts)` with validation. Otherwise, check if
-      // the model will be valid when the attributes, if any, are set.
-      if (attrs && !options.wait) {
-        if (!this.set(attrs, options)) return false;
-      } else {
-        if (!this._validate(attrs, options)) return false;
-      }
-
-      // Set temporary attributes if `{wait: true}`.
-      if (attrs && options.wait) {
-        this.attributes = _.extend({}, attributes, attrs);
-      }
-
-      // After a successful server-side save, the client is (optionally)
-      // updated with the server-side state.
-      if (options.parse === void 0) options.parse = true;
-      var model = this;
-      var success = options.success;
-      options.success = function(resp) {
-        // Ensure attributes are restored during synchronous saves.
-        model.attributes = attributes;
-        var serverAttrs = model.parse(resp, options);
-        if (options.wait) serverAttrs = _.extend(attrs || {}, serverAttrs);
-        if (_.isObject(serverAttrs) && !model.set(serverAttrs, options)) {
-          return false;
-        }
-        if (success) success(model, resp, options);
-        model.trigger('sync', model, resp, options);
-      };
-      wrapError(this, options);
-
-      method = this.isNew() ? 'create' : (options.patch ? 'patch' : 'update');
-      if (method === 'patch') options.attrs = attrs;
-      xhr = this.sync(method, this, options);
-
-      // Restore attributes.
-      if (attrs && options.wait) this.attributes = attributes;
-
-      return xhr;
-    },
-
-    // Destroy this model on the server if it was already persisted.
-    // Optimistically removes the model from its collection, if it has one.
-    // If `wait: true` is passed, waits for the server to respond before removal.
-    destroy: function(options) {
-      options = options ? _.clone(options) : {};
-      var model = this;
-      var success = options.success;
-
-      var destroy = function() {
-        model.trigger('destroy', model, model.collection, options);
-      };
-
-      options.success = function(resp) {
-        if (options.wait || model.isNew()) destroy();
-        if (success) success(model, resp, options);
-        if (!model.isNew()) model.trigger('sync', model, resp, options);
-      };
-
-      if (this.isNew()) {
-        options.success();
-        return false;
-      }
-      wrapError(this, options);
-
-      var xhr = this.sync('delete', this, options);
-      if (!options.wait) destroy();
-      return xhr;
-    },
-
-    // Default URL for the model's representation on the server -- if you're
-    // using Backbone's restful methods, override this to change the endpoint
-    // that will be called.
-    url: function() {
-      var base =
-        _.result(this, 'urlRoot') ||
-        _.result(this.collection, 'url') ||
-        urlError();
-      if (this.isNew()) return base;
-      return base.replace(/([^\/])$/, '$1/') + encodeURIComponent(this.id);
-    },
-
-    // **parse** converts a response into the hash of attributes to be `set` on
-    // the model. The default implementation is just to pass the response along.
-    parse: function(resp, options) {
-      return resp;
-    },
-
-    // Create a new model with identical attributes to this one.
-    clone: function() {
-      return new this.constructor(this.attributes);
-    },
-
-    // A model is new if it has never been saved to the server, and lacks an id.
-    isNew: function() {
-      return !this.has(this.idAttribute);
-    },
-
-    // Check if the model is currently in a valid state.
-    isValid: function(options) {
-      return this._validate({}, _.extend(options || {}, { validate: true }));
-    },
-
-    // Run validation against the next complete set of model attributes,
-    // returning `true` if all is well. Otherwise, fire an `"invalid"` event.
-    _validate: function(attrs, options) {
-      if (!options.validate || !this.validate) return true;
-      attrs = _.extend({}, this.attributes, attrs);
-      var error = this.validationError = this.validate(attrs, options) || null;
-      if (!error) return true;
-      this.trigger('invalid', this, error, _.extend(options, {validationError: error}));
-      return false;
-    }
-
-  });
-
-  // Underscore methods that we want to implement on the Model.
-  var modelMethods = ['keys', 'values', 'pairs', 'invert', 'pick', 'omit'];
-
-  // Mix in each Underscore method as a proxy to `Model#attributes`.
-  _.each(modelMethods, function(method) {
-    Model.prototype[method] = function() {
-      var args = slice.call(arguments);
-      args.unshift(this.attributes);
-      return _[method].apply(_, args);
-    };
-  });
-
-  // Backbone.Collection
-  // -------------------
-
-  // If models tend to represent a single row of data, a Backbone Collection is
-  // more analagous to a table full of data ... or a small slice or page of that
-  // table, or a collection of rows that belong together for a particular reason
-  // -- all of the messages in this particular folder, all of the documents
-  // belonging to this particular author, and so on. Collections maintain
-  // indexes of their models, both in order, and for lookup by `id`.
-
-  // Create a new **Collection**, perhaps to contain a specific type of `model`.
-  // If a `comparator` is specified, the Collection will maintain
-  // its models in sort order, as they're added and removed.
-  var Collection = Backbone.Collection = function(models, options) {
-    options || (options = {});
-    if (options.model) this.model = options.model;
-    if (options.comparator !== void 0) this.comparator = options.comparator;
-    this._reset();
-    this.initialize.apply(this, arguments);
-    if (models) this.reset(models, _.extend({silent: true}, options));
-  };
-
-  // Default options for `Collection#set`.
-  var setOptions = {add: true, remove: true, merge: true};
-  var addOptions = {add: true, remove: false};
-
-  // Define the Collection's inheritable methods.
-  _.extend(Collection.prototype, Events, {
-
-    // The default model for a collection is just a **Backbone.Model**.
-    // This should be overridden in most cases.
-    model: Model,
-
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
-    initialize: function(){},
-
-    // The JSON representation of a Collection is an array of the
-    // models' attributes.
-    toJSON: function(options) {
-      return this.map(function(model){ return model.toJSON(options); });
-    },
-
-    // Proxy `Backbone.sync` by default.
-    sync: function() {
-      return Backbone.sync.apply(this, arguments);
-    },
-
-    // Add a model, or list of models to the set.
-    add: function(models, options) {
-      return this.set(models, _.extend({merge: false}, options, addOptions));
-    },
-
-    // Remove a model, or a list of models from the set.
-    remove: function(models, options) {
-      var singular = !_.isArray(models);
-      models = singular ? [models] : _.clone(models);
-      options || (options = {});
-      var i, l, index, model;
-      for (i = 0, l = models.length; i < l; i++) {
-        model = models[i] = this.get(models[i]);
-        if (!model) continue;
-        delete this._byId[model.id];
-        delete this._byId[model.cid];
-        index = this.indexOf(model);
-        this.models.splice(index, 1);
-        this.length--;
-        if (!options.silent) {
-          options.index = index;
-          model.trigger('remove', model, this, options);
-        }
-        this._removeReference(model, options);
-      }
-      return singular ? models[0] : models;
-    },
-
-    // Update a collection by `set`-ing a new list of models, adding new ones,
-    // removing models that are no longer present, and merging models that
-    // already exist in the collection, as necessary. Similar to **Model#set**,
-    // the core operation for updating the data contained by the collection.
-    set: function(models, options) {
-      options = _.defaults({}, options, setOptions);
-      if (options.parse) models = this.parse(models, options);
-      var singular = !_.isArray(models);
-      models = singular ? (models ? [models] : []) : _.clone(models);
-      var i, l, id, model, attrs, existing, sort;
-      var at = options.at;
-      var targetModel = this.model;
-      var sortable = this.comparator && (at == null) && options.sort !== false;
-      var sortAttr = _.isString(this.comparator) ? this.comparator : null;
-      var toAdd = [], toRemove = [], modelMap = {};
-      var add = options.add, merge = options.merge, remove = options.remove;
-      var order = !sortable && add && remove ? [] : false;
-
-      // Turn bare objects into model references, and prevent invalid models
-      // from being added.
-      for (i = 0, l = models.length; i < l; i++) {
-        attrs = models[i] || {};
-        if (attrs instanceof Model) {
-          id = model = attrs;
-        } else {
-          id = attrs[targetModel.prototype.idAttribute || 'id'];
-        }
-
-        // If a duplicate is found, prevent it from being added and
-        // optionally merge it into the existing model.
-        if (existing = this.get(id)) {
-          if (remove) modelMap[existing.cid] = true;
-          if (merge) {
-            attrs = attrs === model ? model.attributes : attrs;
-            if (options.parse) attrs = existing.parse(attrs, options);
-            existing.set(attrs, options);
-            if (sortable && !sort && existing.hasChanged(sortAttr)) sort = true;
-          }
-          models[i] = existing;
-
-        // If this is a new, valid model, push it to the `toAdd` list.
-        } else if (add) {
-          model = models[i] = this._prepareModel(attrs, options);
-          if (!model) continue;
-          toAdd.push(model);
-          this._addReference(model, options);
-        }
-
-        // Do not add multiple models with the same `id`.
-        model = existing || model;
-        if (order && (model.isNew() || !modelMap[model.id])) order.push(model);
-        modelMap[model.id] = true;
-      }
-
-      // Remove nonexistent models if appropriate.
-      if (remove) {
-        for (i = 0, l = this.length; i < l; ++i) {
-          if (!modelMap[(model = this.models[i]).cid]) toRemove.push(model);
-        }
-        if (toRemove.length) this.remove(toRemove, options);
-      }
-
-      // See if sorting is needed, update `length` and splice in new models.
-      if (toAdd.length || (order && order.length)) {
-        if (sortable) sort = true;
-        this.length += toAdd.length;
-        if (at != null) {
-          for (i = 0, l = toAdd.length; i < l; i++) {
-            this.models.splice(at + i, 0, toAdd[i]);
-          }
-        } else {
-          if (order) this.models.length = 0;
-          var orderedModels = order || toAdd;
-          for (i = 0, l = orderedModels.length; i < l; i++) {
-            this.models.push(orderedModels[i]);
-          }
-        }
-      }
-
-      // Silently sort the collection if appropriate.
-      if (sort) this.sort({silent: true});
-
-      // Unless silenced, it's time to fire all appropriate add/sort events.
-      if (!options.silent) {
-        for (i = 0, l = toAdd.length; i < l; i++) {
-          (model = toAdd[i]).trigger('add', model, this, options);
-        }
-        if (sort || (order && order.length)) this.trigger('sort', this, options);
-      }
-
-      // Return the added (or merged) model (or models).
-      return singular ? models[0] : models;
-    },
-
-    // When you have more items than you want to add or remove individually,
-    // you can reset the entire set with a new list of models, without firing
-    // any granular `add` or `remove` events. Fires `reset` when finished.
-    // Useful for bulk operations and optimizations.
-    reset: function(models, options) {
-      options || (options = {});
-      for (var i = 0, l = this.models.length; i < l; i++) {
-        this._removeReference(this.models[i], options);
-      }
-      options.previousModels = this.models;
-      this._reset();
-      models = this.add(models, _.extend({silent: true}, options));
-      if (!options.silent) this.trigger('reset', this, options);
-      return models;
-    },
-
-    // Add a model to the end of the collection.
-    push: function(model, options) {
-      return this.add(model, _.extend({at: this.length}, options));
-    },
-
-    // Remove a model from the end of the collection.
-    pop: function(options) {
-      var model = this.at(this.length - 1);
-      this.remove(model, options);
-      return model;
-    },
-
-    // Add a model to the beginning of the collection.
-    unshift: function(model, options) {
-      return this.add(model, _.extend({at: 0}, options));
-    },
-
-    // Remove a model from the beginning of the collection.
-    shift: function(options) {
-      var model = this.at(0);
-      this.remove(model, options);
-      return model;
-    },
-
-    // Slice out a sub-array of models from the collection.
-    slice: function() {
-      return slice.apply(this.models, arguments);
-    },
-
-    // Get a model from the set by id.
-    get: function(obj) {
-      if (obj == null) return void 0;
-      return this._byId[obj] || this._byId[obj.id] || this._byId[obj.cid];
-    },
-
-    // Get the model at the given index.
-    at: function(index) {
-      return this.models[index];
-    },
-
-    // Return models with matching attributes. Useful for simple cases of
-    // `filter`.
-    where: function(attrs, first) {
-      if (_.isEmpty(attrs)) return first ? void 0 : [];
-      return this[first ? 'find' : 'filter'](function(model) {
-        for (var key in attrs) {
-          if (attrs[key] !== model.get(key)) return false;
-        }
-        return true;
-      });
-    },
-
-    // Return the first model with matching attributes. Useful for simple cases
-    // of `find`.
-    findWhere: function(attrs) {
-      return this.where(attrs, true);
-    },
-
-    // Force the collection to re-sort itself. You don't need to call this under
-    // normal circumstances, as the set will maintain sort order as each item
-    // is added.
-    sort: function(options) {
-      if (!this.comparator) throw new Error('Cannot sort a set without a comparator');
-      options || (options = {});
-
-      // Run sort based on type of `comparator`.
-      if (_.isString(this.comparator) || this.comparator.length === 1) {
-        this.models = this.sortBy(this.comparator, this);
-      } else {
-        this.models.sort(_.bind(this.comparator, this));
-      }
-
-      if (!options.silent) this.trigger('sort', this, options);
-      return this;
-    },
-
-    // Pluck an attribute from each model in the collection.
-    pluck: function(attr) {
-      return _.invoke(this.models, 'get', attr);
-    },
-
-    // Fetch the default set of models for this collection, resetting the
-    // collection when they arrive. If `reset: true` is passed, the response
-    // data will be passed through the `reset` method instead of `set`.
-    fetch: function(options) {
-      options = options ? _.clone(options) : {};
-      if (options.parse === void 0) options.parse = true;
-      var success = options.success;
-      var collection = this;
-      options.success = function(resp) {
-        var method = options.reset ? 'reset' : 'set';
-        collection[method](resp, options);
-        if (success) success(collection, resp, options);
-        collection.trigger('sync', collection, resp, options);
-      };
-      wrapError(this, options);
-      return this.sync('read', this, options);
-    },
-
-    // Create a new instance of a model in this collection. Add the model to the
-    // collection immediately, unless `wait: true` is passed, in which case we
-    // wait for the server to agree.
-    create: function(model, options) {
-      options = options ? _.clone(options) : {};
-      if (!(model = this._prepareModel(model, options))) return false;
-      if (!options.wait) this.add(model, options);
-      var collection = this;
-      var success = options.success;
-      options.success = function(model, resp) {
-        if (options.wait) collection.add(model, options);
-        if (success) success(model, resp, options);
-      };
-      model.save(null, options);
-      return model;
-    },
-
-    // **parse** converts a response into a list of models to be added to the
-    // collection. The default implementation is just to pass it through.
-    parse: function(resp, options) {
-      return resp;
-    },
-
-    // Create a new collection with an identical list of models as this one.
-    clone: function() {
-      return new this.constructor(this.models);
-    },
-
-    // Private method to reset all internal state. Called when the collection
-    // is first initialized or reset.
-    _reset: function() {
-      this.length = 0;
-      this.models = [];
-      this._byId  = {};
-    },
-
-    // Prepare a hash of attributes (or other model) to be added to this
-    // collection.
-    _prepareModel: function(attrs, options) {
-      if (attrs instanceof Model) return attrs;
-      options = options ? _.clone(options) : {};
-      options.collection = this;
-      var model = new this.model(attrs, options);
-      if (!model.validationError) return model;
-      this.trigger('invalid', this, model.validationError, options);
-      return false;
-    },
-
-    // Internal method to create a model's ties to a collection.
-    _addReference: function(model, options) {
-      this._byId[model.cid] = model;
-      if (model.id != null) this._byId[model.id] = model;
-      if (!model.collection) model.collection = this;
-      model.on('all', this._onModelEvent, this);
-    },
-
-    // Internal method to sever a model's ties to a collection.
-    _removeReference: function(model, options) {
-      if (this === model.collection) delete model.collection;
-      model.off('all', this._onModelEvent, this);
-    },
-
-    // Internal method called every time a model in the set fires an event.
-    // Sets need to update their indexes when models change ids. All other
-    // events simply proxy through. "add" and "remove" events that originate
-    // in other collections are ignored.
-    _onModelEvent: function(event, model, collection, options) {
-      if ((event === 'add' || event === 'remove') && collection !== this) return;
-      if (event === 'destroy') this.remove(model, options);
-      if (model && event === 'change:' + model.idAttribute) {
-        delete this._byId[model.previous(model.idAttribute)];
-        if (model.id != null) this._byId[model.id] = model;
-      }
-      this.trigger.apply(this, arguments);
-    }
-
-  });
-
-  // Underscore methods that we want to implement on the Collection.
-  // 90% of the core usefulness of Backbone Collections is actually implemented
-  // right here:
-  var methods = ['forEach', 'each', 'map', 'collect', 'reduce', 'foldl',
-    'inject', 'reduceRight', 'foldr', 'find', 'detect', 'filter', 'select',
-    'reject', 'every', 'all', 'some', 'any', 'include', 'contains', 'invoke',
-    'max', 'min', 'toArray', 'size', 'first', 'head', 'take', 'initial', 'rest',
-    'tail', 'drop', 'last', 'without', 'difference', 'indexOf', 'shuffle',
-    'lastIndexOf', 'isEmpty', 'chain', 'sample'];
-
-  // Mix in each Underscore method as a proxy to `Collection#models`.
-  _.each(methods, function(method) {
-    Collection.prototype[method] = function() {
-      var args = slice.call(arguments);
-      args.unshift(this.models);
-      return _[method].apply(_, args);
-    };
-  });
-
-  // Underscore methods that take a property name as an argument.
-  var attributeMethods = ['groupBy', 'countBy', 'sortBy', 'indexBy'];
-
-  // Use attributes instead of properties.
-  _.each(attributeMethods, function(method) {
-    Collection.prototype[method] = function(value, context) {
-      var iterator = _.isFunction(value) ? value : function(model) {
-        return model.get(value);
-      };
-      return _[method](this.models, iterator, context);
-    };
-  });
-
-  // Backbone.View
-  // -------------
-
-  // Backbone Views are almost more convention than they are actual code. A View
-  // is simply a JavaScript object that represents a logical chunk of UI in the
-  // DOM. This might be a single item, an entire list, a sidebar or panel, or
-  // even the surrounding frame which wraps your whole app. Defining a chunk of
-  // UI as a **View** allows you to define your DOM events declaratively, without
-  // having to worry about render order ... and makes it easy for the view to
-  // react to specific changes in the state of your models.
-
-  // Creating a Backbone.View creates its initial element outside of the DOM,
-  // if an existing element is not provided...
-  var View = Backbone.View = function(options) {
-    this.cid = _.uniqueId('view');
-    options || (options = {});
-    _.extend(this, _.pick(options, viewOptions));
-    this._ensureElement();
-    this.initialize.apply(this, arguments);
-    this.delegateEvents();
-  };
-
-  // Cached regex to split keys for `delegate`.
-  var delegateEventSplitter = /^(\S+)\s*(.*)$/;
-
-  // List of view options to be merged as properties.
-  var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName', 'events'];
-
-  // Set up all inheritable **Backbone.View** properties and methods.
-  _.extend(View.prototype, Events, {
-
-    // The default `tagName` of a View's element is `"div"`.
-    tagName: 'div',
-
-    // jQuery delegate for element lookup, scoped to DOM elements within the
-    // current view. This should be preferred to global lookups where possible.
-    $: function(selector) {
-      return this.$el.find(selector);
-    },
-
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
-    initialize: function(){},
-
-    // **render** is the core function that your view should override, in order
-    // to populate its element (`this.el`), with the appropriate HTML. The
-    // convention is for **render** to always return `this`.
-    render: function() {
-      return this;
-    },
-
-    // Remove this view by taking the element out of the DOM, and removing any
-    // applicable Backbone.Events listeners.
-    remove: function() {
-      this.$el.remove();
-      this.stopListening();
-      return this;
-    },
-
-    // Change the view's element (`this.el` property), including event
-    // re-delegation.
-    setElement: function(element, delegate) {
-      if (this.$el) this.undelegateEvents();
-      this.$el = element instanceof Backbone.$ ? element : Backbone.$(element);
-      this.el = this.$el[0];
-      if (delegate !== false) this.delegateEvents();
-      return this;
-    },
-
-    // Set callbacks, where `this.events` is a hash of
-    //
-    // *{"event selector": "callback"}*
-    //
-    //     {
-    //       'mousedown .title':  'edit',
-    //       'click .button':     'save',
-    //       'click .open':       function(e) { ... }
-    //     }
-    //
-    // pairs. Callbacks will be bound to the view, with `this` set properly.
-    // Uses event delegation for efficiency.
-    // Omitting the selector binds the event to `this.el`.
-    // This only works for delegate-able events: not `focus`, `blur`, and
-    // not `change`, `submit`, and `reset` in Internet Explorer.
-    delegateEvents: function(events) {
-      if (!(events || (events = _.result(this, 'events')))) return this;
-      this.undelegateEvents();
-      for (var key in events) {
-        var method = events[key];
-        if (!_.isFunction(method)) method = this[events[key]];
-        if (!method) continue;
-
-        var match = key.match(delegateEventSplitter);
-        var eventName = match[1], selector = match[2];
-        method = _.bind(method, this);
-        eventName += '.delegateEvents' + this.cid;
-        if (selector === '') {
-          this.$el.on(eventName, method);
-        } else {
-          this.$el.on(eventName, selector, method);
-        }
-      }
-      return this;
-    },
-
-    // Clears all callbacks previously bound to the view with `delegateEvents`.
-    // You usually don't need to use this, but may wish to if you have multiple
-    // Backbone views attached to the same DOM element.
-    undelegateEvents: function() {
-      this.$el.off('.delegateEvents' + this.cid);
-      return this;
-    },
-
-    // Ensure that the View has a DOM element to render into.
-    // If `this.el` is a string, pass it through `$()`, take the first
-    // matching element, and re-assign it to `el`. Otherwise, create
-    // an element from the `id`, `className` and `tagName` properties.
-    _ensureElement: function() {
-      if (!this.el) {
-        var attrs = _.extend({}, _.result(this, 'attributes'));
-        if (this.id) attrs.id = _.result(this, 'id');
-        if (this.className) attrs['class'] = _.result(this, 'className');
-        var $el = Backbone.$('<' + _.result(this, 'tagName') + '>').attr(attrs);
-        this.setElement($el, false);
-      } else {
-        this.setElement(_.result(this, 'el'), false);
-      }
-    }
-
-  });
-
-  // Backbone.sync
-  // -------------
-
-  // Override this function to change the manner in which Backbone persists
-  // models to the server. You will be passed the type of request, and the
-  // model in question. By default, makes a RESTful Ajax request
-  // to the model's `url()`. Some possible customizations could be:
-  //
-  // * Use `setTimeout` to batch rapid-fire updates into a single request.
-  // * Send up the models as XML instead of JSON.
-  // * Persist models via WebSockets instead of Ajax.
-  //
-  // Turn on `Backbone.emulateHTTP` in order to send `PUT` and `DELETE` requests
-  // as `POST`, with a `_method` parameter containing the true HTTP method,
-  // as well as all requests with the body as `application/x-www-form-urlencoded`
-  // instead of `application/json` with the model in a param named `model`.
-  // Useful when interfacing with server-side languages like **PHP** that make
-  // it difficult to read the body of `PUT` requests.
-  Backbone.sync = function(method, model, options) {
-    var type = methodMap[method];
-
-    // Default options, unless specified.
-    _.defaults(options || (options = {}), {
-      emulateHTTP: Backbone.emulateHTTP,
-      emulateJSON: Backbone.emulateJSON
-    });
-
-    // Default JSON-request options.
-    var params = {type: type, dataType: 'json'};
-
-    // Ensure that we have a URL.
-    if (!options.url) {
-      params.url = _.result(model, 'url') || urlError();
-    }
-
-    // Ensure that we have the appropriate request data.
-    if (options.data == null && model && (method === 'create' || method === 'update' || method === 'patch')) {
-      params.contentType = 'application/json';
-      params.data = JSON.stringify(options.attrs || model.toJSON(options));
-    }
-
-    // For older servers, emulate JSON by encoding the request into an HTML-form.
-    if (options.emulateJSON) {
-      params.contentType = 'application/x-www-form-urlencoded';
-      params.data = params.data ? {model: params.data} : {};
-    }
-
-    // For older servers, emulate HTTP by mimicking the HTTP method with `_method`
-    // And an `X-HTTP-Method-Override` header.
-    if (options.emulateHTTP && (type === 'PUT' || type === 'DELETE' || type === 'PATCH')) {
-      params.type = 'POST';
-      if (options.emulateJSON) params.data._method = type;
-      var beforeSend = options.beforeSend;
-      options.beforeSend = function(xhr) {
-        xhr.setRequestHeader('X-HTTP-Method-Override', type);
-        if (beforeSend) return beforeSend.apply(this, arguments);
-      };
-    }
-
-    // Don't process data on a non-GET request.
-    if (params.type !== 'GET' && !options.emulateJSON) {
-      params.processData = false;
-    }
-
-    // If we're sending a `PATCH` request, and we're in an old Internet Explorer
-    // that still has ActiveX enabled by default, override jQuery to use that
-    // for XHR instead. Remove this line when jQuery supports `PATCH` on IE8.
-    if (params.type === 'PATCH' && noXhrPatch) {
-      params.xhr = function() {
-        return new ActiveXObject("Microsoft.XMLHTTP");
-      };
-    }
-
-    // Make the request, allowing the user to override any Ajax options.
-    var xhr = options.xhr = Backbone.ajax(_.extend(params, options));
-    model.trigger('request', model, xhr, options);
-    return xhr;
-  };
-
-  var noXhrPatch =
-    typeof window !== 'undefined' && !!window.ActiveXObject &&
-      !(window.XMLHttpRequest && (new XMLHttpRequest).dispatchEvent);
-
-  // Map from CRUD to HTTP for our default `Backbone.sync` implementation.
-  var methodMap = {
-    'create': 'POST',
-    'update': 'PUT',
-    'patch':  'PATCH',
-    'delete': 'DELETE',
-    'read':   'GET'
-  };
-
-  // Set the default implementation of `Backbone.ajax` to proxy through to `$`.
-  // Override this if you'd like to use a different library.
-  Backbone.ajax = function() {
-    return Backbone.$.ajax.apply(Backbone.$, arguments);
-  };
-
-  // Backbone.Router
-  // ---------------
-
-  // Routers map faux-URLs to actions, and fire events when routes are
-  // matched. Creating a new one sets its `routes` hash, if not set statically.
-  var Router = Backbone.Router = function(options) {
-    options || (options = {});
-    if (options.routes) this.routes = options.routes;
-    this._bindRoutes();
-    this.initialize.apply(this, arguments);
-  };
-
-  // Cached regular expressions for matching named param parts and splatted
-  // parts of route strings.
-  var optionalParam = /\((.*?)\)/g;
-  var namedParam    = /(\(\?)?:\w+/g;
-  var splatParam    = /\*\w+/g;
-  var escapeRegExp  = /[\-{}\[\]+?.,\\\^$|#\s]/g;
-
-  // Set up all inheritable **Backbone.Router** properties and methods.
-  _.extend(Router.prototype, Events, {
-
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
-    initialize: function(){},
-
-    // Manually bind a single named route to a callback. For example:
-    //
-    //     this.route('search/:query/p:num', 'search', function(query, num) {
-    //       ...
-    //     });
-    //
-    route: function(route, name, callback) {
-      if (!_.isRegExp(route)) route = this._routeToRegExp(route);
-      if (_.isFunction(name)) {
-        callback = name;
-        name = '';
-      }
-      if (!callback) callback = this[name];
-      var router = this;
-      Backbone.history.route(route, function(fragment) {
-        var args = router._extractParameters(route, fragment);
-        router.execute(callback, args);
-        router.trigger.apply(router, ['route:' + name].concat(args));
-        router.trigger('route', name, args);
-        Backbone.history.trigger('route', router, name, args);
-      });
-      return this;
-    },
-
-    // Execute a route handler with the provided parameters.  This is an
-    // excellent place to do pre-route setup or post-route cleanup.
-    execute: function(callback, args) {
-      if (callback) callback.apply(this, args);
-    },
-
-    // Simple proxy to `Backbone.history` to save a fragment into the history.
-    navigate: function(fragment, options) {
-      Backbone.history.navigate(fragment, options);
-      return this;
-    },
-
-    // Bind all defined routes to `Backbone.history`. We have to reverse the
-    // order of the routes here to support behavior where the most general
-    // routes can be defined at the bottom of the route map.
-    _bindRoutes: function() {
-      if (!this.routes) return;
-      this.routes = _.result(this, 'routes');
-      var route, routes = _.keys(this.routes);
-      while ((route = routes.pop()) != null) {
-        this.route(route, this.routes[route]);
-      }
-    },
-
-    // Convert a route string into a regular expression, suitable for matching
-    // against the current location hash.
-    _routeToRegExp: function(route) {
-      route = route.replace(escapeRegExp, '\\$&')
-                   .replace(optionalParam, '(?:$1)?')
-                   .replace(namedParam, function(match, optional) {
-                     return optional ? match : '([^/?]+)';
-                   })
-                   .replace(splatParam, '([^?]*?)');
-      return new RegExp('^' + route + '(?:\\?([\\s\\S]*))?$');
-    },
-
-    // Given a route, and a URL fragment that it matches, return the array of
-    // extracted decoded parameters. Empty or unmatched parameters will be
-    // treated as `null` to normalize cross-browser behavior.
-    _extractParameters: function(route, fragment) {
-      var params = route.exec(fragment).slice(1);
-      return _.map(params, function(param, i) {
-        // Don't decode the search params.
-        if (i === params.length - 1) return param || null;
-        return param ? decodeURIComponent(param) : null;
-      });
-    }
-
-  });
-
-  // Backbone.History
-  // ----------------
-
-  // Handles cross-browser history management, based on either
-  // [pushState](http://diveintohtml5.info/history.html) and real URLs, or
-  // [onhashchange](https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange)
-  // and URL fragments. If the browser supports neither (old IE, natch),
-  // falls back to polling.
-  var History = Backbone.History = function() {
-    this.handlers = [];
-    _.bindAll(this, 'checkUrl');
-
-    // Ensure that `History` can be used outside of the browser.
-    if (typeof window !== 'undefined') {
-      this.location = window.location;
-      this.history = window.history;
-    }
-  };
-
-  // Cached regex for stripping a leading hash/slash and trailing space.
-  var routeStripper = /^[#\/]|\s+$/g;
-
-  // Cached regex for stripping leading and trailing slashes.
-  var rootStripper = /^\/+|\/+$/g;
-
-  // Cached regex for detecting MSIE.
-  var isExplorer = /msie [\w.]+/;
-
-  // Cached regex for removing a trailing slash.
-  var trailingSlash = /\/$/;
-
-  // Cached regex for stripping urls of hash.
-  var pathStripper = /#.*$/;
-
-  // Has the history handling already been started?
-  History.started = false;
-
-  // Set up all inheritable **Backbone.History** properties and methods.
-  _.extend(History.prototype, Events, {
-
-    // The default interval to poll for hash changes, if necessary, is
-    // twenty times a second.
-    interval: 50,
-
-    // Are we at the app root?
-    atRoot: function() {
-      return this.location.pathname.replace(/[^\/]$/, '$&/') === this.root;
-    },
-
-    // Gets the true hash value. Cannot use location.hash directly due to bug
-    // in Firefox where location.hash will always be decoded.
-    getHash: function(window) {
-      var match = (window || this).location.href.match(/#(.*)$/);
-      return match ? match[1] : '';
-    },
-
-    // Get the cross-browser normalized URL fragment, either from the URL,
-    // the hash, or the override.
-    getFragment: function(fragment, forcePushState) {
-      if (fragment == null) {
-        if (this._hasPushState || !this._wantsHashChange || forcePushState) {
-          fragment = decodeURI(this.location.pathname + this.location.search);
-          var root = this.root.replace(trailingSlash, '');
-          if (!fragment.indexOf(root)) fragment = fragment.slice(root.length);
-        } else {
-          fragment = this.getHash();
-        }
-      }
-      return fragment.replace(routeStripper, '');
-    },
-
-    // Start the hash change handling, returning `true` if the current URL matches
-    // an existing route, and `false` otherwise.
-    start: function(options) {
-      if (History.started) throw new Error("Backbone.history has already been started");
-      History.started = true;
-
-      // Figure out the initial configuration. Do we need an iframe?
-      // Is pushState desired ... is it available?
-      this.options          = _.extend({root: '/'}, this.options, options);
-      this.root             = this.options.root;
-      this._wantsHashChange = this.options.hashChange !== false;
-      this._wantsPushState  = !!this.options.pushState;
-      this._hasPushState    = !!(this.options.pushState && this.history && this.history.pushState);
-      var fragment          = this.getFragment();
-      var docMode           = document.documentMode;
-      var oldIE             = (isExplorer.exec(navigator.userAgent.toLowerCase()) && (!docMode || docMode <= 7));
-
-      // Normalize root to always include a leading and trailing slash.
-      this.root = ('/' + this.root + '/').replace(rootStripper, '/');
-
-      if (oldIE && this._wantsHashChange) {
-        var frame = Backbone.$('<iframe src="javascript:0" tabindex="-1">');
-        this.iframe = frame.hide().appendTo('body')[0].contentWindow;
-        this.navigate(fragment);
-      }
-
-      // Depending on whether we're using pushState or hashes, and whether
-      // 'onhashchange' is supported, determine how we check the URL state.
-      if (this._hasPushState) {
-        Backbone.$(window).on('popstate', this.checkUrl);
-      } else if (this._wantsHashChange && ('onhashchange' in window) && !oldIE) {
-        Backbone.$(window).on('hashchange', this.checkUrl);
-      } else if (this._wantsHashChange) {
-        this._checkUrlInterval = setInterval(this.checkUrl, this.interval);
-      }
-
-      // Determine if we need to change the base url, for a pushState link
-      // opened by a non-pushState browser.
-      this.fragment = fragment;
-      var loc = this.location;
-
-      // Transition from hashChange to pushState or vice versa if both are
-      // requested.
-      if (this._wantsHashChange && this._wantsPushState) {
-
-        // If we've started off with a route from a `pushState`-enabled
-        // browser, but we're currently in a browser that doesn't support it...
-        if (!this._hasPushState && !this.atRoot()) {
-          this.fragment = this.getFragment(null, true);
-          this.location.replace(this.root + '#' + this.fragment);
-          // Return immediately as browser will do redirect to new url
-          return true;
-
-        // Or if we've started out with a hash-based route, but we're currently
-        // in a browser where it could be `pushState`-based instead...
-        } else if (this._hasPushState && this.atRoot() && loc.hash) {
-          this.fragment = this.getHash().replace(routeStripper, '');
-          this.history.replaceState({}, document.title, this.root + this.fragment);
-        }
-
-      }
-
-      if (!this.options.silent) return this.loadUrl();
-    },
-
-    // Disable Backbone.history, perhaps temporarily. Not useful in a real app,
-    // but possibly useful for unit testing Routers.
-    stop: function() {
-      Backbone.$(window).off('popstate', this.checkUrl).off('hashchange', this.checkUrl);
-      if (this._checkUrlInterval) clearInterval(this._checkUrlInterval);
-      History.started = false;
-    },
-
-    // Add a route to be tested when the fragment changes. Routes added later
-    // may override previous routes.
-    route: function(route, callback) {
-      this.handlers.unshift({route: route, callback: callback});
-    },
-
-    // Checks the current URL to see if it has changed, and if it has,
-    // calls `loadUrl`, normalizing across the hidden iframe.
-    checkUrl: function(e) {
-      var current = this.getFragment();
-      if (current === this.fragment && this.iframe) {
-        current = this.getFragment(this.getHash(this.iframe));
-      }
-      if (current === this.fragment) return false;
-      if (this.iframe) this.navigate(current);
-      this.loadUrl();
-    },
-
-    // Attempt to load the current URL fragment. If a route succeeds with a
-    // match, returns `true`. If no defined routes matches the fragment,
-    // returns `false`.
-    loadUrl: function(fragment) {
-      fragment = this.fragment = this.getFragment(fragment);
-      return _.any(this.handlers, function(handler) {
-        if (handler.route.test(fragment)) {
-          handler.callback(fragment);
-          return true;
-        }
-      });
-    },
-
-    // Save a fragment into the hash history, or replace the URL state if the
-    // 'replace' option is passed. You are responsible for properly URL-encoding
-    // the fragment in advance.
-    //
-    // The options object can contain `trigger: true` if you wish to have the
-    // route callback be fired (not usually desirable), or `replace: true`, if
-    // you wish to modify the current URL without adding an entry to the history.
-    navigate: function(fragment, options) {
-      if (!History.started) return false;
-      if (!options || options === true) options = {trigger: !!options};
-
-      var url = this.root + (fragment = this.getFragment(fragment || ''));
-
-      // Strip the hash for matching.
-      fragment = fragment.replace(pathStripper, '');
-
-      if (this.fragment === fragment) return;
-      this.fragment = fragment;
-
-      // Don't include a trailing slash on the root.
-      if (fragment === '' && url !== '/') url = url.slice(0, -1);
-
-      // If pushState is available, we use it to set the fragment as a real URL.
-      if (this._hasPushState) {
-        this.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, url);
-
-      // If hash changes haven't been explicitly disabled, update the hash
-      // fragment to store history.
-      } else if (this._wantsHashChange) {
-        this._updateHash(this.location, fragment, options.replace);
-        if (this.iframe && (fragment !== this.getFragment(this.getHash(this.iframe)))) {
-          // Opening and closing the iframe tricks IE7 and earlier to push a
-          // history entry on hash-tag change.  When replace is true, we don't
-          // want this.
-          if(!options.replace) this.iframe.document.open().close();
-          this._updateHash(this.iframe.location, fragment, options.replace);
-        }
-
-      // If you've told us that you explicitly don't want fallback hashchange-
-      // based history, then `navigate` becomes a page refresh.
-      } else {
-        return this.location.assign(url);
-      }
-      if (options.trigger) return this.loadUrl(fragment);
-    },
-
-    // Update the hash location, either replacing the current entry, or adding
-    // a new one to the browser history.
-    _updateHash: function(location, fragment, replace) {
-      if (replace) {
-        var href = location.href.replace(/(javascript:|#).*$/, '');
-        location.replace(href + '#' + fragment);
-      } else {
-        // Some browsers require that `hash` contains a leading #.
-        location.hash = '#' + fragment;
-      }
-    }
-
-  });
-
-  // Create the default Backbone.history.
-  Backbone.history = new History;
-
-  // Helpers
-  // -------
-
-  // Helper function to correctly set up the prototype chain, for subclasses.
-  // Similar to `goog.inherits`, but uses a hash of prototype properties and
-  // class properties to be extended.
-  var extend = function(protoProps, staticProps) {
-    var parent = this;
-    var child;
-
-    // The constructor function for the new subclass is either defined by you
-    // (the "constructor" property in your `extend` definition), or defaulted
-    // by us to simply call the parent's constructor.
-    if (protoProps && _.has(protoProps, 'constructor')) {
-      child = protoProps.constructor;
-    } else {
-      child = function(){ return parent.apply(this, arguments); };
-    }
-
-    // Add static properties to the constructor function, if supplied.
-    _.extend(child, parent, staticProps);
-
-    // Set the prototype chain to inherit from `parent`, without calling
-    // `parent`'s constructor function.
-    var Surrogate = function(){ this.constructor = child; };
-    Surrogate.prototype = parent.prototype;
-    child.prototype = new Surrogate;
-
-    // Add prototype properties (instance properties) to the subclass,
-    // if supplied.
-    if (protoProps) _.extend(child.prototype, protoProps);
-
-    // Set a convenience property in case the parent's prototype is needed
-    // later.
-    child.__super__ = parent.prototype;
-
-    return child;
-  };
-
-  // Set up inheritance for the model, collection, router, view and history.
-  Model.extend = Collection.extend = Router.extend = View.extend = History.extend = extend;
-
-  // Throw an error when a URL is needed, and none is supplied.
-  var urlError = function() {
-    throw new Error('A "url" property or function must be specified');
-  };
-
-  // Wrap an optional error callback with a fallback error event.
-  var wrapError = function(model, options) {
-    var error = options.error;
-    options.error = function(resp) {
-      if (error) error(model, resp, options);
-      model.trigger('error', model, resp, options);
-    };
-  };
-
-  return Backbone;
-
-}));
-
-},{"underscore":17}],17:[function(require,module,exports){
-//     Underscore.js 1.7.0
-//     http://underscorejs.org
-//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
-
-(function() {
-
-  // Baseline setup
-  // --------------
-
-  // Establish the root object, `window` in the browser, or `exports` on the server.
-  var root = this;
-
-  // Save the previous value of the `_` variable.
-  var previousUnderscore = root._;
-
-  // Save bytes in the minified (but not gzipped) version:
-  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
-
-  // Create quick reference variables for speed access to core prototypes.
-  var
-    push             = ArrayProto.push,
-    slice            = ArrayProto.slice,
-    concat           = ArrayProto.concat,
-    toString         = ObjProto.toString,
-    hasOwnProperty   = ObjProto.hasOwnProperty;
-
-  // All **ECMAScript 5** native function implementations that we hope to use
-  // are declared here.
-  var
-    nativeIsArray      = Array.isArray,
-    nativeKeys         = Object.keys,
-    nativeBind         = FuncProto.bind;
-
-  // Create a safe reference to the Underscore object for use below.
-  var _ = function(obj) {
-    if (obj instanceof _) return obj;
-    if (!(this instanceof _)) return new _(obj);
-    this._wrapped = obj;
-  };
-
-  // Export the Underscore object for **Node.js**, with
-  // backwards-compatibility for the old `require()` API. If we're in
-  // the browser, add `_` as a global object.
-  if (typeof exports !== 'undefined') {
-    if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = _;
-    }
-    exports._ = _;
-  } else {
-    root._ = _;
-  }
-
-  // Current version.
-  _.VERSION = '1.7.0';
-
-  // Internal function that returns an efficient (for current engines) version
-  // of the passed-in callback, to be repeatedly applied in other Underscore
-  // functions.
-  var createCallback = function(func, context, argCount) {
-    if (context === void 0) return func;
-    switch (argCount == null ? 3 : argCount) {
-      case 1: return function(value) {
-        return func.call(context, value);
-      };
-      case 2: return function(value, other) {
-        return func.call(context, value, other);
-      };
-      case 3: return function(value, index, collection) {
-        return func.call(context, value, index, collection);
-      };
-      case 4: return function(accumulator, value, index, collection) {
-        return func.call(context, accumulator, value, index, collection);
-      };
-    }
-    return function() {
-      return func.apply(context, arguments);
-    };
-  };
-
-  // A mostly-internal function to generate callbacks that can be applied
-  // to each element in a collection, returning the desired result — either
-  // identity, an arbitrary callback, a property matcher, or a property accessor.
-  _.iteratee = function(value, context, argCount) {
-    if (value == null) return _.identity;
-    if (_.isFunction(value)) return createCallback(value, context, argCount);
-    if (_.isObject(value)) return _.matches(value);
-    return _.property(value);
-  };
-
-  // Collection Functions
-  // --------------------
-
-  // The cornerstone, an `each` implementation, aka `forEach`.
-  // Handles raw objects in addition to array-likes. Treats all
-  // sparse array-likes as if they were dense.
-  _.each = _.forEach = function(obj, iteratee, context) {
-    if (obj == null) return obj;
-    iteratee = createCallback(iteratee, context);
-    var i, length = obj.length;
-    if (length === +length) {
-      for (i = 0; i < length; i++) {
-        iteratee(obj[i], i, obj);
-      }
-    } else {
-      var keys = _.keys(obj);
-      for (i = 0, length = keys.length; i < length; i++) {
-        iteratee(obj[keys[i]], keys[i], obj);
-      }
-    }
-    return obj;
-  };
-
-  // Return the results of applying the iteratee to each element.
-  _.map = _.collect = function(obj, iteratee, context) {
-    if (obj == null) return [];
-    iteratee = _.iteratee(iteratee, context);
-    var keys = obj.length !== +obj.length && _.keys(obj),
-        length = (keys || obj).length,
-        results = Array(length),
-        currentKey;
-    for (var index = 0; index < length; index++) {
-      currentKey = keys ? keys[index] : index;
-      results[index] = iteratee(obj[currentKey], currentKey, obj);
-    }
-    return results;
-  };
-
-  var reduceError = 'Reduce of empty array with no initial value';
-
-  // **Reduce** builds up a single result from a list of values, aka `inject`,
-  // or `foldl`.
-  _.reduce = _.foldl = _.inject = function(obj, iteratee, memo, context) {
-    if (obj == null) obj = [];
-    iteratee = createCallback(iteratee, context, 4);
-    var keys = obj.length !== +obj.length && _.keys(obj),
-        length = (keys || obj).length,
-        index = 0, currentKey;
-    if (arguments.length < 3) {
-      if (!length) throw new TypeError(reduceError);
-      memo = obj[keys ? keys[index++] : index++];
-    }
-    for (; index < length; index++) {
-      currentKey = keys ? keys[index] : index;
-      memo = iteratee(memo, obj[currentKey], currentKey, obj);
-    }
-    return memo;
-  };
-
-  // The right-associative version of reduce, also known as `foldr`.
-  _.reduceRight = _.foldr = function(obj, iteratee, memo, context) {
-    if (obj == null) obj = [];
-    iteratee = createCallback(iteratee, context, 4);
-    var keys = obj.length !== + obj.length && _.keys(obj),
-        index = (keys || obj).length,
-        currentKey;
-    if (arguments.length < 3) {
-      if (!index) throw new TypeError(reduceError);
-      memo = obj[keys ? keys[--index] : --index];
-    }
-    while (index--) {
-      currentKey = keys ? keys[index] : index;
-      memo = iteratee(memo, obj[currentKey], currentKey, obj);
-    }
-    return memo;
-  };
-
-  // Return the first value which passes a truth test. Aliased as `detect`.
-  _.find = _.detect = function(obj, predicate, context) {
-    var result;
-    predicate = _.iteratee(predicate, context);
-    _.some(obj, function(value, index, list) {
-      if (predicate(value, index, list)) {
-        result = value;
-        return true;
-      }
-    });
-    return result;
-  };
-
-  // Return all the elements that pass a truth test.
-  // Aliased as `select`.
-  _.filter = _.select = function(obj, predicate, context) {
-    var results = [];
-    if (obj == null) return results;
-    predicate = _.iteratee(predicate, context);
-    _.each(obj, function(value, index, list) {
-      if (predicate(value, index, list)) results.push(value);
-    });
-    return results;
-  };
-
-  // Return all the elements for which a truth test fails.
-  _.reject = function(obj, predicate, context) {
-    return _.filter(obj, _.negate(_.iteratee(predicate)), context);
-  };
-
-  // Determine whether all of the elements match a truth test.
-  // Aliased as `all`.
-  _.every = _.all = function(obj, predicate, context) {
-    if (obj == null) return true;
-    predicate = _.iteratee(predicate, context);
-    var keys = obj.length !== +obj.length && _.keys(obj),
-        length = (keys || obj).length,
-        index, currentKey;
-    for (index = 0; index < length; index++) {
-      currentKey = keys ? keys[index] : index;
-      if (!predicate(obj[currentKey], currentKey, obj)) return false;
-    }
-    return true;
-  };
-
-  // Determine if at least one element in the object matches a truth test.
-  // Aliased as `any`.
-  _.some = _.any = function(obj, predicate, context) {
-    if (obj == null) return false;
-    predicate = _.iteratee(predicate, context);
-    var keys = obj.length !== +obj.length && _.keys(obj),
-        length = (keys || obj).length,
-        index, currentKey;
-    for (index = 0; index < length; index++) {
-      currentKey = keys ? keys[index] : index;
-      if (predicate(obj[currentKey], currentKey, obj)) return true;
-    }
-    return false;
-  };
-
-  // Determine if the array or object contains a given value (using `===`).
-  // Aliased as `include`.
-  _.contains = _.include = function(obj, target) {
-    if (obj == null) return false;
-    if (obj.length !== +obj.length) obj = _.values(obj);
-    return _.indexOf(obj, target) >= 0;
-  };
-
-  // Invoke a method (with arguments) on every item in a collection.
-  _.invoke = function(obj, method) {
-    var args = slice.call(arguments, 2);
-    var isFunc = _.isFunction(method);
-    return _.map(obj, function(value) {
-      return (isFunc ? method : value[method]).apply(value, args);
-    });
-  };
-
-  // Convenience version of a common use case of `map`: fetching a property.
-  _.pluck = function(obj, key) {
-    return _.map(obj, _.property(key));
-  };
-
-  // Convenience version of a common use case of `filter`: selecting only objects
-  // containing specific `key:value` pairs.
-  _.where = function(obj, attrs) {
-    return _.filter(obj, _.matches(attrs));
-  };
-
-  // Convenience version of a common use case of `find`: getting the first object
-  // containing specific `key:value` pairs.
-  _.findWhere = function(obj, attrs) {
-    return _.find(obj, _.matches(attrs));
-  };
-
-  // Return the maximum element (or element-based computation).
-  _.max = function(obj, iteratee, context) {
-    var result = -Infinity, lastComputed = -Infinity,
-        value, computed;
-    if (iteratee == null && obj != null) {
-      obj = obj.length === +obj.length ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value > result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = _.iteratee(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
-  // Return the minimum element (or element-based computation).
-  _.min = function(obj, iteratee, context) {
-    var result = Infinity, lastComputed = Infinity,
-        value, computed;
-    if (iteratee == null && obj != null) {
-      obj = obj.length === +obj.length ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value < result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = _.iteratee(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed < lastComputed || computed === Infinity && result === Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
-  // Shuffle a collection, using the modern version of the
-  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
-  _.shuffle = function(obj) {
-    var set = obj && obj.length === +obj.length ? obj : _.values(obj);
-    var length = set.length;
-    var shuffled = Array(length);
-    for (var index = 0, rand; index < length; index++) {
-      rand = _.random(0, index);
-      if (rand !== index) shuffled[index] = shuffled[rand];
-      shuffled[rand] = set[index];
-    }
-    return shuffled;
-  };
-
-  // Sample **n** random values from a collection.
-  // If **n** is not specified, returns a single random element.
-  // The internal `guard` argument allows it to work with `map`.
-  _.sample = function(obj, n, guard) {
-    if (n == null || guard) {
-      if (obj.length !== +obj.length) obj = _.values(obj);
-      return obj[_.random(obj.length - 1)];
-    }
-    return _.shuffle(obj).slice(0, Math.max(0, n));
-  };
-
-  // Sort the object's values by a criterion produced by an iteratee.
-  _.sortBy = function(obj, iteratee, context) {
-    iteratee = _.iteratee(iteratee, context);
-    return _.pluck(_.map(obj, function(value, index, list) {
-      return {
-        value: value,
-        index: index,
-        criteria: iteratee(value, index, list)
-      };
-    }).sort(function(left, right) {
-      var a = left.criteria;
-      var b = right.criteria;
-      if (a !== b) {
-        if (a > b || a === void 0) return 1;
-        if (a < b || b === void 0) return -1;
-      }
-      return left.index - right.index;
-    }), 'value');
-  };
-
-  // An internal function used for aggregate "group by" operations.
-  var group = function(behavior) {
-    return function(obj, iteratee, context) {
-      var result = {};
-      iteratee = _.iteratee(iteratee, context);
-      _.each(obj, function(value, index) {
-        var key = iteratee(value, index, obj);
-        behavior(result, value, key);
-      });
-      return result;
-    };
-  };
-
-  // Groups the object's values by a criterion. Pass either a string attribute
-  // to group by, or a function that returns the criterion.
-  _.groupBy = group(function(result, value, key) {
-    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
-  });
-
-  // Indexes the object's values by a criterion, similar to `groupBy`, but for
-  // when you know that your index values will be unique.
-  _.indexBy = group(function(result, value, key) {
-    result[key] = value;
-  });
-
-  // Counts instances of an object that group by a certain criterion. Pass
-  // either a string attribute to count by, or a function that returns the
-  // criterion.
-  _.countBy = group(function(result, value, key) {
-    if (_.has(result, key)) result[key]++; else result[key] = 1;
-  });
-
-  // Use a comparator function to figure out the smallest index at which
-  // an object should be inserted so as to maintain order. Uses binary search.
-  _.sortedIndex = function(array, obj, iteratee, context) {
-    iteratee = _.iteratee(iteratee, context, 1);
-    var value = iteratee(obj);
-    var low = 0, high = array.length;
-    while (low < high) {
-      var mid = low + high >>> 1;
-      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
-    }
-    return low;
-  };
-
-  // Safely create a real, live array from anything iterable.
-  _.toArray = function(obj) {
-    if (!obj) return [];
-    if (_.isArray(obj)) return slice.call(obj);
-    if (obj.length === +obj.length) return _.map(obj, _.identity);
-    return _.values(obj);
-  };
-
-  // Return the number of elements in an object.
-  _.size = function(obj) {
-    if (obj == null) return 0;
-    return obj.length === +obj.length ? obj.length : _.keys(obj).length;
-  };
-
-  // Split a collection into two arrays: one whose elements all satisfy the given
-  // predicate, and one whose elements all do not satisfy the predicate.
-  _.partition = function(obj, predicate, context) {
-    predicate = _.iteratee(predicate, context);
-    var pass = [], fail = [];
-    _.each(obj, function(value, key, obj) {
-      (predicate(value, key, obj) ? pass : fail).push(value);
-    });
-    return [pass, fail];
-  };
-
-  // Array Functions
-  // ---------------
-
-  // Get the first element of an array. Passing **n** will return the first N
-  // values in the array. Aliased as `head` and `take`. The **guard** check
-  // allows it to work with `_.map`.
-  _.first = _.head = _.take = function(array, n, guard) {
-    if (array == null) return void 0;
-    if (n == null || guard) return array[0];
-    if (n < 0) return [];
-    return slice.call(array, 0, n);
-  };
-
-  // Returns everything but the last entry of the array. Especially useful on
-  // the arguments object. Passing **n** will return all the values in
-  // the array, excluding the last N. The **guard** check allows it to work with
-  // `_.map`.
-  _.initial = function(array, n, guard) {
-    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
-  };
-
-  // Get the last element of an array. Passing **n** will return the last N
-  // values in the array. The **guard** check allows it to work with `_.map`.
-  _.last = function(array, n, guard) {
-    if (array == null) return void 0;
-    if (n == null || guard) return array[array.length - 1];
-    return slice.call(array, Math.max(array.length - n, 0));
-  };
-
-  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
-  // Especially useful on the arguments object. Passing an **n** will return
-  // the rest N values in the array. The **guard**
-  // check allows it to work with `_.map`.
-  _.rest = _.tail = _.drop = function(array, n, guard) {
-    return slice.call(array, n == null || guard ? 1 : n);
-  };
-
-  // Trim out all falsy values from an array.
-  _.compact = function(array) {
-    return _.filter(array, _.identity);
-  };
-
-  // Internal implementation of a recursive `flatten` function.
-  var flatten = function(input, shallow, strict, output) {
-    if (shallow && _.every(input, _.isArray)) {
-      return concat.apply(output, input);
-    }
-    for (var i = 0, length = input.length; i < length; i++) {
-      var value = input[i];
-      if (!_.isArray(value) && !_.isArguments(value)) {
-        if (!strict) output.push(value);
-      } else if (shallow) {
-        push.apply(output, value);
-      } else {
-        flatten(value, shallow, strict, output);
-      }
-    }
-    return output;
-  };
-
-  // Flatten out an array, either recursively (by default), or just one level.
-  _.flatten = function(array, shallow) {
-    return flatten(array, shallow, false, []);
-  };
-
-  // Return a version of the array that does not contain the specified value(s).
-  _.without = function(array) {
-    return _.difference(array, slice.call(arguments, 1));
-  };
-
-  // Produce a duplicate-free version of the array. If the array has already
-  // been sorted, you have the option of using a faster algorithm.
-  // Aliased as `unique`.
-  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
-    if (array == null) return [];
-    if (!_.isBoolean(isSorted)) {
-      context = iteratee;
-      iteratee = isSorted;
-      isSorted = false;
-    }
-    if (iteratee != null) iteratee = _.iteratee(iteratee, context);
-    var result = [];
-    var seen = [];
-    for (var i = 0, length = array.length; i < length; i++) {
-      var value = array[i];
-      if (isSorted) {
-        if (!i || seen !== value) result.push(value);
-        seen = value;
-      } else if (iteratee) {
-        var computed = iteratee(value, i, array);
-        if (_.indexOf(seen, computed) < 0) {
-          seen.push(computed);
-          result.push(value);
-        }
-      } else if (_.indexOf(result, value) < 0) {
-        result.push(value);
-      }
-    }
-    return result;
-  };
-
-  // Produce an array that contains the union: each distinct element from all of
-  // the passed-in arrays.
-  _.union = function() {
-    return _.uniq(flatten(arguments, true, true, []));
-  };
-
-  // Produce an array that contains every item shared between all the
-  // passed-in arrays.
-  _.intersection = function(array) {
-    if (array == null) return [];
-    var result = [];
-    var argsLength = arguments.length;
-    for (var i = 0, length = array.length; i < length; i++) {
-      var item = array[i];
-      if (_.contains(result, item)) continue;
-      for (var j = 1; j < argsLength; j++) {
-        if (!_.contains(arguments[j], item)) break;
-      }
-      if (j === argsLength) result.push(item);
-    }
-    return result;
-  };
-
-  // Take the difference between one array and a number of other arrays.
-  // Only the elements present in just the first array will remain.
-  _.difference = function(array) {
-    var rest = flatten(slice.call(arguments, 1), true, true, []);
-    return _.filter(array, function(value){
-      return !_.contains(rest, value);
-    });
-  };
-
-  // Zip together multiple lists into a single array -- elements that share
-  // an index go together.
-  _.zip = function(array) {
-    if (array == null) return [];
-    var length = _.max(arguments, 'length').length;
-    var results = Array(length);
-    for (var i = 0; i < length; i++) {
-      results[i] = _.pluck(arguments, i);
-    }
-    return results;
-  };
-
-  // Converts lists into objects. Pass either a single array of `[key, value]`
-  // pairs, or two parallel arrays of the same length -- one of keys, and one of
-  // the corresponding values.
-  _.object = function(list, values) {
-    if (list == null) return {};
-    var result = {};
-    for (var i = 0, length = list.length; i < length; i++) {
-      if (values) {
-        result[list[i]] = values[i];
-      } else {
-        result[list[i][0]] = list[i][1];
-      }
-    }
-    return result;
-  };
-
-  // Return the position of the first occurrence of an item in an array,
-  // or -1 if the item is not included in the array.
-  // If the array is large and already in sort order, pass `true`
-  // for **isSorted** to use binary search.
-  _.indexOf = function(array, item, isSorted) {
-    if (array == null) return -1;
-    var i = 0, length = array.length;
-    if (isSorted) {
-      if (typeof isSorted == 'number') {
-        i = isSorted < 0 ? Math.max(0, length + isSorted) : isSorted;
-      } else {
-        i = _.sortedIndex(array, item);
-        return array[i] === item ? i : -1;
-      }
-    }
-    for (; i < length; i++) if (array[i] === item) return i;
-    return -1;
-  };
-
-  _.lastIndexOf = function(array, item, from) {
-    if (array == null) return -1;
-    var idx = array.length;
-    if (typeof from == 'number') {
-      idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
-    }
-    while (--idx >= 0) if (array[idx] === item) return idx;
-    return -1;
-  };
-
-  // Generate an integer Array containing an arithmetic progression. A port of
-  // the native Python `range()` function. See
-  // [the Python documentation](http://docs.python.org/library/functions.html#range).
-  _.range = function(start, stop, step) {
-    if (arguments.length <= 1) {
-      stop = start || 0;
-      start = 0;
-    }
-    step = step || 1;
-
-    var length = Math.max(Math.ceil((stop - start) / step), 0);
-    var range = Array(length);
-
-    for (var idx = 0; idx < length; idx++, start += step) {
-      range[idx] = start;
-    }
-
-    return range;
-  };
-
-  // Function (ahem) Functions
-  // ------------------
-
-  // Reusable constructor function for prototype setting.
-  var Ctor = function(){};
-
-  // Create a function bound to a given object (assigning `this`, and arguments,
-  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
-  // available.
-  _.bind = function(func, context) {
-    var args, bound;
-    if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
-    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
-    args = slice.call(arguments, 2);
-    bound = function() {
-      if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
-      Ctor.prototype = func.prototype;
-      var self = new Ctor;
-      Ctor.prototype = null;
-      var result = func.apply(self, args.concat(slice.call(arguments)));
-      if (_.isObject(result)) return result;
-      return self;
-    };
-    return bound;
-  };
-
-  // Partially apply a function by creating a version that has had some of its
-  // arguments pre-filled, without changing its dynamic `this` context. _ acts
-  // as a placeholder, allowing any combination of arguments to be pre-filled.
-  _.partial = function(func) {
-    var boundArgs = slice.call(arguments, 1);
-    return function() {
-      var position = 0;
-      var args = boundArgs.slice();
-      for (var i = 0, length = args.length; i < length; i++) {
-        if (args[i] === _) args[i] = arguments[position++];
-      }
-      while (position < arguments.length) args.push(arguments[position++]);
-      return func.apply(this, args);
-    };
-  };
-
-  // Bind a number of an object's methods to that object. Remaining arguments
-  // are the method names to be bound. Useful for ensuring that all callbacks
-  // defined on an object belong to it.
-  _.bindAll = function(obj) {
-    var i, length = arguments.length, key;
-    if (length <= 1) throw new Error('bindAll must be passed function names');
-    for (i = 1; i < length; i++) {
-      key = arguments[i];
-      obj[key] = _.bind(obj[key], obj);
-    }
-    return obj;
-  };
-
-  // Memoize an expensive function by storing its results.
-  _.memoize = function(func, hasher) {
-    var memoize = function(key) {
-      var cache = memoize.cache;
-      var address = hasher ? hasher.apply(this, arguments) : key;
-      if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
-      return cache[address];
-    };
-    memoize.cache = {};
-    return memoize;
-  };
-
-  // Delays a function for the given number of milliseconds, and then calls
-  // it with the arguments supplied.
-  _.delay = function(func, wait) {
-    var args = slice.call(arguments, 2);
-    return setTimeout(function(){
-      return func.apply(null, args);
-    }, wait);
-  };
-
-  // Defers a function, scheduling it to run after the current call stack has
-  // cleared.
-  _.defer = function(func) {
-    return _.delay.apply(_, [func, 1].concat(slice.call(arguments, 1)));
-  };
-
-  // Returns a function, that, when invoked, will only be triggered at most once
-  // during a given window of time. Normally, the throttled function will run
-  // as much as it can, without ever going more than once per `wait` duration;
-  // but if you'd like to disable the execution on the leading edge, pass
-  // `{leading: false}`. To disable execution on the trailing edge, ditto.
-  _.throttle = function(func, wait, options) {
-    var context, args, result;
-    var timeout = null;
-    var previous = 0;
-    if (!options) options = {};
-    var later = function() {
-      previous = options.leading === false ? 0 : _.now();
-      timeout = null;
-      result = func.apply(context, args);
-      if (!timeout) context = args = null;
-    };
-    return function() {
-      var now = _.now();
-      if (!previous && options.leading === false) previous = now;
-      var remaining = wait - (now - previous);
-      context = this;
-      args = arguments;
-      if (remaining <= 0 || remaining > wait) {
-        clearTimeout(timeout);
-        timeout = null;
-        previous = now;
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-      } else if (!timeout && options.trailing !== false) {
-        timeout = setTimeout(later, remaining);
-      }
-      return result;
-    };
-  };
-
-  // Returns a function, that, as long as it continues to be invoked, will not
-  // be triggered. The function will be called after it stops being called for
-  // N milliseconds. If `immediate` is passed, trigger the function on the
-  // leading edge, instead of the trailing.
-  _.debounce = function(func, wait, immediate) {
-    var timeout, args, context, timestamp, result;
-
-    var later = function() {
-      var last = _.now() - timestamp;
-
-      if (last < wait && last > 0) {
-        timeout = setTimeout(later, wait - last);
-      } else {
-        timeout = null;
-        if (!immediate) {
-          result = func.apply(context, args);
-          if (!timeout) context = args = null;
-        }
-      }
-    };
-
-    return function() {
-      context = this;
-      args = arguments;
-      timestamp = _.now();
-      var callNow = immediate && !timeout;
-      if (!timeout) timeout = setTimeout(later, wait);
-      if (callNow) {
-        result = func.apply(context, args);
-        context = args = null;
-      }
-
-      return result;
-    };
-  };
-
-  // Returns the first function passed as an argument to the second,
-  // allowing you to adjust arguments, run code before and after, and
-  // conditionally execute the original function.
-  _.wrap = function(func, wrapper) {
-    return _.partial(wrapper, func);
-  };
-
-  // Returns a negated version of the passed-in predicate.
-  _.negate = function(predicate) {
-    return function() {
-      return !predicate.apply(this, arguments);
-    };
-  };
-
-  // Returns a function that is the composition of a list of functions, each
-  // consuming the return value of the function that follows.
-  _.compose = function() {
-    var args = arguments;
-    var start = args.length - 1;
-    return function() {
-      var i = start;
-      var result = args[start].apply(this, arguments);
-      while (i--) result = args[i].call(this, result);
-      return result;
-    };
-  };
-
-  // Returns a function that will only be executed after being called N times.
-  _.after = function(times, func) {
-    return function() {
-      if (--times < 1) {
-        return func.apply(this, arguments);
-      }
-    };
-  };
-
-  // Returns a function that will only be executed before being called N times.
-  _.before = function(times, func) {
-    var memo;
-    return function() {
-      if (--times > 0) {
-        memo = func.apply(this, arguments);
-      } else {
-        func = null;
-      }
-      return memo;
-    };
-  };
-
-  // Returns a function that will be executed at most one time, no matter how
-  // often you call it. Useful for lazy initialization.
-  _.once = _.partial(_.before, 2);
-
-  // Object Functions
-  // ----------------
-
-  // Retrieve the names of an object's properties.
-  // Delegates to **ECMAScript 5**'s native `Object.keys`
-  _.keys = function(obj) {
-    if (!_.isObject(obj)) return [];
-    if (nativeKeys) return nativeKeys(obj);
-    var keys = [];
-    for (var key in obj) if (_.has(obj, key)) keys.push(key);
-    return keys;
-  };
-
-  // Retrieve the values of an object's properties.
-  _.values = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var values = Array(length);
-    for (var i = 0; i < length; i++) {
-      values[i] = obj[keys[i]];
-    }
-    return values;
-  };
-
-  // Convert an object into a list of `[key, value]` pairs.
-  _.pairs = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var pairs = Array(length);
-    for (var i = 0; i < length; i++) {
-      pairs[i] = [keys[i], obj[keys[i]]];
-    }
-    return pairs;
-  };
-
-  // Invert the keys and values of an object. The values must be serializable.
-  _.invert = function(obj) {
-    var result = {};
-    var keys = _.keys(obj);
-    for (var i = 0, length = keys.length; i < length; i++) {
-      result[obj[keys[i]]] = keys[i];
-    }
-    return result;
-  };
-
-  // Return a sorted list of the function names available on the object.
-  // Aliased as `methods`
-  _.functions = _.methods = function(obj) {
-    var names = [];
-    for (var key in obj) {
-      if (_.isFunction(obj[key])) names.push(key);
-    }
-    return names.sort();
-  };
-
-  // Extend a given object with all the properties in passed-in object(s).
-  _.extend = function(obj) {
-    if (!_.isObject(obj)) return obj;
-    var source, prop;
-    for (var i = 1, length = arguments.length; i < length; i++) {
-      source = arguments[i];
-      for (prop in source) {
-        if (hasOwnProperty.call(source, prop)) {
-            obj[prop] = source[prop];
-        }
-      }
-    }
-    return obj;
-  };
-
-  // Return a copy of the object only containing the whitelisted properties.
-  _.pick = function(obj, iteratee, context) {
-    var result = {}, key;
-    if (obj == null) return result;
-    if (_.isFunction(iteratee)) {
-      iteratee = createCallback(iteratee, context);
-      for (key in obj) {
-        var value = obj[key];
-        if (iteratee(value, key, obj)) result[key] = value;
-      }
-    } else {
-      var keys = concat.apply([], slice.call(arguments, 1));
-      obj = new Object(obj);
-      for (var i = 0, length = keys.length; i < length; i++) {
-        key = keys[i];
-        if (key in obj) result[key] = obj[key];
-      }
-    }
-    return result;
-  };
-
-   // Return a copy of the object without the blacklisted properties.
-  _.omit = function(obj, iteratee, context) {
-    if (_.isFunction(iteratee)) {
-      iteratee = _.negate(iteratee);
-    } else {
-      var keys = _.map(concat.apply([], slice.call(arguments, 1)), String);
-      iteratee = function(value, key) {
-        return !_.contains(keys, key);
-      };
-    }
-    return _.pick(obj, iteratee, context);
-  };
-
-  // Fill in a given object with default properties.
-  _.defaults = function(obj) {
-    if (!_.isObject(obj)) return obj;
-    for (var i = 1, length = arguments.length; i < length; i++) {
-      var source = arguments[i];
-      for (var prop in source) {
-        if (obj[prop] === void 0) obj[prop] = source[prop];
-      }
-    }
-    return obj;
-  };
-
-  // Create a (shallow-cloned) duplicate of an object.
-  _.clone = function(obj) {
-    if (!_.isObject(obj)) return obj;
-    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
-  };
-
-  // Invokes interceptor with the obj, and then returns obj.
-  // The primary purpose of this method is to "tap into" a method chain, in
-  // order to perform operations on intermediate results within the chain.
-  _.tap = function(obj, interceptor) {
-    interceptor(obj);
-    return obj;
-  };
-
-  // Internal recursive comparison function for `isEqual`.
-  var eq = function(a, b, aStack, bStack) {
-    // Identical objects are equal. `0 === -0`, but they aren't identical.
-    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
-    if (a === b) return a !== 0 || 1 / a === 1 / b;
-    // A strict comparison is necessary because `null == undefined`.
-    if (a == null || b == null) return a === b;
-    // Unwrap any wrapped objects.
-    if (a instanceof _) a = a._wrapped;
-    if (b instanceof _) b = b._wrapped;
-    // Compare `[[Class]]` names.
-    var className = toString.call(a);
-    if (className !== toString.call(b)) return false;
-    switch (className) {
-      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
-      case '[object RegExp]':
-      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
-      case '[object String]':
-        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-        // equivalent to `new String("5")`.
-        return '' + a === '' + b;
-      case '[object Number]':
-        // `NaN`s are equivalent, but non-reflexive.
-        // Object(NaN) is equivalent to NaN
-        if (+a !== +a) return +b !== +b;
-        // An `egal` comparison is performed for other numeric values.
-        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
-      case '[object Date]':
-      case '[object Boolean]':
-        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-        // millisecond representations. Note that invalid dates with millisecond representations
-        // of `NaN` are not equivalent.
-        return +a === +b;
-    }
-    if (typeof a != 'object' || typeof b != 'object') return false;
-    // Assume equality for cyclic structures. The algorithm for detecting cyclic
-    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-    var length = aStack.length;
-    while (length--) {
-      // Linear search. Performance is inversely proportional to the number of
-      // unique nested structures.
-      if (aStack[length] === a) return bStack[length] === b;
-    }
-    // Objects with different constructors are not equivalent, but `Object`s
-    // from different frames are.
-    var aCtor = a.constructor, bCtor = b.constructor;
-    if (
-      aCtor !== bCtor &&
-      // Handle Object.create(x) cases
-      'constructor' in a && 'constructor' in b &&
-      !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
-        _.isFunction(bCtor) && bCtor instanceof bCtor)
-    ) {
-      return false;
-    }
-    // Add the first object to the stack of traversed objects.
-    aStack.push(a);
-    bStack.push(b);
-    var size, result;
-    // Recursively compare objects and arrays.
-    if (className === '[object Array]') {
-      // Compare array lengths to determine if a deep comparison is necessary.
-      size = a.length;
-      result = size === b.length;
-      if (result) {
-        // Deep compare the contents, ignoring non-numeric properties.
-        while (size--) {
-          if (!(result = eq(a[size], b[size], aStack, bStack))) break;
-        }
-      }
-    } else {
-      // Deep compare objects.
-      var keys = _.keys(a), key;
-      size = keys.length;
-      // Ensure that both objects contain the same number of properties before comparing deep equality.
-      result = _.keys(b).length === size;
-      if (result) {
-        while (size--) {
-          // Deep compare each member
-          key = keys[size];
-          if (!(result = _.has(b, key) && eq(a[key], b[key], aStack, bStack))) break;
-        }
-      }
-    }
-    // Remove the first object from the stack of traversed objects.
-    aStack.pop();
-    bStack.pop();
-    return result;
-  };
-
-  // Perform a deep comparison to check if two objects are equal.
-  _.isEqual = function(a, b) {
-    return eq(a, b, [], []);
-  };
-
-  // Is a given array, string, or object empty?
-  // An "empty" object has no enumerable own-properties.
-  _.isEmpty = function(obj) {
-    if (obj == null) return true;
-    if (_.isArray(obj) || _.isString(obj) || _.isArguments(obj)) return obj.length === 0;
-    for (var key in obj) if (_.has(obj, key)) return false;
-    return true;
-  };
-
-  // Is a given value a DOM element?
-  _.isElement = function(obj) {
-    return !!(obj && obj.nodeType === 1);
-  };
-
-  // Is a given value an array?
-  // Delegates to ECMA5's native Array.isArray
-  _.isArray = nativeIsArray || function(obj) {
-    return toString.call(obj) === '[object Array]';
-  };
-
-  // Is a given variable an object?
-  _.isObject = function(obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
-  };
-
-  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp.
-  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
-    _['is' + name] = function(obj) {
-      return toString.call(obj) === '[object ' + name + ']';
-    };
-  });
-
-  // Define a fallback version of the method in browsers (ahem, IE), where
-  // there isn't any inspectable "Arguments" type.
-  if (!_.isArguments(arguments)) {
-    _.isArguments = function(obj) {
-      return _.has(obj, 'callee');
-    };
-  }
-
-  // Optimize `isFunction` if appropriate. Work around an IE 11 bug.
-  if (typeof /./ !== 'function') {
-    _.isFunction = function(obj) {
-      return typeof obj == 'function' || false;
-    };
-  }
-
-  // Is a given object a finite number?
-  _.isFinite = function(obj) {
-    return isFinite(obj) && !isNaN(parseFloat(obj));
-  };
-
-  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
-  _.isNaN = function(obj) {
-    return _.isNumber(obj) && obj !== +obj;
-  };
-
-  // Is a given value a boolean?
-  _.isBoolean = function(obj) {
-    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
-  };
-
-  // Is a given value equal to null?
-  _.isNull = function(obj) {
-    return obj === null;
-  };
-
-  // Is a given variable undefined?
-  _.isUndefined = function(obj) {
-    return obj === void 0;
-  };
-
-  // Shortcut function for checking if an object has a given property directly
-  // on itself (in other words, not on a prototype).
-  _.has = function(obj, key) {
-    return obj != null && hasOwnProperty.call(obj, key);
-  };
-
-  // Utility Functions
-  // -----------------
-
-  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
-  // previous owner. Returns a reference to the Underscore object.
-  _.noConflict = function() {
-    root._ = previousUnderscore;
-    return this;
-  };
-
-  // Keep the identity function around for default iteratees.
-  _.identity = function(value) {
-    return value;
-  };
-
-  _.constant = function(value) {
-    return function() {
-      return value;
-    };
-  };
-
-  _.noop = function(){};
-
-  _.property = function(key) {
-    return function(obj) {
-      return obj[key];
-    };
-  };
-
-  // Returns a predicate for checking whether an object has a given set of `key:value` pairs.
-  _.matches = function(attrs) {
-    var pairs = _.pairs(attrs), length = pairs.length;
-    return function(obj) {
-      if (obj == null) return !length;
-      obj = new Object(obj);
-      for (var i = 0; i < length; i++) {
-        var pair = pairs[i], key = pair[0];
-        if (pair[1] !== obj[key] || !(key in obj)) return false;
-      }
-      return true;
-    };
-  };
-
-  // Run a function **n** times.
-  _.times = function(n, iteratee, context) {
-    var accum = Array(Math.max(0, n));
-    iteratee = createCallback(iteratee, context, 1);
-    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
-    return accum;
-  };
-
-  // Return a random integer between min and max (inclusive).
-  _.random = function(min, max) {
-    if (max == null) {
-      max = min;
-      min = 0;
-    }
-    return min + Math.floor(Math.random() * (max - min + 1));
-  };
-
-  // A (possibly faster) way to get the current timestamp as an integer.
-  _.now = Date.now || function() {
-    return new Date().getTime();
-  };
-
-   // List of HTML entities for escaping.
-  var escapeMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '`': '&#x60;'
-  };
-  var unescapeMap = _.invert(escapeMap);
-
-  // Functions for escaping and unescaping strings to/from HTML interpolation.
-  var createEscaper = function(map) {
-    var escaper = function(match) {
-      return map[match];
-    };
-    // Regexes for identifying a key that needs to be escaped
-    var source = '(?:' + _.keys(map).join('|') + ')';
-    var testRegexp = RegExp(source);
-    var replaceRegexp = RegExp(source, 'g');
-    return function(string) {
-      string = string == null ? '' : '' + string;
-      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
-    };
-  };
-  _.escape = createEscaper(escapeMap);
-  _.unescape = createEscaper(unescapeMap);
-
-  // If the value of the named `property` is a function then invoke it with the
-  // `object` as context; otherwise, return it.
-  _.result = function(object, property) {
-    if (object == null) return void 0;
-    var value = object[property];
-    return _.isFunction(value) ? object[property]() : value;
-  };
-
-  // Generate a unique integer id (unique within the entire client session).
-  // Useful for temporary DOM ids.
-  var idCounter = 0;
-  _.uniqueId = function(prefix) {
-    var id = ++idCounter + '';
-    return prefix ? prefix + id : id;
-  };
-
-  // By default, Underscore uses ERB-style template delimiters, change the
-  // following template settings to use alternative delimiters.
-  _.templateSettings = {
-    evaluate    : /<%([\s\S]+?)%>/g,
-    interpolate : /<%=([\s\S]+?)%>/g,
-    escape      : /<%-([\s\S]+?)%>/g
-  };
-
-  // When customizing `templateSettings`, if you don't want to define an
-  // interpolation, evaluation or escaping regex, we need one that is
-  // guaranteed not to match.
-  var noMatch = /(.)^/;
-
-  // Certain characters need to be escaped so that they can be put into a
-  // string literal.
-  var escapes = {
-    "'":      "'",
-    '\\':     '\\',
-    '\r':     'r',
-    '\n':     'n',
-    '\u2028': 'u2028',
-    '\u2029': 'u2029'
-  };
-
-  var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
-
-  var escapeChar = function(match) {
-    return '\\' + escapes[match];
-  };
-
-  // JavaScript micro-templating, similar to John Resig's implementation.
-  // Underscore templating handles arbitrary delimiters, preserves whitespace,
-  // and correctly escapes quotes within interpolated code.
-  // NB: `oldSettings` only exists for backwards compatibility.
-  _.template = function(text, settings, oldSettings) {
-    if (!settings && oldSettings) settings = oldSettings;
-    settings = _.defaults({}, settings, _.templateSettings);
-
-    // Combine delimiters into one regular expression via alternation.
-    var matcher = RegExp([
-      (settings.escape || noMatch).source,
-      (settings.interpolate || noMatch).source,
-      (settings.evaluate || noMatch).source
-    ].join('|') + '|$', 'g');
-
-    // Compile the template source, escaping string literals appropriately.
-    var index = 0;
-    var source = "__p+='";
-    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
-      source += text.slice(index, offset).replace(escaper, escapeChar);
-      index = offset + match.length;
-
-      if (escape) {
-        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
-      } else if (interpolate) {
-        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
-      } else if (evaluate) {
-        source += "';\n" + evaluate + "\n__p+='";
-      }
-
-      // Adobe VMs need the match returned to produce the correct offest.
-      return match;
-    });
-    source += "';\n";
-
-    // If a variable is not specified, place data values in local scope.
-    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
-
-    source = "var __t,__p='',__j=Array.prototype.join," +
-      "print=function(){__p+=__j.call(arguments,'');};\n" +
-      source + 'return __p;\n';
-
-    try {
-      var render = new Function(settings.variable || 'obj', '_', source);
-    } catch (e) {
-      e.source = source;
-      throw e;
-    }
-
-    var template = function(data) {
-      return render.call(this, data, _);
-    };
-
-    // Provide the compiled source as a convenience for precompilation.
-    var argument = settings.variable || 'obj';
-    template.source = 'function(' + argument + '){\n' + source + '}';
-
-    return template;
-  };
-
-  // Add a "chain" function. Start chaining a wrapped Underscore object.
-  _.chain = function(obj) {
-    var instance = _(obj);
-    instance._chain = true;
-    return instance;
-  };
-
-  // OOP
-  // ---------------
-  // If Underscore is called as a function, it returns a wrapped object that
-  // can be used OO-style. This wrapper holds altered versions of all the
-  // underscore functions. Wrapped objects may be chained.
-
-  // Helper function to continue chaining intermediate results.
-  var result = function(obj) {
-    return this._chain ? _(obj).chain() : obj;
-  };
-
-  // Add your own custom functions to the Underscore object.
-  _.mixin = function(obj) {
-    _.each(_.functions(obj), function(name) {
-      var func = _[name] = obj[name];
-      _.prototype[name] = function() {
-        var args = [this._wrapped];
-        push.apply(args, arguments);
-        return result.call(this, func.apply(_, args));
-      };
-    });
-  };
-
-  // Add all of the Underscore functions to the wrapper object.
-  _.mixin(_);
-
-  // Add all mutator Array functions to the wrapper.
-  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
-    var method = ArrayProto[name];
-    _.prototype[name] = function() {
-      var obj = this._wrapped;
-      method.apply(obj, arguments);
-      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
-      return result.call(this, obj);
-    };
-  });
-
-  // Add all accessor Array functions to the wrapper.
-  _.each(['concat', 'join', 'slice'], function(name) {
-    var method = ArrayProto[name];
-    _.prototype[name] = function() {
-      return result.call(this, method.apply(this._wrapped, arguments));
-    };
-  });
-
-  // Extracts the result from a wrapped and chained object.
-  _.prototype.value = function() {
-    return this._wrapped;
-  };
-
-  // AMD registration happens at the end for compatibility with AMD loaders
-  // that may not enforce next-turn semantics on modules. Even though general
-  // practice for AMD registration is to be anonymous, underscore registers
-  // as a named module because, like jQuery, it is a base library that is
-  // popular enough to be bundled in a third party lib, but not be part of
-  // an AMD load request. Those cases could generate an error when an
-  // anonymous define() is called outside of a loader request.
-  if (typeof define === 'function' && define.amd) {
-    define('underscore', [], function() {
-      return _;
-    });
-  }
-}.call(this));
-
-},{}],18:[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    if (canPost) {
-        var queue = [];
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-}
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
+},{}],"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js":[function(require,module,exports){
+var keyMirror = require('react/lib/keyMirror');
+
+module.exports = {
+  ActionTypes: keyMirror({
+    RECEIVE_TRACKS_BY_ARTIST: null,
+    RECEIVE_TRACKS_BY_COUNTRY: null
+  }),
+  PayloadSources: keyMirror({
+    VIEW_ACTION: null
+  })
 };
 
-},{}],19:[function(require,module,exports){
+},{"react/lib/keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js":[function(require,module,exports){
+var Dispatcher    = require('flux').Dispatcher,
+    assign        = require('object-assign'),
+    AppConstants  = require('../constants/AppConstants')
+;
+
+var PayloadSources = AppConstants.PayloadSources;
+
+module.exports = assign(new Dispatcher(), {
+  handleViewAction: function(action) {
+    this.dispatch({
+      source: PayloadSources.VIEW_ACTION,
+      action: action
+    });
+  }
+});
+
+},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","flux":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/index.js":[function(require,module,exports){
+// browser's entry point
+var React   = require('react'),
+    App     = require('./components/App')
+;
+
+React.render(
+  React.createElement(App, { path: window.location.pathname }),
+  document
+);
+
+},{"./components/App":"/Users/koba04/work/github/react-boilerplate/app/components/App.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js":[function(require,module,exports){
+var AppDispatcher = require('../dispatcher/AppDispatcher'),
+    AppConstants  = require('../constants/AppConstants'),
+    EventEmitter  = require('events').EventEmitter,
+    assign        = require('object-assign')
+;
+
+var ActionTypes = AppConstants.ActionTypes;
+var CHANGE_EVENT = 'change';
+var tracks = [];
+
+var TrackStore = assign({}, EventEmitter.prototype, {
+
+  emitChange: function() {
+    this.emit(CHANGE_EVENT);
+  },
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+  getAll: function() {
+    return tracks;
+  },
+});
+
+TrackStore.dispatchToken = AppDispatcher.register(function(payload) {
+  var action = payload.action;
+
+  switch (action.type) {
+    case ActionTypes.RECEIVE_TRACKS_BY_ARTIST:
+      tracks = action.tracks;
+      TrackStore.emitChange();
+      break;
+    case ActionTypes.RECEIVE_TRACKS_BY_COUNTRY:
+      tracks = action.tracks;
+      TrackStore.emitChange();
+      break;
+  }
+});
+
+module.exports = TrackStore;
+
+
+},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","events":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js":[function(require,module,exports){
+/**
+ * Copyright (c) 2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+module.exports.Dispatcher = require('./lib/Dispatcher')
+
+},{"./lib/Dispatcher":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/Dispatcher.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/Dispatcher.js":[function(require,module,exports){
+/*
+ * Copyright (c) 2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Dispatcher
+ * @typechecks
+ */
+
+"use strict";
+
+var invariant = require('./invariant');
+
+var _lastID = 1;
+var _prefix = 'ID_';
+
+/**
+ * Dispatcher is used to broadcast payloads to registered callbacks. This is
+ * different from generic pub-sub systems in two ways:
+ *
+ *   1) Callbacks are not subscribed to particular events. Every payload is
+ *      dispatched to every registered callback.
+ *   2) Callbacks can be deferred in whole or part until other callbacks have
+ *      been executed.
+ *
+ * For example, consider this hypothetical flight destination form, which
+ * selects a default city when a country is selected:
+ *
+ *   var flightDispatcher = new Dispatcher();
+ *
+ *   // Keeps track of which country is selected
+ *   var CountryStore = {country: null};
+ *
+ *   // Keeps track of which city is selected
+ *   var CityStore = {city: null};
+ *
+ *   // Keeps track of the base flight price of the selected city
+ *   var FlightPriceStore = {price: null}
+ *
+ * When a user changes the selected city, we dispatch the payload:
+ *
+ *   flightDispatcher.dispatch({
+ *     actionType: 'city-update',
+ *     selectedCity: 'paris'
+ *   });
+ *
+ * This payload is digested by `CityStore`:
+ *
+ *   flightDispatcher.register(function(payload) {
+ *     if (payload.actionType === 'city-update') {
+ *       CityStore.city = payload.selectedCity;
+ *     }
+ *   });
+ *
+ * When the user selects a country, we dispatch the payload:
+ *
+ *   flightDispatcher.dispatch({
+ *     actionType: 'country-update',
+ *     selectedCountry: 'australia'
+ *   });
+ *
+ * This payload is digested by both stores:
+ *
+ *    CountryStore.dispatchToken = flightDispatcher.register(function(payload) {
+ *     if (payload.actionType === 'country-update') {
+ *       CountryStore.country = payload.selectedCountry;
+ *     }
+ *   });
+ *
+ * When the callback to update `CountryStore` is registered, we save a reference
+ * to the returned token. Using this token with `waitFor()`, we can guarantee
+ * that `CountryStore` is updated before the callback that updates `CityStore`
+ * needs to query its data.
+ *
+ *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {
+ *     if (payload.actionType === 'country-update') {
+ *       // `CountryStore.country` may not be updated.
+ *       flightDispatcher.waitFor([CountryStore.dispatchToken]);
+ *       // `CountryStore.country` is now guaranteed to be updated.
+ *
+ *       // Select the default city for the new country
+ *       CityStore.city = getDefaultCityForCountry(CountryStore.country);
+ *     }
+ *   });
+ *
+ * The usage of `waitFor()` can be chained, for example:
+ *
+ *   FlightPriceStore.dispatchToken =
+ *     flightDispatcher.register(function(payload) {
+ *       switch (payload.actionType) {
+ *         case 'country-update':
+ *           flightDispatcher.waitFor([CityStore.dispatchToken]);
+ *           FlightPriceStore.price =
+ *             getFlightPriceStore(CountryStore.country, CityStore.city);
+ *           break;
+ *
+ *         case 'city-update':
+ *           FlightPriceStore.price =
+ *             FlightPriceStore(CountryStore.country, CityStore.city);
+ *           break;
+ *     }
+ *   });
+ *
+ * The `country-update` payload will be guaranteed to invoke the stores'
+ * registered callbacks in order: `CountryStore`, `CityStore`, then
+ * `FlightPriceStore`.
+ */
+
+  function Dispatcher() {
+    this.$Dispatcher_callbacks = {};
+    this.$Dispatcher_isPending = {};
+    this.$Dispatcher_isHandled = {};
+    this.$Dispatcher_isDispatching = false;
+    this.$Dispatcher_pendingPayload = null;
+  }
+
+  /**
+   * Registers a callback to be invoked with every dispatched payload. Returns
+   * a token that can be used with `waitFor()`.
+   *
+   * @param {function} callback
+   * @return {string}
+   */
+  Dispatcher.prototype.register=function(callback) {
+    var id = _prefix + _lastID++;
+    this.$Dispatcher_callbacks[id] = callback;
+    return id;
+  };
+
+  /**
+   * Removes a callback based on its token.
+   *
+   * @param {string} id
+   */
+  Dispatcher.prototype.unregister=function(id) {
+    invariant(
+      this.$Dispatcher_callbacks[id],
+      'Dispatcher.unregister(...): `%s` does not map to a registered callback.',
+      id
+    );
+    delete this.$Dispatcher_callbacks[id];
+  };
+
+  /**
+   * Waits for the callbacks specified to be invoked before continuing execution
+   * of the current callback. This method should only be used by a callback in
+   * response to a dispatched payload.
+   *
+   * @param {array<string>} ids
+   */
+  Dispatcher.prototype.waitFor=function(ids) {
+    invariant(
+      this.$Dispatcher_isDispatching,
+      'Dispatcher.waitFor(...): Must be invoked while dispatching.'
+    );
+    for (var ii = 0; ii < ids.length; ii++) {
+      var id = ids[ii];
+      if (this.$Dispatcher_isPending[id]) {
+        invariant(
+          this.$Dispatcher_isHandled[id],
+          'Dispatcher.waitFor(...): Circular dependency detected while ' +
+          'waiting for `%s`.',
+          id
+        );
+        continue;
+      }
+      invariant(
+        this.$Dispatcher_callbacks[id],
+        'Dispatcher.waitFor(...): `%s` does not map to a registered callback.',
+        id
+      );
+      this.$Dispatcher_invokeCallback(id);
+    }
+  };
+
+  /**
+   * Dispatches a payload to all registered callbacks.
+   *
+   * @param {object} payload
+   */
+  Dispatcher.prototype.dispatch=function(payload) {
+    invariant(
+      !this.$Dispatcher_isDispatching,
+      'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.'
+    );
+    this.$Dispatcher_startDispatching(payload);
+    try {
+      for (var id in this.$Dispatcher_callbacks) {
+        if (this.$Dispatcher_isPending[id]) {
+          continue;
+        }
+        this.$Dispatcher_invokeCallback(id);
+      }
+    } finally {
+      this.$Dispatcher_stopDispatching();
+    }
+  };
+
+  /**
+   * Is this Dispatcher currently dispatching.
+   *
+   * @return {boolean}
+   */
+  Dispatcher.prototype.isDispatching=function() {
+    return this.$Dispatcher_isDispatching;
+  };
+
+  /**
+   * Call the callback stored with the given id. Also do some internal
+   * bookkeeping.
+   *
+   * @param {string} id
+   * @internal
+   */
+  Dispatcher.prototype.$Dispatcher_invokeCallback=function(id) {
+    this.$Dispatcher_isPending[id] = true;
+    this.$Dispatcher_callbacks[id](this.$Dispatcher_pendingPayload);
+    this.$Dispatcher_isHandled[id] = true;
+  };
+
+  /**
+   * Set up bookkeeping needed when dispatching.
+   *
+   * @param {object} payload
+   * @internal
+   */
+  Dispatcher.prototype.$Dispatcher_startDispatching=function(payload) {
+    for (var id in this.$Dispatcher_callbacks) {
+      this.$Dispatcher_isPending[id] = false;
+      this.$Dispatcher_isHandled[id] = false;
+    }
+    this.$Dispatcher_pendingPayload = payload;
+    this.$Dispatcher_isDispatching = true;
+  };
+
+  /**
+   * Clear bookkeeping used for dispatching.
+   *
+   * @internal
+   */
+  Dispatcher.prototype.$Dispatcher_stopDispatching=function() {
+    this.$Dispatcher_pendingPayload = null;
+    this.$Dispatcher_isDispatching = false;
+  };
+
+
+module.exports = Dispatcher;
+
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/invariant.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/invariant.js":[function(require,module,exports){
+/**
+ * Copyright (c) 2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule invariant
+ */
+
+"use strict";
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var invariant = function(condition, format, a, b, c, d, e, f) {
+  if (false) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error(
+        'Minified exception occurred; use the non-minified dev environment ' +
+        'for the full error message and additional helpful warnings.'
+      );
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(
+        'Invariant Violation: ' +
+        format.replace(/%s/g, function() { return args[argIndex++]; })
+      );
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
+
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js":[function(require,module,exports){
 var inserted = {};
 
 module.exports = function (css, options) {
@@ -3444,7 +808,46 @@ module.exports = function (css, options) {
     }
 };
 
-},{}],20:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js":[function(require,module,exports){
+'use strict';
+
+function ToObject(val) {
+	if (val == null) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var pendingException;
+	var from;
+	var keys;
+	var to = ToObject(target);
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = arguments[s];
+		keys = Object.keys(Object(from));
+
+		for (var i = 0; i < keys.length; i++) {
+			try {
+				to[keys[i]] = from[keys[i]];
+			} catch (err) {
+				if (pendingException === undefined) {
+					pendingException = err;
+				}
+			}
+		}
+	}
+
+	if (pendingException) {
+		throw pendingException;
+	}
+
+	return to;
+};
+
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js":[function(require,module,exports){
 "use strict";
 
 var Router                    = require('./lib/Router');
@@ -3481,7 +884,7 @@ module.exports = {
   CaptureClicks: CaptureClicks
 };
 
-},{"./lib/AsyncRouteRenderingMixin":21,"./lib/CaptureClicks":22,"./lib/Link":23,"./lib/NavigatableMixin":24,"./lib/Route":25,"./lib/RouteRenderingMixin":26,"./lib/Router":27,"./lib/RouterMixin":28,"./lib/environment":33}],21:[function(require,module,exports){
+},{"./lib/AsyncRouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js","./lib/CaptureClicks":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/CaptureClicks.js","./lib/Link":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Link.js","./lib/NavigatableMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/NavigatableMixin.js","./lib/Route":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Route.js","./lib/RouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js","./lib/Router":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Router.js","./lib/RouterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js","./lib/environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js":[function(require,module,exports){
 "use strict";
 
 var assign              = Object.assign || require('object.assign');
@@ -3536,7 +939,7 @@ var AsyncRouteRenderingMixin = {
 
 module.exports = AsyncRouteRenderingMixin;
 
-},{"./RouteRenderingMixin":26,"object.assign":35,"react-async/lib/isAsyncComponent":38,"react-async/lib/prefetchAsyncState":39}],22:[function(require,module,exports){
+},{"./RouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react-async/lib/isAsyncComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js","react-async/lib/prefetchAsyncState":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/prefetchAsyncState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/CaptureClicks.js":[function(require,module,exports){
 "use strict";
 
 var React       = require('react');
@@ -3659,7 +1062,7 @@ var CaptureClicks = React.createClass({
 
 module.exports = CaptureClicks;
 
-},{"./environment":33,"object.assign":35,"react":203,"urllite/lib/core":41}],23:[function(require,module,exports){
+},{"./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","urllite/lib/core":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/urllite/lib/core.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Link.js":[function(require,module,exports){
 "use strict";
 
 var React             = require('react');
@@ -3743,7 +1146,7 @@ var Link = React.createClass({
 
 module.exports = Link;
 
-},{"./NavigatableMixin":24,"./environment":33,"object.assign":35,"react":203}],24:[function(require,module,exports){
+},{"./NavigatableMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/NavigatableMixin.js","./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/NavigatableMixin.js":[function(require,module,exports){
 "use strict";
 
 var React       = require('react');
@@ -3784,7 +1187,7 @@ var NavigatableMixin = {
 
 module.exports = NavigatableMixin;
 
-},{"./environment":33,"react":203}],25:[function(require,module,exports){
+},{"./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Route.js":[function(require,module,exports){
 "use strict";
 
 var React     = require('react');
@@ -3829,7 +1232,7 @@ module.exports = {
   NotFound: createClass('NotFound')
 };
 
-},{"react":203}],26:[function(require,module,exports){
+},{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js":[function(require,module,exports){
 "use strict";
 
 var cloneWithProps = require('react/lib/cloneWithProps');
@@ -3848,7 +1251,7 @@ var RouteRenderingMixin = {
 
 module.exports = RouteRenderingMixin;
 
-},{"react/lib/cloneWithProps":155}],27:[function(require,module,exports){
+},{"react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Router.js":[function(require,module,exports){
 "use strict";
 
 var React                     = require('react');
@@ -3897,7 +1300,7 @@ module.exports = {
   Pages: createRouter('Pages', React.DOM.body)
 }
 
-},{"./AsyncRouteRenderingMixin":21,"./RouterMixin":28,"object.assign":35,"react":203}],28:[function(require,module,exports){
+},{"./AsyncRouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js","./RouterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js":[function(require,module,exports){
 "use strict";
 
 var React         = require('react');
@@ -4112,7 +1515,7 @@ function isString(o) {
 
 module.exports = RouterMixin;
 
-},{"./environment":33,"./matchRoutes":34,"object.assign":35,"react":203,"react/lib/invariant":182}],29:[function(require,module,exports){
+},{"./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","./matchRoutes":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/matchRoutes.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/DummyEnvironment.js":[function(require,module,exports){
 "use strict";
 
 var Environment   = require('./Environment');
@@ -4148,7 +1551,7 @@ DummyEnvironment.prototype.stop = emptyFunction;
 
 module.exports = DummyEnvironment;
 
-},{"./Environment":30,"react/lib/emptyFunction":163}],30:[function(require,module,exports){
+},{"./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js","react/lib/emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js":[function(require,module,exports){
 "use strict";
 
 var ReactUpdates  = require('react/lib/ReactUpdates');
@@ -4246,7 +1649,7 @@ Environment.prototype.unregister = function unregister(router) {
 
 module.exports = Environment;
 
-},{"react/lib/ReactUpdates":132}],31:[function(require,module,exports){
+},{"react/lib/ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/HashEnvironment.js":[function(require,module,exports){
 "use strict";
 
 var Environment = require('./Environment');
@@ -4301,7 +1704,7 @@ HashEnvironment.prototype.onHashChange = function() {
 
 module.exports = HashEnvironment;
 
-},{"./Environment":30}],32:[function(require,module,exports){
+},{"./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/PathnameEnvironment.js":[function(require,module,exports){
 "use strict";
 
 var Environment = require('./Environment');
@@ -4351,7 +1754,7 @@ PathnameEnvironment.prototype.onPopState = function(e) {
 
 module.exports = PathnameEnvironment;
 
-},{"./Environment":30}],33:[function(require,module,exports){
+},{"./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js":[function(require,module,exports){
 "use strict";
 /**
  * Routing environment.
@@ -4421,7 +1824,7 @@ module.exports = {
   Mixin: Mixin
 };
 
-},{"./DummyEnvironment":29,"./Environment":30,"./HashEnvironment":31,"./PathnameEnvironment":32,"react/lib/ExecutionEnvironment":64}],34:[function(require,module,exports){
+},{"./DummyEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/DummyEnvironment.js","./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js","./HashEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/HashEnvironment.js","./PathnameEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/PathnameEnvironment.js","react/lib/ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/matchRoutes.js":[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -4517,7 +1920,7 @@ Match.prototype.getHandler = function() {
 module.exports = matchRoutes;
 
 }).call(this,require('_process'))
-},{"_process":18,"object.assign":35,"react":203,"react/lib/invariant":182,"url-pattern":40}],35:[function(require,module,exports){
+},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","url-pattern":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/url-pattern/src/url-pattern.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js":[function(require,module,exports){
 "use strict";
 
 // modified from https://github.com/es-shims/es6-shim
@@ -4550,7 +1953,7 @@ assignShim.shim = function shimObjectAssign() {
 module.exports = assignShim;
 
 
-},{"object-keys":36}],36:[function(require,module,exports){
+},{"object-keys":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/index.js":[function(require,module,exports){
 "use strict";
 
 // modified from https://github.com/es-shims/es5-shim
@@ -4622,7 +2025,7 @@ keysShim.shim = function shimObjectKeys() {
 module.exports = keysShim;
 
 
-},{"./isArguments":37}],37:[function(require,module,exports){
+},{"./isArguments":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/isArguments.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/isArguments.js":[function(require,module,exports){
 "use strict";
 
 var toString = Object.prototype.toString;
@@ -4642,7 +2045,7 @@ module.exports = function isArguments(value) {
 };
 
 
-},{}],38:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js":[function(require,module,exports){
 "use strict";
 
 /**
@@ -4656,7 +2059,7 @@ function isAsyncComponent(component) {
 
 module.exports = isAsyncComponent;
 
-},{}],39:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/prefetchAsyncState.js":[function(require,module,exports){
 "use strict";
 
 var invariant         = require('react/lib/invariant');
@@ -4695,7 +2098,7 @@ function prefetchAsyncState(component, cb) {
 
 module.exports = prefetchAsyncState;
 
-},{"./isAsyncComponent":38,"react/lib/cloneWithProps":155,"react/lib/invariant":182}],40:[function(require,module,exports){
+},{"./isAsyncComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js","react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/url-pattern/src/url-pattern.js":[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -4804,7 +2207,7 @@ module.exports = {
   }
 };
 
-},{}],41:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/urllite/lib/core.js":[function(require,module,exports){
 (function() {
   var URL, URL_PATTERN, defaults, urllite,
     __hasProp = {}.hasOwnProperty,
@@ -4887,10 +2290,10 @@ module.exports = {
 
 }).call(this);
 
-},{}],42:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/addons.js":[function(require,module,exports){
 module.exports = require('./lib/ReactWithAddons');
 
-},{"./lib/ReactWithAddons":133}],43:[function(require,module,exports){
+},{"./lib/ReactWithAddons":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactWithAddons.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -4917,7 +2320,7 @@ var AutoFocusMixin = {
 
 module.exports = AutoFocusMixin;
 
-},{"./focusNode":167}],44:[function(require,module,exports){
+},{"./focusNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/focusNode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/BeforeInputEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -5139,7 +2542,7 @@ var BeforeInputEventPlugin = {
 
 module.exports = BeforeInputEventPlugin;
 
-},{"./EventConstants":58,"./EventPropagators":63,"./ExecutionEnvironment":64,"./SyntheticInputEvent":143,"./keyOf":189}],45:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./SyntheticInputEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticInputEvent.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSCore.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5251,7 +2654,7 @@ var CSSCore = {
 module.exports = CSSCore;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],46:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSProperty.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -5367,7 +2770,7 @@ var CSSProperty = {
 
 module.exports = CSSProperty;
 
-},{}],47:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSPropertyOperations.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5502,7 +2905,7 @@ var CSSPropertyOperations = {
 module.exports = CSSPropertyOperations;
 
 }).call(this,require('_process'))
-},{"./CSSProperty":46,"./ExecutionEnvironment":64,"./camelizeStyleName":154,"./dangerousStyleValue":161,"./hyphenateStyleName":180,"./memoizeStringOnly":191,"./warning":202,"_process":18}],48:[function(require,module,exports){
+},{"./CSSProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSProperty.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./camelizeStyleName":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelizeStyleName.js","./dangerousStyleValue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/dangerousStyleValue.js","./hyphenateStyleName":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenateStyleName.js","./memoizeStringOnly":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/memoizeStringOnly.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5602,7 +3005,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./PooledClass":71,"./invariant":182,"_process":18}],49:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ChangeEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -5984,7 +3387,7 @@ var ChangeEventPlugin = {
 
 module.exports = ChangeEventPlugin;
 
-},{"./EventConstants":58,"./EventPluginHub":60,"./EventPropagators":63,"./ExecutionEnvironment":64,"./ReactUpdates":132,"./SyntheticEvent":141,"./isEventSupported":183,"./isTextInputElement":185,"./keyOf":189}],50:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./isEventSupported":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js","./isTextInputElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextInputElement.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ClientReactRootIndex.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -6009,7 +3412,7 @@ var ClientReactRootIndex = {
 
 module.exports = ClientReactRootIndex;
 
-},{}],51:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CompositionEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -6268,7 +3671,7 @@ var CompositionEventPlugin = {
 
 module.exports = CompositionEventPlugin;
 
-},{"./EventConstants":58,"./EventPropagators":63,"./ExecutionEnvironment":64,"./ReactInputSelection":106,"./SyntheticCompositionEvent":139,"./getTextContentAccessor":177,"./keyOf":189}],52:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./ReactInputSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js","./SyntheticCompositionEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticCompositionEvent.js","./getTextContentAccessor":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMChildrenOperations.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6443,7 +3846,7 @@ var DOMChildrenOperations = {
 module.exports = DOMChildrenOperations;
 
 }).call(this,require('_process'))
-},{"./Danger":55,"./ReactMultiChildUpdateTypes":113,"./getTextContentAccessor":177,"./invariant":182,"_process":18}],53:[function(require,module,exports){
+},{"./Danger":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Danger.js","./ReactMultiChildUpdateTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./getTextContentAccessor":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6742,7 +4145,7 @@ var DOMProperty = {
 module.exports = DOMProperty;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],54:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6939,7 +4342,7 @@ var DOMPropertyOperations = {
 module.exports = DOMPropertyOperations;
 
 }).call(this,require('_process'))
-},{"./DOMProperty":53,"./escapeTextForBrowser":165,"./memoizeStringOnly":191,"./warning":202,"_process":18}],55:[function(require,module,exports){
+},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./escapeTextForBrowser":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js","./memoizeStringOnly":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/memoizeStringOnly.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Danger.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -7125,7 +4528,7 @@ var Danger = {
 module.exports = Danger;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":64,"./createNodesFromMarkup":159,"./emptyFunction":163,"./getMarkupWrap":174,"./invariant":182,"_process":18}],56:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./createNodesFromMarkup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createNodesFromMarkup.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","./getMarkupWrap":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getMarkupWrap.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DefaultEventPluginOrder.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -7165,7 +4568,7 @@ var DefaultEventPluginOrder = [
 
 module.exports = DefaultEventPluginOrder;
 
-},{"./keyOf":189}],57:[function(require,module,exports){
+},{"./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EnterLeaveEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -7305,7 +4708,7 @@ var EnterLeaveEventPlugin = {
 
 module.exports = EnterLeaveEventPlugin;
 
-},{"./EventConstants":58,"./EventPropagators":63,"./ReactMount":111,"./SyntheticMouseEvent":145,"./keyOf":189}],58:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -7377,7 +4780,7 @@ var EventConstants = {
 
 module.exports = EventConstants;
 
-},{"./keyMirror":188}],59:[function(require,module,exports){
+},{"./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventListener.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014 Facebook, Inc.
@@ -7467,7 +4870,7 @@ var EventListener = {
 module.exports = EventListener;
 
 }).call(this,require('_process'))
-},{"./emptyFunction":163,"_process":18}],60:[function(require,module,exports){
+},{"./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -7743,7 +5146,7 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
 
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":61,"./EventPluginUtils":62,"./accumulateInto":151,"./forEachAccumulated":168,"./invariant":182,"_process":18}],61:[function(require,module,exports){
+},{"./EventPluginRegistry":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginRegistry.js","./EventPluginUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js","./accumulateInto":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginRegistry.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -8023,7 +5426,7 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],62:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -8244,7 +5647,7 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
 
 }).call(this,require('_process'))
-},{"./EventConstants":58,"./invariant":182,"_process":18}],63:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -8386,7 +5789,7 @@ var EventPropagators = {
 module.exports = EventPropagators;
 
 }).call(this,require('_process'))
-},{"./EventConstants":58,"./EventPluginHub":60,"./accumulateInto":151,"./forEachAccumulated":168,"_process":18}],64:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./accumulateInto":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -8431,7 +5834,7 @@ var ExecutionEnvironment = {
 
 module.exports = ExecutionEnvironment;
 
-},{}],65:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/HTMLDOMPropertyConfig.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -8617,7 +6020,7 @@ var HTMLDOMPropertyConfig = {
 
 module.exports = HTMLDOMPropertyConfig;
 
-},{"./DOMProperty":53,"./ExecutionEnvironment":64}],66:[function(require,module,exports){
+},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedStateMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -8658,7 +6061,7 @@ var LinkedStateMixin = {
 
 module.exports = LinkedStateMixin;
 
-},{"./ReactLink":109,"./ReactStateSetters":126}],67:[function(require,module,exports){
+},{"./ReactLink":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLink.js","./ReactStateSetters":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactStateSetters.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -8814,7 +6217,7 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
 
 }).call(this,require('_process'))
-},{"./ReactPropTypes":120,"./invariant":182,"_process":18}],68:[function(require,module,exports){
+},{"./ReactPropTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypes.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LocalEventTrapMixin.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -8864,7 +6267,7 @@ var LocalEventTrapMixin = {
 module.exports = LocalEventTrapMixin;
 
 }).call(this,require('_process'))
-},{"./ReactBrowserEventEmitter":74,"./accumulateInto":151,"./forEachAccumulated":168,"./invariant":182,"_process":18}],69:[function(require,module,exports){
+},{"./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./accumulateInto":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/MobileSafariClickEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -8922,7 +6325,7 @@ var MobileSafariClickEventPlugin = {
 
 module.exports = MobileSafariClickEventPlugin;
 
-},{"./EventConstants":58,"./emptyFunction":163}],70:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -8969,7 +6372,7 @@ function assign(target, sources) {
 
 module.exports = assign;
 
-},{}],71:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -9085,7 +6488,7 @@ var PooledClass = {
 module.exports = PooledClass;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],72:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -9273,7 +6676,7 @@ React.version = '0.12.0';
 module.exports = React;
 
 }).call(this,require('_process'))
-},{"./DOMPropertyOperations":54,"./EventPluginUtils":62,"./ExecutionEnvironment":64,"./Object.assign":70,"./ReactChildren":77,"./ReactComponent":78,"./ReactCompositeComponent":81,"./ReactContext":82,"./ReactCurrentOwner":83,"./ReactDOM":84,"./ReactDOMComponent":86,"./ReactDefaultInjection":96,"./ReactElement":99,"./ReactElementValidator":100,"./ReactInstanceHandles":107,"./ReactLegacyElement":108,"./ReactMount":111,"./ReactMultiChild":112,"./ReactPerf":116,"./ReactPropTypes":120,"./ReactServerRendering":124,"./ReactTextComponent":128,"./deprecated":162,"./onlyChild":193,"_process":18}],73:[function(require,module,exports){
+},{"./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./EventPluginUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactChildren.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactContext":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactDOMComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMComponent.js","./ReactDefaultInjection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultInjection.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactPropTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypes.js","./ReactServerRendering":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRendering.js","./ReactTextComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js","./deprecated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js","./onlyChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/onlyChild.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -9316,7 +6719,7 @@ var ReactBrowserComponentMixin = {
 module.exports = ReactBrowserComponentMixin;
 
 }).call(this,require('_process'))
-},{"./ReactEmptyComponent":101,"./ReactMount":111,"./invariant":182,"_process":18}],74:[function(require,module,exports){
+},{"./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -9671,7 +7074,7 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
 
 module.exports = ReactBrowserEventEmitter;
 
-},{"./EventConstants":58,"./EventPluginHub":60,"./EventPluginRegistry":61,"./Object.assign":70,"./ReactEventEmitterMixin":103,"./ViewportMetrics":150,"./isEventSupported":183}],75:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./EventPluginRegistry":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginRegistry.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactEventEmitterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventEmitterMixin.js","./ViewportMetrics":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ViewportMetrics.js","./isEventSupported":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroup.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -9738,7 +7141,7 @@ var ReactCSSTransitionGroup = React.createClass({
 
 module.exports = ReactCSSTransitionGroup;
 
-},{"./Object.assign":70,"./React":72,"./ReactCSSTransitionGroupChild":76,"./ReactTransitionGroup":131}],76:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactCSSTransitionGroupChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroupChild.js","./ReactTransitionGroup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionGroup.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroupChild.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -9873,7 +7276,7 @@ var ReactCSSTransitionGroupChild = React.createClass({
 module.exports = ReactCSSTransitionGroupChild;
 
 }).call(this,require('_process'))
-},{"./CSSCore":45,"./React":72,"./ReactTransitionEvents":130,"./onlyChild":193,"_process":18}],77:[function(require,module,exports){
+},{"./CSSCore":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSCore.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactTransitionEvents":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionEvents.js","./onlyChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/onlyChild.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactChildren.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -10023,7 +7426,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 }).call(this,require('_process'))
-},{"./PooledClass":71,"./traverseAllChildren":200,"./warning":202,"_process":18}],78:[function(require,module,exports){
+},{"./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./traverseAllChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/traverseAllChildren.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -10466,7 +7869,7 @@ var ReactComponent = {
 module.exports = ReactComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./ReactElement":99,"./ReactOwner":115,"./ReactUpdates":132,"./invariant":182,"./keyMirror":188,"_process":18}],79:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactOwner.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentBrowserEnvironment.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -10588,7 +7991,7 @@ var ReactComponentBrowserEnvironment = {
 module.exports = ReactComponentBrowserEnvironment;
 
 }).call(this,require('_process'))
-},{"./ReactDOMIDOperations":88,"./ReactMarkupChecksum":110,"./ReactMount":111,"./ReactPerf":116,"./ReactReconcileTransaction":122,"./getReactRootElementInContainer":176,"./invariant":182,"./setInnerHTML":196,"_process":18}],80:[function(require,module,exports){
+},{"./ReactDOMIDOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMIDOperations.js","./ReactMarkupChecksum":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMarkupChecksum.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactReconcileTransaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactReconcileTransaction.js","./getReactRootElementInContainer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getReactRootElementInContainer.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./setInnerHTML":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/setInnerHTML.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentWithPureRenderMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -10637,7 +8040,7 @@ var ReactComponentWithPureRenderMixin = {
 
 module.exports = ReactComponentWithPureRenderMixin;
 
-},{"./shallowEqual":197}],81:[function(require,module,exports){
+},{"./shallowEqual":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shallowEqual.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -12077,7 +9480,7 @@ var ReactCompositeComponent = {
 module.exports = ReactCompositeComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./ReactComponent":78,"./ReactContext":82,"./ReactCurrentOwner":83,"./ReactElement":99,"./ReactElementValidator":100,"./ReactEmptyComponent":101,"./ReactErrorUtils":102,"./ReactLegacyElement":108,"./ReactOwner":115,"./ReactPerf":116,"./ReactPropTransferer":117,"./ReactPropTypeLocationNames":118,"./ReactPropTypeLocations":119,"./ReactUpdates":132,"./instantiateReactComponent":181,"./invariant":182,"./keyMirror":188,"./keyOf":189,"./mapObject":190,"./monitorCodeUse":192,"./shouldUpdateReactComponent":198,"./warning":202,"_process":18}],82:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactContext":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js","./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactErrorUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactErrorUtils.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactOwner.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactPropTransferer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTransferer.js","./ReactPropTypeLocationNames":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocationNames.js","./ReactPropTypeLocations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocations.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./mapObject":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/mapObject.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js","./shouldUpdateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12139,7 +9542,7 @@ var ReactContext = {
 
 module.exports = ReactContext;
 
-},{"./Object.assign":70}],83:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12173,7 +9576,7 @@ var ReactCurrentOwner = {
 
 module.exports = ReactCurrentOwner;
 
-},{}],84:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -12356,7 +9759,7 @@ var ReactDOM = mapObject({
 module.exports = ReactDOM;
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./ReactElementValidator":100,"./ReactLegacyElement":108,"./mapObject":190,"_process":18}],85:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./mapObject":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/mapObject.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMButton.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12421,7 +9824,7 @@ var ReactDOMButton = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMButton;
 
-},{"./AutoFocusMixin":43,"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99,"./keyMirror":188}],86:[function(require,module,exports){
+},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -12908,7 +10311,7 @@ assign(
 module.exports = ReactDOMComponent;
 
 }).call(this,require('_process'))
-},{"./CSSPropertyOperations":47,"./DOMProperty":53,"./DOMPropertyOperations":54,"./Object.assign":70,"./ReactBrowserComponentMixin":73,"./ReactBrowserEventEmitter":74,"./ReactComponent":78,"./ReactMount":111,"./ReactMultiChild":112,"./ReactPerf":116,"./escapeTextForBrowser":165,"./invariant":182,"./isEventSupported":183,"./keyOf":189,"./monitorCodeUse":192,"_process":18}],87:[function(require,module,exports){
+},{"./CSSPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSPropertyOperations.js","./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./escapeTextForBrowser":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./isEventSupported":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMForm.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12958,7 +10361,7 @@ var ReactDOMForm = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMForm;
 
-},{"./EventConstants":58,"./LocalEventTrapMixin":68,"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99}],88:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMIDOperations.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -13144,7 +10547,7 @@ var ReactDOMIDOperations = {
 module.exports = ReactDOMIDOperations;
 
 }).call(this,require('_process'))
-},{"./CSSPropertyOperations":47,"./DOMChildrenOperations":52,"./DOMPropertyOperations":54,"./ReactMount":111,"./ReactPerf":116,"./invariant":182,"./setInnerHTML":196,"_process":18}],89:[function(require,module,exports){
+},{"./CSSPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSPropertyOperations.js","./DOMChildrenOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMChildrenOperations.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./setInnerHTML":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/setInnerHTML.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMImg.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13192,7 +10595,7 @@ var ReactDOMImg = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMImg;
 
-},{"./EventConstants":58,"./LocalEventTrapMixin":68,"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99}],90:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMInput.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -13370,7 +10773,7 @@ var ReactDOMInput = ReactCompositeComponent.createClass({
 module.exports = ReactDOMInput;
 
 }).call(this,require('_process'))
-},{"./AutoFocusMixin":43,"./DOMPropertyOperations":54,"./LinkedValueUtils":67,"./Object.assign":70,"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99,"./ReactMount":111,"./ReactUpdates":132,"./invariant":182,"_process":18}],91:[function(require,module,exports){
+},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMOption.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -13423,7 +10826,7 @@ var ReactDOMOption = ReactCompositeComponent.createClass({
 module.exports = ReactDOMOption;
 
 }).call(this,require('_process'))
-},{"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99,"./warning":202,"_process":18}],92:[function(require,module,exports){
+},{"./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelect.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13607,7 +11010,7 @@ var ReactDOMSelect = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMSelect;
 
-},{"./AutoFocusMixin":43,"./LinkedValueUtils":67,"./Object.assign":70,"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99,"./ReactUpdates":132}],93:[function(require,module,exports){
+},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./LinkedValueUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13816,7 +11219,7 @@ var ReactDOMSelection = {
 
 module.exports = ReactDOMSelection;
 
-},{"./ExecutionEnvironment":64,"./getNodeForCharacterOffset":175,"./getTextContentAccessor":177}],94:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./getNodeForCharacterOffset":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getNodeForCharacterOffset.js","./getTextContentAccessor":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMTextarea.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -13957,7 +11360,7 @@ var ReactDOMTextarea = ReactCompositeComponent.createClass({
 module.exports = ReactDOMTextarea;
 
 }).call(this,require('_process'))
-},{"./AutoFocusMixin":43,"./DOMPropertyOperations":54,"./LinkedValueUtils":67,"./Object.assign":70,"./ReactBrowserComponentMixin":73,"./ReactCompositeComponent":81,"./ReactDOM":84,"./ReactElement":99,"./ReactUpdates":132,"./invariant":182,"./warning":202,"_process":18}],95:[function(require,module,exports){
+},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultBatchingStrategy.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -14030,7 +11433,7 @@ var ReactDefaultBatchingStrategy = {
 
 module.exports = ReactDefaultBatchingStrategy;
 
-},{"./Object.assign":70,"./ReactUpdates":132,"./Transaction":149,"./emptyFunction":163}],96:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultInjection.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -14159,7 +11562,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":44,"./ChangeEventPlugin":49,"./ClientReactRootIndex":50,"./CompositionEventPlugin":51,"./DefaultEventPluginOrder":56,"./EnterLeaveEventPlugin":57,"./ExecutionEnvironment":64,"./HTMLDOMPropertyConfig":65,"./MobileSafariClickEventPlugin":69,"./ReactBrowserComponentMixin":73,"./ReactComponentBrowserEnvironment":79,"./ReactDOMButton":85,"./ReactDOMComponent":86,"./ReactDOMForm":87,"./ReactDOMImg":89,"./ReactDOMInput":90,"./ReactDOMOption":91,"./ReactDOMSelect":92,"./ReactDOMTextarea":94,"./ReactDefaultBatchingStrategy":95,"./ReactDefaultPerf":97,"./ReactEventListener":104,"./ReactInjection":105,"./ReactInstanceHandles":107,"./ReactMount":111,"./SVGDOMPropertyConfig":134,"./SelectEventPlugin":135,"./ServerReactRootIndex":136,"./SimpleEventPlugin":137,"./createFullPageComponent":158,"_process":18}],97:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/BeforeInputEventPlugin.js","./ChangeEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ChangeEventPlugin.js","./ClientReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ClientReactRootIndex.js","./CompositionEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CompositionEventPlugin.js","./DefaultEventPluginOrder":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DefaultEventPluginOrder.js","./EnterLeaveEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EnterLeaveEventPlugin.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./HTMLDOMPropertyConfig":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/HTMLDOMPropertyConfig.js","./MobileSafariClickEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/MobileSafariClickEventPlugin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactComponentBrowserEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentBrowserEnvironment.js","./ReactDOMButton":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMButton.js","./ReactDOMComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMComponent.js","./ReactDOMForm":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMForm.js","./ReactDOMImg":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMImg.js","./ReactDOMInput":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMInput.js","./ReactDOMOption":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMOption.js","./ReactDOMSelect":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelect.js","./ReactDOMTextarea":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMTextarea.js","./ReactDefaultBatchingStrategy":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultBatchingStrategy.js","./ReactDefaultPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerf.js","./ReactEventListener":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventListener.js","./ReactInjection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInjection.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./SVGDOMPropertyConfig":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SVGDOMPropertyConfig.js","./SelectEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SelectEventPlugin.js","./ServerReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ServerReactRootIndex.js","./SimpleEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SimpleEventPlugin.js","./createFullPageComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createFullPageComponent.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerf.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -14419,7 +11822,7 @@ var ReactDefaultPerf = {
 
 module.exports = ReactDefaultPerf;
 
-},{"./DOMProperty":53,"./ReactDefaultPerfAnalysis":98,"./ReactMount":111,"./ReactPerf":116,"./performanceNow":195}],98:[function(require,module,exports){
+},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./ReactDefaultPerfAnalysis":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerfAnalysis.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./performanceNow":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performanceNow.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerfAnalysis.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -14625,7 +12028,7 @@ var ReactDefaultPerfAnalysis = {
 
 module.exports = ReactDefaultPerfAnalysis;
 
-},{"./Object.assign":70}],99:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -14871,7 +12274,7 @@ ReactElement.isValidElement = function(object) {
 module.exports = ReactElement;
 
 }).call(this,require('_process'))
-},{"./ReactContext":82,"./ReactCurrentOwner":83,"./warning":202,"_process":18}],100:[function(require,module,exports){
+},{"./ReactContext":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -15139,7 +12542,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 
-},{"./ReactCurrentOwner":83,"./ReactElement":99,"./ReactPropTypeLocations":119,"./monitorCodeUse":192}],101:[function(require,module,exports){
+},{"./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocations.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -15216,7 +12619,7 @@ var ReactEmptyComponent = {
 module.exports = ReactEmptyComponent;
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./invariant":182,"_process":18}],102:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactErrorUtils.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15248,7 +12651,7 @@ var ReactErrorUtils = {
 
 module.exports = ReactErrorUtils;
 
-},{}],103:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventEmitterMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15298,7 +12701,7 @@ var ReactEventEmitterMixin = {
 
 module.exports = ReactEventEmitterMixin;
 
-},{"./EventPluginHub":60}],104:[function(require,module,exports){
+},{"./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventListener.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15482,7 +12885,7 @@ var ReactEventListener = {
 
 module.exports = ReactEventListener;
 
-},{"./EventListener":59,"./ExecutionEnvironment":64,"./Object.assign":70,"./PooledClass":71,"./ReactInstanceHandles":107,"./ReactMount":111,"./ReactUpdates":132,"./getEventTarget":173,"./getUnboundedScrollPosition":178}],105:[function(require,module,exports){
+},{"./EventListener":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventListener.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./getEventTarget":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js","./getUnboundedScrollPosition":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInjection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15522,7 +12925,7 @@ var ReactInjection = {
 
 module.exports = ReactInjection;
 
-},{"./DOMProperty":53,"./EventPluginHub":60,"./ReactBrowserEventEmitter":74,"./ReactComponent":78,"./ReactCompositeComponent":81,"./ReactEmptyComponent":101,"./ReactNativeComponent":114,"./ReactPerf":116,"./ReactRootIndex":123,"./ReactUpdates":132}],106:[function(require,module,exports){
+},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactNativeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactNativeComponent.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactRootIndex.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15658,7 +13061,7 @@ var ReactInputSelection = {
 
 module.exports = ReactInputSelection;
 
-},{"./ReactDOMSelection":93,"./containsNode":156,"./focusNode":167,"./getActiveElement":169}],107:[function(require,module,exports){
+},{"./ReactDOMSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelection.js","./containsNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/containsNode.js","./focusNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/focusNode.js","./getActiveElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getActiveElement.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -15993,7 +13396,7 @@ var ReactInstanceHandles = {
 module.exports = ReactInstanceHandles;
 
 }).call(this,require('_process'))
-},{"./ReactRootIndex":123,"./invariant":182,"_process":18}],108:[function(require,module,exports){
+},{"./ReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactRootIndex.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -16240,7 +13643,7 @@ ReactLegacyElementFactory._isLegacyCallWarningEnabled = true;
 module.exports = ReactLegacyElementFactory;
 
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":83,"./invariant":182,"./monitorCodeUse":192,"./warning":202,"_process":18}],109:[function(require,module,exports){
+},{"./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLink.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16313,7 +13716,7 @@ ReactLink.PropTypes = {
 
 module.exports = ReactLink;
 
-},{"./React":72}],110:[function(require,module,exports){
+},{"./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMarkupChecksum.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16361,7 +13764,7 @@ var ReactMarkupChecksum = {
 
 module.exports = ReactMarkupChecksum;
 
-},{"./adler32":152}],111:[function(require,module,exports){
+},{"./adler32":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/adler32.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -17059,7 +14462,7 @@ ReactMount.renderComponent = deprecated(
 module.exports = ReactMount;
 
 }).call(this,require('_process'))
-},{"./DOMProperty":53,"./ReactBrowserEventEmitter":74,"./ReactCurrentOwner":83,"./ReactElement":99,"./ReactInstanceHandles":107,"./ReactLegacyElement":108,"./ReactPerf":116,"./containsNode":156,"./deprecated":162,"./getReactRootElementInContainer":176,"./instantiateReactComponent":181,"./invariant":182,"./shouldUpdateReactComponent":198,"./warning":202,"_process":18}],112:[function(require,module,exports){
+},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./containsNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/containsNode.js","./deprecated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js","./getReactRootElementInContainer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getReactRootElementInContainer.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./shouldUpdateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChild.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17487,7 +14890,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 
-},{"./ReactComponent":78,"./ReactMultiChildUpdateTypes":113,"./flattenChildren":166,"./instantiateReactComponent":181,"./shouldUpdateReactComponent":198}],113:[function(require,module,exports){
+},{"./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactMultiChildUpdateTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./flattenChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/flattenChildren.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./shouldUpdateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChildUpdateTypes.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17520,7 +14923,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 
 module.exports = ReactMultiChildUpdateTypes;
 
-},{"./keyMirror":188}],114:[function(require,module,exports){
+},{"./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactNativeComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -17593,7 +14996,7 @@ var ReactNativeComponent = {
 module.exports = ReactNativeComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./invariant":182,"_process":18}],115:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactOwner.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -17749,7 +15152,7 @@ var ReactOwner = {
 module.exports = ReactOwner;
 
 }).call(this,require('_process'))
-},{"./emptyObject":164,"./invariant":182,"_process":18}],116:[function(require,module,exports){
+},{"./emptyObject":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyObject.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -17833,7 +15236,7 @@ function _noMeasure(objName, fnName, func) {
 module.exports = ReactPerf;
 
 }).call(this,require('_process'))
-},{"_process":18}],117:[function(require,module,exports){
+},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTransferer.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -18000,7 +15403,7 @@ var ReactPropTransferer = {
 module.exports = ReactPropTransferer;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./emptyFunction":163,"./invariant":182,"./joinClasses":187,"./warning":202,"_process":18}],118:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./joinClasses":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/joinClasses.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocationNames.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -18028,7 +15431,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = ReactPropTypeLocationNames;
 
 }).call(this,require('_process'))
-},{"_process":18}],119:[function(require,module,exports){
+},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocations.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18052,7 +15455,7 @@ var ReactPropTypeLocations = keyMirror({
 
 module.exports = ReactPropTypeLocations;
 
-},{"./keyMirror":188}],120:[function(require,module,exports){
+},{"./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypes.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18406,7 +15809,7 @@ function getPreciseType(propValue) {
 
 module.exports = ReactPropTypes;
 
-},{"./ReactElement":99,"./ReactPropTypeLocationNames":118,"./deprecated":162,"./emptyFunction":163}],121:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocationNames":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocationNames.js","./deprecated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPutListenerQueue.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18462,7 +15865,7 @@ PooledClass.addPoolingTo(ReactPutListenerQueue);
 
 module.exports = ReactPutListenerQueue;
 
-},{"./Object.assign":70,"./PooledClass":71,"./ReactBrowserEventEmitter":74}],122:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactReconcileTransaction.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18638,7 +16041,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 
-},{"./CallbackQueue":48,"./Object.assign":70,"./PooledClass":71,"./ReactBrowserEventEmitter":74,"./ReactInputSelection":106,"./ReactPutListenerQueue":121,"./Transaction":149}],123:[function(require,module,exports){
+},{"./CallbackQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactInputSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js","./ReactPutListenerQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactRootIndex.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18669,7 +16072,7 @@ var ReactRootIndex = {
 
 module.exports = ReactRootIndex;
 
-},{}],124:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRendering.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -18749,7 +16152,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./ReactInstanceHandles":107,"./ReactMarkupChecksum":110,"./ReactServerRenderingTransaction":125,"./instantiateReactComponent":181,"./invariant":182,"_process":18}],125:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactMarkupChecksum":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMarkupChecksum.js","./ReactServerRenderingTransaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRenderingTransaction.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRenderingTransaction.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -18862,7 +16265,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 
-},{"./CallbackQueue":48,"./Object.assign":70,"./PooledClass":71,"./ReactPutListenerQueue":121,"./Transaction":149,"./emptyFunction":163}],126:[function(require,module,exports){
+},{"./CallbackQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactPutListenerQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactStateSetters.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18968,7 +16371,7 @@ ReactStateSetters.Mixin = {
 
 module.exports = ReactStateSetters;
 
-},{}],127:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTestUtils.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19380,7 +16783,7 @@ for (eventType in topLevelTypes) {
 
 module.exports = ReactTestUtils;
 
-},{"./EventConstants":58,"./EventPluginHub":60,"./EventPropagators":63,"./Object.assign":70,"./React":72,"./ReactBrowserEventEmitter":74,"./ReactElement":99,"./ReactMount":111,"./ReactTextComponent":128,"./ReactUpdates":132,"./SyntheticEvent":141}],128:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactTextComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19486,7 +16889,7 @@ ReactTextComponentFactory.type = ReactTextComponent;
 
 module.exports = ReactTextComponentFactory;
 
-},{"./DOMPropertyOperations":54,"./Object.assign":70,"./ReactComponent":78,"./ReactElement":99,"./escapeTextForBrowser":165}],129:[function(require,module,exports){
+},{"./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./escapeTextForBrowser":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionChildMapping.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19587,7 +16990,7 @@ var ReactTransitionChildMapping = {
 
 module.exports = ReactTransitionChildMapping;
 
-},{"./ReactChildren":77}],130:[function(require,module,exports){
+},{"./ReactChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactChildren.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionEvents.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19698,7 +17101,7 @@ var ReactTransitionEvents = {
 
 module.exports = ReactTransitionEvents;
 
-},{"./ExecutionEnvironment":64}],131:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionGroup.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19887,7 +17290,7 @@ var ReactTransitionGroup = React.createClass({
 
 module.exports = ReactTransitionGroup;
 
-},{"./Object.assign":70,"./React":72,"./ReactTransitionChildMapping":129,"./cloneWithProps":155,"./emptyFunction":163}],132:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactTransitionChildMapping":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionChildMapping.js","./cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20177,7 +17580,7 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 
 }).call(this,require('_process'))
-},{"./CallbackQueue":48,"./Object.assign":70,"./PooledClass":71,"./ReactCurrentOwner":83,"./ReactPerf":116,"./Transaction":149,"./invariant":182,"./warning":202,"_process":18}],133:[function(require,module,exports){
+},{"./CallbackQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactWithAddons.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20231,7 +17634,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = React;
 
 }).call(this,require('_process'))
-},{"./LinkedStateMixin":66,"./React":72,"./ReactCSSTransitionGroup":75,"./ReactComponentWithPureRenderMixin":80,"./ReactDefaultPerf":97,"./ReactTestUtils":127,"./ReactTransitionGroup":131,"./ReactUpdates":132,"./cloneWithProps":155,"./cx":160,"./update":201,"_process":18}],134:[function(require,module,exports){
+},{"./LinkedStateMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedStateMixin.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactCSSTransitionGroup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroup.js","./ReactComponentWithPureRenderMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentWithPureRenderMixin.js","./ReactDefaultPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerf.js","./ReactTestUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTestUtils.js","./ReactTransitionGroup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionGroup.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","./cx":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cx.js","./update":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/update.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SVGDOMPropertyConfig.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20323,7 +17726,7 @@ var SVGDOMPropertyConfig = {
 
 module.exports = SVGDOMPropertyConfig;
 
-},{"./DOMProperty":53}],135:[function(require,module,exports){
+},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SelectEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20518,7 +17921,7 @@ var SelectEventPlugin = {
 
 module.exports = SelectEventPlugin;
 
-},{"./EventConstants":58,"./EventPropagators":63,"./ReactInputSelection":106,"./SyntheticEvent":141,"./getActiveElement":169,"./isTextInputElement":185,"./keyOf":189,"./shallowEqual":197}],136:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ReactInputSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./getActiveElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getActiveElement.js","./isTextInputElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextInputElement.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./shallowEqual":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shallowEqual.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ServerReactRootIndex.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20549,7 +17952,7 @@ var ServerReactRootIndex = {
 
 module.exports = ServerReactRootIndex;
 
-},{}],137:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SimpleEventPlugin.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20977,7 +18380,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 
 }).call(this,require('_process'))
-},{"./EventConstants":58,"./EventPluginUtils":62,"./EventPropagators":63,"./SyntheticClipboardEvent":138,"./SyntheticDragEvent":140,"./SyntheticEvent":141,"./SyntheticFocusEvent":142,"./SyntheticKeyboardEvent":144,"./SyntheticMouseEvent":145,"./SyntheticTouchEvent":146,"./SyntheticUIEvent":147,"./SyntheticWheelEvent":148,"./getEventCharCode":170,"./invariant":182,"./keyOf":189,"./warning":202,"_process":18}],138:[function(require,module,exports){
+},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./SyntheticClipboardEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticClipboardEvent.js","./SyntheticDragEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticDragEvent.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./SyntheticFocusEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticFocusEvent.js","./SyntheticKeyboardEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticKeyboardEvent.js","./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js","./SyntheticTouchEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticTouchEvent.js","./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./SyntheticWheelEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticWheelEvent.js","./getEventCharCode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticClipboardEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21023,7 +18426,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 module.exports = SyntheticClipboardEvent;
 
 
-},{"./SyntheticEvent":141}],139:[function(require,module,exports){
+},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticCompositionEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21069,7 +18472,7 @@ SyntheticEvent.augmentClass(
 module.exports = SyntheticCompositionEvent;
 
 
-},{"./SyntheticEvent":141}],140:[function(require,module,exports){
+},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticDragEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21108,7 +18511,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
 
-},{"./SyntheticMouseEvent":145}],141:[function(require,module,exports){
+},{"./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21266,7 +18669,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.threeArgumentPooler);
 
 module.exports = SyntheticEvent;
 
-},{"./Object.assign":70,"./PooledClass":71,"./emptyFunction":163,"./getEventTarget":173}],142:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","./getEventTarget":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticFocusEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21305,7 +18708,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
 
-},{"./SyntheticUIEvent":147}],143:[function(require,module,exports){
+},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticInputEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -21352,7 +18755,7 @@ SyntheticEvent.augmentClass(
 module.exports = SyntheticInputEvent;
 
 
-},{"./SyntheticEvent":141}],144:[function(require,module,exports){
+},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticKeyboardEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21439,7 +18842,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
 
-},{"./SyntheticUIEvent":147,"./getEventCharCode":170,"./getEventKey":171,"./getEventModifierState":172}],145:[function(require,module,exports){
+},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./getEventCharCode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js","./getEventKey":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventKey.js","./getEventModifierState":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21522,7 +18925,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
 
-},{"./SyntheticUIEvent":147,"./ViewportMetrics":150,"./getEventModifierState":172}],146:[function(require,module,exports){
+},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./ViewportMetrics":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ViewportMetrics.js","./getEventModifierState":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticTouchEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21570,7 +18973,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
 
-},{"./SyntheticUIEvent":147,"./getEventModifierState":172}],147:[function(require,module,exports){
+},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./getEventModifierState":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21632,7 +19035,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
 
-},{"./SyntheticEvent":141,"./getEventTarget":173}],148:[function(require,module,exports){
+},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./getEventTarget":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticWheelEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21693,7 +19096,7 @@ SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
 
-},{"./SyntheticMouseEvent":145}],149:[function(require,module,exports){
+},{"./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -21934,7 +19337,7 @@ var Transaction = {
 module.exports = Transaction;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],150:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ViewportMetrics.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21966,7 +19369,7 @@ var ViewportMetrics = {
 
 module.exports = ViewportMetrics;
 
-},{"./getUnboundedScrollPosition":178}],151:[function(require,module,exports){
+},{"./getUnboundedScrollPosition":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -22032,7 +19435,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],152:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/adler32.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22066,7 +19469,7 @@ function adler32(data) {
 
 module.exports = adler32;
 
-},{}],153:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelize.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22098,7 +19501,7 @@ function camelize(string) {
 
 module.exports = camelize;
 
-},{}],154:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelizeStyleName.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -22140,7 +19543,7 @@ function camelizeStyleName(string) {
 
 module.exports = camelizeStyleName;
 
-},{"./camelize":153}],155:[function(require,module,exports){
+},{"./camelize":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelize.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22199,7 +19602,7 @@ function cloneWithProps(child, props) {
 module.exports = cloneWithProps;
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./ReactPropTransferer":117,"./keyOf":189,"./warning":202,"_process":18}],156:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactPropTransferer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTransferer.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/containsNode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22243,7 +19646,7 @@ function containsNode(outerNode, innerNode) {
 
 module.exports = containsNode;
 
-},{"./isTextNode":186}],157:[function(require,module,exports){
+},{"./isTextNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextNode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createArrayFrom.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22329,7 +19732,7 @@ function createArrayFrom(obj) {
 
 module.exports = createArrayFrom;
 
-},{"./toArray":199}],158:[function(require,module,exports){
+},{"./toArray":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/toArray.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createFullPageComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22390,7 +19793,7 @@ function createFullPageComponent(tag) {
 module.exports = createFullPageComponent;
 
 }).call(this,require('_process'))
-},{"./ReactCompositeComponent":81,"./ReactElement":99,"./invariant":182,"_process":18}],159:[function(require,module,exports){
+},{"./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createNodesFromMarkup.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22480,7 +19883,7 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":64,"./createArrayFrom":157,"./getMarkupWrap":174,"./invariant":182,"_process":18}],160:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./createArrayFrom":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createArrayFrom.js","./getMarkupWrap":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getMarkupWrap.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cx.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22519,7 +19922,7 @@ function cx(classNames) {
 
 module.exports = cx;
 
-},{}],161:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/dangerousStyleValue.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22577,7 +19980,7 @@ function dangerousStyleValue(name, value) {
 
 module.exports = dangerousStyleValue;
 
-},{"./CSSProperty":46}],162:[function(require,module,exports){
+},{"./CSSProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSProperty.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22628,7 +20031,7 @@ function deprecated(namespace, oldName, newName, ctx, fn) {
 module.exports = deprecated;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./warning":202,"_process":18}],163:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22662,7 +20065,7 @@ emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
-},{}],164:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyObject.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22686,7 +20089,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = emptyObject;
 
 }).call(this,require('_process'))
-},{"_process":18}],165:[function(require,module,exports){
+},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22727,7 +20130,7 @@ function escapeTextForBrowser(text) {
 
 module.exports = escapeTextForBrowser;
 
-},{}],166:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/flattenChildren.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22796,7 +20199,7 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 
 }).call(this,require('_process'))
-},{"./ReactTextComponent":128,"./traverseAllChildren":200,"./warning":202,"_process":18}],167:[function(require,module,exports){
+},{"./ReactTextComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js","./traverseAllChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/traverseAllChildren.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/focusNode.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -22825,7 +20228,7 @@ function focusNode(node) {
 
 module.exports = focusNode;
 
-},{}],168:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22856,7 +20259,7 @@ var forEachAccumulated = function(arr, cb, scope) {
 
 module.exports = forEachAccumulated;
 
-},{}],169:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getActiveElement.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22885,7 +20288,7 @@ function getActiveElement() /*?DOMElement*/ {
 
 module.exports = getActiveElement;
 
-},{}],170:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -22937,7 +20340,7 @@ function getEventCharCode(nativeEvent) {
 
 module.exports = getEventCharCode;
 
-},{}],171:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventKey.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23042,7 +20445,7 @@ function getEventKey(nativeEvent) {
 
 module.exports = getEventKey;
 
-},{"./getEventCharCode":170}],172:[function(require,module,exports){
+},{"./getEventCharCode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js":[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -23089,7 +20492,7 @@ function getEventModifierState(nativeEvent) {
 
 module.exports = getEventModifierState;
 
-},{}],173:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23120,7 +20523,7 @@ function getEventTarget(nativeEvent) {
 
 module.exports = getEventTarget;
 
-},{}],174:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getMarkupWrap.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -23237,7 +20640,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":64,"./invariant":182,"_process":18}],175:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getNodeForCharacterOffset.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23312,7 +20715,7 @@ function getNodeForCharacterOffset(root, offset) {
 
 module.exports = getNodeForCharacterOffset;
 
-},{}],176:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getReactRootElementInContainer.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23347,7 +20750,7 @@ function getReactRootElementInContainer(container) {
 
 module.exports = getReactRootElementInContainer;
 
-},{}],177:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23384,7 +20787,7 @@ function getTextContentAccessor() {
 
 module.exports = getTextContentAccessor;
 
-},{"./ExecutionEnvironment":64}],178:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getUnboundedScrollPosition.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23424,7 +20827,7 @@ function getUnboundedScrollPosition(scrollable) {
 
 module.exports = getUnboundedScrollPosition;
 
-},{}],179:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenate.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23457,7 +20860,7 @@ function hyphenate(string) {
 
 module.exports = hyphenate;
 
-},{}],180:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenateStyleName.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23498,7 +20901,7 @@ function hyphenateStyleName(string) {
 
 module.exports = hyphenateStyleName;
 
-},{"./hyphenate":179}],181:[function(require,module,exports){
+},{"./hyphenate":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenate.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -23612,7 +21015,7 @@ function instantiateReactComponent(element, parentCompositeType) {
 module.exports = instantiateReactComponent;
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./ReactEmptyComponent":101,"./ReactLegacyElement":108,"./ReactNativeComponent":114,"./warning":202,"_process":18}],182:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactNativeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactNativeComponent.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -23669,7 +21072,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":18}],183:[function(require,module,exports){
+},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23734,7 +21137,7 @@ function isEventSupported(eventNameSuffix, capture) {
 
 module.exports = isEventSupported;
 
-},{"./ExecutionEnvironment":64}],184:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isNode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23762,7 +21165,7 @@ function isNode(object) {
 
 module.exports = isNode;
 
-},{}],185:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextInputElement.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23806,7 +21209,7 @@ function isTextInputElement(elem) {
 
 module.exports = isTextInputElement;
 
-},{}],186:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextNode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23831,7 +21234,7 @@ function isTextNode(object) {
 
 module.exports = isTextNode;
 
-},{"./isNode":184}],187:[function(require,module,exports){
+},{"./isNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isNode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/joinClasses.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23872,7 +21275,7 @@ function joinClasses(className/*, ... */) {
 
 module.exports = joinClasses;
 
-},{}],188:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -23927,7 +21330,7 @@ var keyMirror = function(obj) {
 module.exports = keyMirror;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],189:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -23963,7 +21366,7 @@ var keyOf = function(oneKeyObj) {
 
 module.exports = keyOf;
 
-},{}],190:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/mapObject.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24016,7 +21419,7 @@ function mapObject(object, callback, context) {
 
 module.exports = mapObject;
 
-},{}],191:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/memoizeStringOnly.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24050,7 +21453,7 @@ function memoizeStringOnly(callback) {
 
 module.exports = memoizeStringOnly;
 
-},{}],192:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -24084,7 +21487,7 @@ function monitorCodeUse(eventName, data) {
 module.exports = monitorCodeUse;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],193:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/onlyChild.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -24124,7 +21527,7 @@ function onlyChild(children) {
 module.exports = onlyChild;
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./invariant":182,"_process":18}],194:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performance.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24152,7 +21555,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = performance || {};
 
-},{"./ExecutionEnvironment":64}],195:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performanceNow.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24180,7 +21583,7 @@ var performanceNow = performance.now.bind(performance);
 
 module.exports = performanceNow;
 
-},{"./performance":194}],196:[function(require,module,exports){
+},{"./performance":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performance.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/setInnerHTML.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24258,7 +21661,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setInnerHTML;
 
-},{"./ExecutionEnvironment":64}],197:[function(require,module,exports){
+},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shallowEqual.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24302,7 +21705,7 @@ function shallowEqual(objA, objB) {
 
 module.exports = shallowEqual;
 
-},{}],198:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -24340,7 +21743,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 
 module.exports = shouldUpdateReactComponent;
 
-},{}],199:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/toArray.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -24412,7 +21815,7 @@ function toArray(obj) {
 module.exports = toArray;
 
 }).call(this,require('_process'))
-},{"./invariant":182,"_process":18}],200:[function(require,module,exports){
+},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/traverseAllChildren.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -24595,7 +21998,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 
 }).call(this,require('_process'))
-},{"./ReactElement":99,"./ReactInstanceHandles":107,"./invariant":182,"_process":18}],201:[function(require,module,exports){
+},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/update.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -24763,7 +22166,7 @@ function update(value, spec) {
 module.exports = update;
 
 }).call(this,require('_process'))
-},{"./Object.assign":70,"./invariant":182,"./keyOf":189,"_process":18}],202:[function(require,module,exports){
+},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js":[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -24808,10 +22211,10 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"./emptyFunction":163,"_process":18}],203:[function(require,module,exports){
+},{"./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js":[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":72}],204:[function(require,module,exports){
+},{"./lib/React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/lib/client.js":[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -25862,7 +23265,7 @@ request.put = function(url, data, fn){
 
 module.exports = request;
 
-},{"emitter":205,"reduce":206}],205:[function(require,module,exports){
+},{"emitter":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/component-emitter/index.js","reduce":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/reduce-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/component-emitter/index.js":[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -26028,7 +23431,7 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],206:[function(require,module,exports){
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/reduce-component/index.js":[function(require,module,exports){
 
 /**
  * Reduce `arr` with `fn`.
@@ -26053,55 +23456,395 @@ module.exports = function(arr, fn, initial){
   
   return curr;
 };
-},{}],207:[function(require,module,exports){
-var React   = require('react'),
-    tracks = require('./tracks')
-;
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-module.exports = {
-  getInitialState:function() {
-    return {
-      tracks: []
-    };
-  },
-  componentWillMount:function() {
-    this.tracks = tracks;
-    tracks.on("all", this.setTracks);
-  },
-  componentWillUnmount:function() {
-    tracks.off("all", this.setTracks);
-  },
-  setTracks:function() {
-    if (this.isMounted()) {
-      this.setState({
-        tracks: tracks.map( function(track)  { return track.attributes } )
-      });
-    }
-  },
+function EventEmitter() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || undefined;
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+EventEmitter.defaultMaxListeners = 10;
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!isNumber(n) || n < 0 || isNaN(n))
+    throw TypeError('n must be a positive number');
+  this._maxListeners = n;
+  return this;
 };
 
-},{"./tracks":208,"react":203}],208:[function(require,module,exports){
-var Backbone = require('backbone'),
-    request = require('superagent')
-;
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
 
-var Tracks = Backbone.Collection.extend({
-  urlRoot: "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&",
-  countries: ['Japan', 'United States', 'United Kingdom'],
-  fetchByArtist:function(artist) {
-    request.get(
-      (this.urlRoot + "method=artist.gettoptracks&artist=" + encodeURIComponent(artist)),
-      function(res)  { this.reset(res.body.toptracks.track); }.bind(this)
-    );
-  },
-  fetchByCountry:function(country) {
-    request.get(
-      (this.urlRoot + "method=geo.gettoptracks&country=" + encodeURIComponent(country)),
-      function(res)  { this.reset(res.body.toptracks.track); }.bind(this)
-    );
+  if (!this._events)
+    this._events = {};
+
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events.error ||
+        (isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+        throw er; // Unhandled 'error' event
+      }
+      throw TypeError('Uncaught, unspecified "error" event.');
+    }
   }
-})
-module.exports = new Tracks();
 
+  handler = this._events[type];
 
-},{"backbone":16,"superagent":204}]},{},[6]);
+  if (isUndefined(handler))
+    return false;
+
+  if (isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        len = arguments.length;
+        args = new Array(len - 1);
+        for (i = 1; i < len; i++)
+          args[i - 1] = arguments[i];
+        handler.apply(this, args);
+    }
+  } else if (isObject(handler)) {
+    len = arguments.length;
+    args = new Array(len - 1);
+    for (i = 1; i < len; i++)
+      args[i - 1] = arguments[i];
+
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++)
+      listeners[i].apply(this, args);
+  }
+
+  return true;
+};
+
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events)
+    this._events = {};
+
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
+  if (this._events.newListener)
+    this.emit('newListener', type,
+              isFunction(listener.listener) ?
+              listener.listener : listener);
+
+  if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  else
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+
+  // Check for listener leak
+  if (isObject(this._events[type]) && !this._events[type].warned) {
+    var m;
+    if (!isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      console.error('(node) warning: possible EventEmitter memory ' +
+                    'leak detected. %d listeners added. ' +
+                    'Use emitter.setMaxListeners() to increase limit.',
+                    this._events[type].length);
+      if (typeof console.trace === 'function') {
+        // not supported in IE 10
+        console.trace();
+      }
+    }
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  var fired = false;
+
+  function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+
+  g.listener = listener;
+  this.on(type, g);
+
+  return this;
+};
+
+// emits a 'removeListener' event iff the listener was removed
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events || !this._events[type])
+    return this;
+
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+
+  if (list === listener ||
+      (isFunction(list.listener) && list.listener === listener)) {
+    delete this._events[type];
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+
+  } else if (isObject(list)) {
+    for (i = length; i-- > 0;) {
+      if (list[i] === listener ||
+          (list[i].listener && list[i].listener === listener)) {
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0)
+      return this;
+
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+
+  if (!this._events)
+    return this;
+
+  // not listening for removeListener, no need to emit
+  if (!this._events.removeListener) {
+    if (arguments.length === 0)
+      this._events = {};
+    else if (this._events[type])
+      delete this._events[type];
+    return this;
+  }
+
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = {};
+    return this;
+  }
+
+  listeners = this._events[type];
+
+  if (isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else {
+    // LIFO order
+    while (listeners.length)
+      this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type])
+    ret = [];
+  else if (isFunction(this._events[type]))
+    ret = [this._events[type]];
+  else
+    ret = this._events[type].slice();
+  return ret;
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  var ret;
+  if (!emitter._events || !emitter._events[type])
+    ret = 0;
+  else if (isFunction(emitter._events[type]))
+    ret = 1;
+  else
+    ret = emitter._events[type].length;
+  return ret;
+};
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+
+},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canMutationObserver = typeof window !== 'undefined'
+    && window.MutationObserver;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    var queue = [];
+
+    if (canMutationObserver) {
+        var hiddenDiv = document.createElement("div");
+        var observer = new MutationObserver(function () {
+            var queueList = queue.slice();
+            queue.length = 0;
+            queueList.forEach(function (fn) {
+                fn();
+            });
+        });
+
+        observer.observe(hiddenDiv, { attributes: true });
+
+        return function nextTick(fn) {
+            if (!queue.length) {
+                hiddenDiv.setAttribute('yes', 'no');
+            }
+            queue.push(fn);
+        };
+    }
+
+    if (canPost) {
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}]},{},["/Users/koba04/work/github/react-boilerplate/app/index.js"]);

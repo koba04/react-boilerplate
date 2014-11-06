@@ -1,10 +1,9 @@
-var React   = require('react/addons');
+var React   = require('react/addons'),
+    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
+;
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
-  propTypes: {
-    onHandleSubmit: React.PropTypes.func.isRequired
-  },
   getInitialState() {
     return {
       inputArtist: 'radiohead'
@@ -14,7 +13,7 @@ module.exports = React.createClass({
     e.preventDefault();
     var artist = this.state.inputArtist;
     if (artist) {
-      this.props.onHandleSubmit(artist);
+      AppTracksActionCreators.fetchByArtist(artist);
     }
   },
   render() {

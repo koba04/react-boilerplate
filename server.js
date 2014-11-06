@@ -4,7 +4,7 @@ var express = require('express'),
 ;
 
 require('node-jsx').install({ harmony: true });
-var App = require('./components/index');
+var App = require('./app/components/App');
 
 var handler = function(name) {
   return function(req, res) {

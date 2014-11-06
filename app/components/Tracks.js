@@ -1,5 +1,5 @@
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./tracks.styl'));
+  require('insert-css')(require('./Tracks.styl'));
 }
 
 var React = require('react');

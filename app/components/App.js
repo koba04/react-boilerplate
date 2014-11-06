@@ -1,15 +1,15 @@
 if (typeof window !== "undefined") {
-  require('insert-css')(require('./index.styl'));
+  require('insert-css')(require('./App.styl'));
 }
 
 var React               = require('react'),
     Router              = require('react-router-component'),
-    Top                 = require('./top'),
-    Artist              = require('./artist'),
-    Country             = require('./country')
+    Top                 = require('./Top'),
+    Artist              = require('./Artist'),
+    Country             = require('./Country')
 ;
 
-var App = React.createClass({
+module.exports = React.createClass({
   render() {
     var Locations  = Router.Locations;
     var Location   = Router.Location;
@@ -39,9 +39,3 @@ var App = React.createClass({
     );
   }
 });
-
-if (typeof window !== "undefined") {
-  React.render(React.createElement(App, {path: window.location.pathname}), document);
-} else {
-  module.exports = App;
-}
