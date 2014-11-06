@@ -11,20 +11,6 @@ var React       = require('react'),
 ;
 
 module.exports = React.createClass({
-  getInitialState() {
-    return {
-      tracks: TrackStore.getAll(),
-    };
-  },
-  componentDidMount: function() {
-    TrackStore.addChangeListener(this._onChange);
-  },
-  componentWillUnmount: function() {
-    TrackStore.removeChangeListener(this._onChange);
-  },
-  _onChange: function() {
-    this.setState({ tracks: TrackStore.getAll() });
-  },
   render() {
     return (
       <div className="artist">
@@ -34,7 +20,7 @@ module.exports = React.createClass({
         <Nav current="artist" />
         <article className="main-content">
           <InputArtist onHandleSubmit={this.fetchArtist} />
-          <Tracks tracks={this.state.tracks} />
+          <Tracks />
         </article>
         <Footer />
       </div>

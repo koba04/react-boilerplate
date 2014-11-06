@@ -92,20 +92,6 @@ var React       = require('react'),
 ;
 
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState:function() {
-    return {
-      tracks: TrackStore.getAll(),
-    };
-  },
-  componentDidMount: function() {
-    TrackStore.addChangeListener(this._onChange);
-  },
-  componentWillUnmount: function() {
-    TrackStore.removeChangeListener(this._onChange);
-  },
-  _onChange: function() {
-    this.setState({ tracks: TrackStore.getAll() });
-  },
   render:function() {
     return (
       React.createElement("div", {className: "artist"}, 
@@ -115,7 +101,7 @@ module.exports = React.createClass({displayName: 'exports',
         React.createElement(Nav, {current: "artist"}), 
         React.createElement("article", {className: "main-content"}, 
           React.createElement(InputArtist, {onHandleSubmit: this.fetchArtist}), 
-          React.createElement(Tracks, {tracks: this.state.tracks})
+          React.createElement(Tracks, null)
         ), 
         React.createElement(Footer, null)
       )
@@ -140,20 +126,6 @@ var React         = require('react'),
 ;
 
 module.exports = React.createClass({displayName: 'exports',
-  getInitialState:function() {
-    return {
-      tracks: TrackStore.getAll(),
-    };
-  },
-  componentDidMount: function() {
-    TrackStore.addChangeListener(this._onChange);
-  },
-  componentWillUnmount: function() {
-    TrackStore.removeChangeListener(this._onChange);
-  },
-  _onChange: function() {
-    this.setState({ tracks: TrackStore.getAll() });
-  },
   render:function() {
     return (
       React.createElement("div", {className: "country"}, 
@@ -163,7 +135,7 @@ module.exports = React.createClass({displayName: 'exports',
         React.createElement(Nav, {current: "country"}), 
         React.createElement("article", {className: "main-content"}, 
           React.createElement(SelectCountry, null), 
-          React.createElement(Tracks, {tracks: this.state.tracks})
+          React.createElement(Tracks, null)
         ), 
         React.createElement(Footer, null)
       )
@@ -349,14 +321,27 @@ if (typeof window !== "undefined") {
   require('insert-css')(require('./Tracks.styl'));
 }
 
-var React = require('react');
+var React       = require('react'),
+    TrackStore  = require('../stores/TrackStore')
+;
 
 module.exports = React.createClass({displayName: 'exports',
-  propTypes: {
-    tracks: React.PropTypes.array.isRequired
+  getInitialState:function() {
+    return {
+      tracks: TrackStore.getAll(),
+    };
+  },
+  componentDidMount: function() {
+    TrackStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    TrackStore.removeChangeListener(this._onChange);
+  },
+  _onChange: function() {
+    this.setState({ tracks: TrackStore.getAll() });
   },
   render:function() {
-    var tracks = this.props.tracks.map( function(track, index)  {
+    var tracks = this.state.tracks.map( function(track, index)  {
       return (
         React.createElement("li", {className: "list-group-item", key: index}, 
           React.createElement("span", {className: "label label-info"}, index+1), 
@@ -377,7 +362,7 @@ module.exports = React.createClass({displayName: 'exports',
 });
 
 
-},{"./Tracks.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl":[function(require,module,exports){
+},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Tracks.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl":[function(require,module,exports){
 module.exports = ".tracks .track{font-size:20px;margin-right:10px}.tracks .artist{font-size:14px;margin-right:10px}";
 },{}],"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js":[function(require,module,exports){
 var keyMirror = require('react/lib/keyMirror');
