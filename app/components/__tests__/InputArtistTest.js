@@ -18,16 +18,22 @@ describe("inputArtist", function() {
   });
 
   describe("handleSubmit", function() {
-    it ("calls AppTracksActionCreators.fetchByArtist with state.inputArtist", function() {
-      var preventDefault = jest.genMockFunction();
+    var preventDefault;
+    beforeEach(function() {
+      preventDefault = jest.genMockFunction();
       inputArtist.setState({ inputArtist: 'travis' });
       React.addons.TestUtils.Simulate.submit(inputArtist.getDOMNode(), {
         preventDefault: preventDefault
       });
+    });
+    it ("calls AppTracksActionCreators.fetchByArtist with state.inputArtist", function() {
       expect(AppTracksActionCreators.fetchByArtist).toBeCalled();
       expect(AppTracksActionCreators.fetchByArtist).toBeCalledWith('travis');
+    });
+    it ("calls e.preventDefault", function() {
       expect(preventDefault).toBeCalled();
     });
+
   });
 
 });
