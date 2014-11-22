@@ -1,4 +1,5 @@
-# My React Boilerplate
+# My React Boilerplate  [![Build Status](https://travis-ci.org/koba04/react-boilerplate.svg?branch=master)](https://travis-ci.org/koba04/react-boilerplate)
+
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/koba04/react-boilerplate)
 
