@@ -36,3 +36,9 @@ node server.js
 ```
 npm run build
 ```
+
+## test (with Jest)
+
+```
+npm test
+```
