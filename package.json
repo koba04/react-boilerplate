@@ -23,7 +23,7 @@
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
     "browserify": "^5.11.0",
-    "jest-cli": "^0.1.18",
+    "jest-cli": "^0.2.0",
     "react-tools": "^0.12.1",
     "reactify": "^0.15.2",
     "watchify": "^2.1.1"
