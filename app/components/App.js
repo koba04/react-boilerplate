@@ -30,7 +30,7 @@ export default React.createClass({
           </Locations>
         </div>
       </body>
-      <script src="bundle.js"></script>
+      <script src="bundle.js?v=20150113"></script>
       </html>
     );
   }
