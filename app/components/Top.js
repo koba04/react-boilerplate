@@ -4,14 +4,14 @@ import React  from 'react';
 import Nav    from './Nav';
 import Footer from './Footer';
 
-let style = {
-  title: {
-    fontFamily: "'Playfair Display SC', serif"
-  }
-}
-
-let Top = React.createClass({
+export default React.createClass({
+  displayName: 'Top',
   render() {
+    let style = {
+      title: {
+        fontFamily: "'Playfair Display SC', serif"
+      }
+    };
     return (
       <div>
         <header className="page-header">
@@ -26,5 +26,3 @@ let Top = React.createClass({
     );
   }
 });
-
-export default Top;

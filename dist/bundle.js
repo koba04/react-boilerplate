@@ -15,7 +15,7 @@ var ActionTypes = AppConstants.ActionTypes;
 var urlRoot = "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&";
 
 // TODO Loading
-var AppTracksActionCreators = {
+module.exports = {
   fetchByArtist: function fetchByArtist(artist) {
     request.get("" + urlRoot + "method=artist.gettoptracks&artist=" + encodeURIComponent(artist), function (res) {
       AppDispatcher.handleViewAction({
@@ -34,8 +34,6 @@ var AppTracksActionCreators = {
   }
 };
 
-module.exports = AppTracksActionCreators;
-
 },{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","superagent":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/lib/client.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/App.js":[function(require,module,exports){
 "use strict";
 
@@ -45,19 +43,17 @@ var _interopRequire = function (obj) {
 
 var React = _interopRequire(require("react"));
 
-var Router = _interopRequire(require("react-router-component"));
-
+var Locations = require("react-router-component").Locations;
+var Location = require("react-router-component").Location;
 var Top = _interopRequire(require("./Top"));
 
 var Artist = _interopRequire(require("./Artist"));
 
 var Country = _interopRequire(require("./Country"));
 
-var App = React.createClass({
+module.exports = React.createClass({
   displayName: "App",
   render: function render() {
-    var Locations = Router.Locations;
-    var Location = Router.Location;
     var title = "Artist Top Tracks (" + this.props.path + ")";
     return React.createElement(
       "html",
@@ -97,8 +93,6 @@ var App = React.createClass({
   }
 });
 
-module.exports = App;
-
 },{"./Artist":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js","./Country":"/Users/koba04/work/github/react-boilerplate/app/components/Country.js","./Top":"/Users/koba04/work/github/react-boilerplate/app/components/Top.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js":[function(require,module,exports){
 "use strict";
 
@@ -118,15 +112,14 @@ var Tracks = _interopRequire(require("./Tracks"));
 
 var TrackStore = _interopRequire(require("../stores/TrackStore"));
 
-var style = {
-  title: {
-    fontFamily: "'Poiret One', cursive"
-  }
-};
-
-var Artist = React.createClass({
+module.exports = React.createClass({
   displayName: "Artist",
   render: function render() {
+    var style = {
+      title: {
+        fontFamily: "'Poiret One', cursive"
+      }
+    };
     return React.createElement(
       "div",
       null,
@@ -156,8 +149,6 @@ var Artist = React.createClass({
   }
 });
 
-module.exports = Artist;
-
 },{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./InputArtist":"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.js":[function(require,module,exports){
 "use strict";
 
@@ -177,15 +168,14 @@ var Tracks = _interopRequire(require("./Tracks"));
 
 var TrackStore = _interopRequire(require("../stores/TrackStore"));
 
-var style = {
-  title: {
-    fontFamily: "'Roboto Condensed', sans-serif"
-  }
-};
-
-var Country = React.createClass({
+module.exports = React.createClass({
   displayName: "Country",
   render: function render() {
+    var style = {
+      title: {
+        fontFamily: "'Roboto Condensed', sans-serif"
+      }
+    };
     return React.createElement(
       "div",
       null,
@@ -215,8 +205,6 @@ var Country = React.createClass({
   }
 });
 
-module.exports = Country;
-
 },{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./SelectCountry":"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js":[function(require,module,exports){
 "use strict";
 
@@ -227,9 +215,7 @@ var _interopRequire = function (obj) {
 var React = _interopRequire(require("react"));
 
 var Link = require("react-router-component").Link;
-
-
-var Footer = React.createClass({
+module.exports = React.createClass({
   displayName: "Footer",
   render: function render() {
     return React.createElement(
@@ -254,8 +240,6 @@ var Footer = React.createClass({
   }
 });
 
-module.exports = Footer;
-
 },{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js":[function(require,module,exports){
 "use strict";
 
@@ -267,7 +251,7 @@ var React = _interopRequire(require("react/addons"));
 
 var AppTracksActionCreators = _interopRequire(require("../actions/AppTracksActionCreators"));
 
-var InputArtist = React.createClass({
+module.exports = React.createClass({
   displayName: "InputArtist",
   mixins: [React.addons.LinkedStateMixin],
   getInitialState: function getInitialState() {
@@ -321,8 +305,6 @@ var InputArtist = React.createClass({
   }
 });
 
-module.exports = InputArtist;
-
 },{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react/addons":"/Users/koba04/work/github/react-boilerplate/node_modules/react/addons.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js":[function(require,module,exports){
 "use strict";
 
@@ -333,21 +315,18 @@ var _interopRequire = function (obj) {
 var React = _interopRequire(require("react"));
 
 var Link = require("react-router-component").Link;
-
-
-var style = {
-  nav: {
-    marginBottom: 20,
-    borderBottom: "solid #eee"
-  }
-};
-
-var Nav = React.createClass({
+module.exports = React.createClass({
   displayName: "Nav",
   propTypes: {
     current: React.PropTypes.string
   },
   render: function render() {
+    var style = {
+      nav: {
+        marginBottom: 20,
+        borderBottom: "solid #eee"
+      }
+    };
     var artistClassName = React.addons.classSet({
       active: this.props.current === "artist"
     });
@@ -379,8 +358,6 @@ var Nav = React.createClass({
   }
 });
 
-module.exports = Nav;
-
 },{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js":[function(require,module,exports){
 "use strict";
 
@@ -392,7 +369,7 @@ var React = _interopRequire(require("react"));
 
 var AppTracksActionCreators = _interopRequire(require("../actions/AppTracksActionCreators"));
 
-var SelectCountry = React.createClass({
+module.exports = React.createClass({
   displayName: "SelectCountry",
   mixins: [React.addons.LinkedStateMixin],
   getDefaultProps: function getDefaultProps() {
@@ -463,8 +440,6 @@ var SelectCountry = React.createClass({
   }
 });
 
-module.exports = SelectCountry;
-
 },{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Top.js":[function(require,module,exports){
 "use strict";
 
@@ -478,15 +453,14 @@ var Nav = _interopRequire(require("./Nav"));
 
 var Footer = _interopRequire(require("./Footer"));
 
-var style = {
-  title: {
-    fontFamily: "'Playfair Display SC', serif"
-  }
-};
-
-var Top = React.createClass({
+module.exports = React.createClass({
   displayName: "Top",
   render: function render() {
+    var style = {
+      title: {
+        fontFamily: "'Playfair Display SC', serif"
+      }
+    };
     return React.createElement(
       "div",
       null,
@@ -514,8 +488,6 @@ var Top = React.createClass({
   }
 });
 
-module.exports = Top;
-
 },{"./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js":[function(require,module,exports){
 "use strict";
 
@@ -527,18 +499,7 @@ var React = _interopRequire(require("react"));
 
 var TrackStore = _interopRequire(require("../stores/TrackStore"));
 
-var style = {
-  track: {
-    fontSize: 20,
-    marginRight: 10
-  },
-  artist: {
-    fontSize: 14,
-    marginRight: 10
-  }
-};
-
-var Tracks = React.createClass({
+module.exports = React.createClass({
   displayName: "Tracks",
   getInitialState: function getInitialState() {
     return {
@@ -554,6 +515,16 @@ var Tracks = React.createClass({
     this.setState({ tracks: TrackStore.getAll() });
   },
   render: function render() {
+    var style = {
+      track: {
+        fontSize: 20,
+        marginRight: 10
+      },
+      artist: {
+        fontSize: 14,
+        marginRight: 10
+      }
+    };
     var tracks = this.state.tracks.map(function (track, index) {
       return React.createElement(
         "li",
@@ -596,8 +567,6 @@ var Tracks = React.createClass({
   }
 });
 
-module.exports = Tracks;
-
 },{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js":[function(require,module,exports){
 "use strict";
 
@@ -607,7 +576,7 @@ var _interopRequire = function (obj) {
 
 var keyMirror = _interopRequire(require("react/lib/keyMirror"));
 
-var AppConstants = {
+module.exports = {
   ActionTypes: keyMirror({
     RECEIVE_TRACKS_BY_ARTIST: null,
     RECEIVE_TRACKS_BY_COUNTRY: null
@@ -616,8 +585,6 @@ var AppConstants = {
     VIEW_ACTION: null
   })
 };
-
-module.exports = AppConstants;
 
 },{"react/lib/keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js":[function(require,module,exports){
 "use strict";
@@ -633,7 +600,7 @@ var AppConstants = _interopRequire(require("../constants/AppConstants"));
 
 var PayloadSources = AppConstants.PayloadSources;
 
-var AppDispatcher = assign(new Dispatcher(), {
+module.exports = assign(new Dispatcher(), {
   handleViewAction: function handleViewAction(action) {
     this.dispatch({
       source: PayloadSources.VIEW_ACTION,
@@ -641,8 +608,6 @@ var AppDispatcher = assign(new Dispatcher(), {
     });
   }
 });
-
-module.exports = AppDispatcher;
 
 },{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","flux":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/index.js":[function(require,module,exports){
 "use strict";
@@ -662,17 +627,16 @@ React.render(React.createElement(App, { path: window.location.pathname }), docum
 },{"./components/App":"/Users/koba04/work/github/react-boilerplate/app/components/App.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js":[function(require,module,exports){
 "use strict";
 
-
 var _interopRequire = function (obj) {
   return obj && (obj["default"] || obj);
 };
 
+var EventEmitter = require("events").EventEmitter;
+var assign = _interopRequire(require("object-assign"));
+
 var AppDispatcher = _interopRequire(require("../dispatcher/AppDispatcher"));
 
 var AppConstants = _interopRequire(require("../constants/AppConstants"));
-
-var EventEmitter = require("events").EventEmitter;
-var assign = _interopRequire(require("object-assign"));
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = "change";
@@ -1041,7 +1005,6 @@ function ToObject(val) {
 }
 
 module.exports = Object.assign || function (target, source) {
-	var pendingException;
 	var from;
 	var keys;
 	var to = ToObject(target);
@@ -1051,18 +1014,8 @@ module.exports = Object.assign || function (target, source) {
 		keys = Object.keys(Object(from));
 
 		for (var i = 0; i < keys.length; i++) {
-			try {
-				to[keys[i]] = from[keys[i]];
-			} catch (err) {
-				if (pendingException === undefined) {
-					pendingException = err;
-				}
-			}
+			to[keys[i]] = from[keys[i]];
 		}
-	}
-
-	if (pendingException) {
-		throw pendingException;
 	}
 
 	return to;
@@ -1416,10 +1369,7 @@ var React     = require('react');
 function createClass(name) {
   return React.createClass({
     propTypes: {
-      handler: React.PropTypes.oneOfType([
-        React.PropTypes.node,
-        React.PropTypes.func
-      ]).isRequired,
+      handler: React.PropTypes.element.isRequired,
       path: name === 'NotFound' ? 
         function(props, propName) {
           if (props[propName]) throw new Error("Don't pass a `path` to NotFound.");
@@ -1456,7 +1406,10 @@ module.exports = {
 },{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js":[function(require,module,exports){
 "use strict";
 
+var React  = require('react');
 var cloneWithProps = require('react/lib/cloneWithProps');
+var assign = Object.assign || require('object.assign');
+
 
 /**
  * Mixin for routers which implements the simplest rendering strategy.
@@ -1465,14 +1418,19 @@ var RouteRenderingMixin = {
 
   renderRouteHandler: function() {
     var handler = this.state.handler;
-    return cloneWithProps(handler, {ref: this.state.match.route.ref});
+    var props = assign({ref: this.state.match.route.ref}, props);
+    // If we were passed an element, we need to clone it before passing it along.
+    if (React.isValidElement(handler)) {
+      return cloneWithProps(handler, props);
+    }
+    return React.createElement(handler, props);
   }
 
 };
 
 module.exports = RouteRenderingMixin;
 
-},{"react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Router.js":[function(require,module,exports){
+},{"object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Router.js":[function(require,module,exports){
 "use strict";
 
 var React                     = require('react');
@@ -1510,15 +1468,15 @@ function createRouter(name, component) {
       // Pass all props except this component to the Router (containing div/body).
       var props = assign({}, this.props);
       delete props.component;
-      return this.props.component(props, handler);
+      return React.createElement(this.props.component, props, handler);
     }
   });
 }
 
 module.exports = {
   createRouter: createRouter,
-  Locations: createRouter('Locations', React.DOM.div),
-  Pages: createRouter('Pages', React.DOM.body)
+  Locations: createRouter('Locations', 'div'),
+  Pages: createRouter('Pages', 'body')
 }
 
 },{"./AsyncRouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js","./RouterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js":[function(require,module,exports){
@@ -2050,9 +2008,10 @@ module.exports = {
 "use strict";
 
 var pattern   = require('url-pattern');
-var assign    = Object.assign || require('object.assign');
 var invariant = require('react/lib/invariant');
-var React     = require('react');
+var React  = require('react');
+var cloneWithProps = require('react/lib/cloneWithProps');
+var assign = Object.assign || require('object.assign');
 
 /**
  * Match routes against a path
@@ -2072,12 +2031,6 @@ function matchRoutes(routes, path) {
     // Simply skip null or undefined to allow ternaries in route definitions
     if (!current) continue;
 
-    // We expect to be passed an Element. If we weren't, and were just passed props,
-    // mock an Element's structure.
-    if (!React.isValidElement(current)) {
-      current = {props: current, ref: current.ref};
-    }
-
     if (process.env.NODE_ENV !== "production") {
       invariant(
         current.props.handler !== undefined && current.props.path !== undefined,
@@ -2092,9 +2045,9 @@ function matchRoutes(routes, path) {
         if (match) {
           page = current;
         }
-        // Regex matches are not named, so they go in the `_` array, much like splats.
+        // Parse RegExp matches, which are returned as an array rather an an object.
         if (Array.isArray(match)) {
-          match = {_: match};
+          match = parseMatch(current, match);
         }
       }
     }
@@ -2108,6 +2061,23 @@ function matchRoutes(routes, path) {
     page ? page : notFound ? notFound : null,
     match
   );
+}
+
+/**
+ * Given the currently matched Location & the match array, transform the matches to named key/value pairs,
+ * if possible.
+ * @param  {Route} current Matched Route.
+ * @param  {Array} match   Array of matches from RegExp.
+ * @return {Object}        Key/value pairs to feed to the route's handler.
+ */
+function parseMatch(current, match) {
+  if (Array.isArray(current.props.matchKeys)) {
+    return current.props.matchKeys.reduce(function(memo, key, i) {
+      memo[key] = match[i];
+      return memo;
+    }, {});
+  }
+  return {_: match};
 }
 
 /**
@@ -2131,32 +2101,40 @@ function Match(path, route, match) {
 
 Match.prototype.getHandler = function() {
   if (!this.route) return undefined;
+
   var props = assign({}, this.route.props, this.match);
   delete props.pattern;
   delete props.path;
   delete props.handler;
-  return this.route.props.handler(props);
+  var handler = this.route.props.handler;
+  // Passed an element - clone it with the props from the route
+  if (React.isValidElement(handler)) {
+    return cloneWithProps(handler, props);
+  }
+  // Passed a component descriptor - create an element. Assign it the ref
+  // from the <Location> tag.
+  return React.createElement(handler, props);
 }
 
 module.exports = matchRoutes;
 
 }).call(this,require('_process'))
-},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","url-pattern":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/url-pattern/src/url-pattern.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js":[function(require,module,exports){
-"use strict";
+},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","url-pattern":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/url-pattern/src/url-pattern.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js":[function(require,module,exports){
+'use strict';
 
 // modified from https://github.com/es-shims/es6-shim
 var keys = require('object-keys');
-var isObject = function (obj) {
+var canBeObject = function (obj) {
 	return typeof obj !== 'undefined' && obj !== null;
 };
 
 var assignShim = function assign(target, source1) {
-	var objTarget, s, source, i, props;
-	if (!isObject(target)) { throw new TypeError('target must be an object'); }
-	objTarget = Object(target);
+	if (!canBeObject(target)) { throw new TypeError('target must be an object'); }
+	var objTarget = Object(target);
+	var s, source, i, props;
 	for (s = 1; s < arguments.length; ++s) {
-		source = arguments[s];
-		props = keys(Object(source));
+		source = Object(arguments[s]);
+		props = keys(source);
 		for (i = 0; i < props.length; ++i) {
 			objTarget[props[i]] = source[props[i]];
 		}
@@ -2175,33 +2153,33 @@ module.exports = assignShim;
 
 
 },{"object-keys":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/index.js":[function(require,module,exports){
-"use strict";
+'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
 var has = Object.prototype.hasOwnProperty;
-var toString = Object.prototype.toString;
+var toStr = Object.prototype.toString;
 var isArgs = require('./isArguments');
-var hasDontEnumBug = !({'toString': null}).propertyIsEnumerable('toString');
-var hasProtoEnumBug = (function () {}).propertyIsEnumerable('prototype');
+var hasDontEnumBug = !({ 'toString': null }).propertyIsEnumerable('toString');
+var hasProtoEnumBug = function () {}.propertyIsEnumerable('prototype');
 var dontEnums = [
-	"toString",
-	"toLocaleString",
-	"valueOf",
-	"hasOwnProperty",
-	"isPrototypeOf",
-	"propertyIsEnumerable",
-	"constructor"
+	'toString',
+	'toLocaleString',
+	'valueOf',
+	'hasOwnProperty',
+	'isPrototypeOf',
+	'propertyIsEnumerable',
+	'constructor'
 ];
 
 var keysShim = function keys(object) {
 	var isObject = object !== null && typeof object === 'object';
-	var isFunction = toString.call(object) === '[object Function]';
+	var isFunction = toStr.call(object) === '[object Function]';
 	var isArguments = isArgs(object);
-	var isString = isObject && toString.call(object) === '[object String]';
+	var isString = isObject && toStr.call(object) === '[object String]';
 	var theKeys = [];
 
 	if (!isObject && !isFunction && !isArguments) {
-		throw new TypeError("Object.keys called on a non-object");
+		throw new TypeError('Object.keys called on a non-object');
 	}
 
 	var skipProto = hasProtoEnumBug && isFunction;
@@ -2227,9 +2205,9 @@ var keysShim = function keys(object) {
 		var ctor = object.constructor;
 		var skipConstructor = ctor && ctor.prototype === object;
 
-		for (var j = 0; j < dontEnums.length; ++j) {
-			if (!(skipConstructor && dontEnums[j] === 'constructor') && has.call(object, dontEnums[j])) {
-				theKeys.push(dontEnums[j]);
+		for (var k = 0; k < dontEnums.length; ++k) {
+			if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
+				theKeys.push(dontEnums[k]);
 			}
 		}
 	}
@@ -2245,26 +2223,24 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-
 },{"./isArguments":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/isArguments.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/isArguments.js":[function(require,module,exports){
-"use strict";
+'use strict';
 
-var toString = Object.prototype.toString;
+var toStr = Object.prototype.toString;
 
 module.exports = function isArguments(value) {
-	var str = toString.call(value);
-	var isArguments = str === '[object Arguments]';
-	if (!isArguments) {
-		isArguments = str !== '[object Array]'
+	var str = toStr.call(value);
+	var isArgs = str === '[object Arguments]';
+	if (!isArgs) {
+		isArgs = str !== '[object Array]'
 			&& value !== null
 			&& typeof value === 'object'
 			&& typeof value.length === 'number'
 			&& value.length >= 0
-			&& toString.call(value.callee) === '[object Function]';
+			&& toStr.call(value.callee) === '[object Function]';
 	}
-	return isArguments;
+	return isArgs;
 };
-
 
 },{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js":[function(require,module,exports){
 "use strict";

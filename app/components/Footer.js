@@ -1,7 +1,8 @@
-import React from 'react';
+import React  from 'react';
 import {Link} from 'react-router-component';
 
-var Footer = React.createClass({
+export default React.createClass({
+  displayName: 'Footer',
   render() {
     return (
       <footer>
@@ -13,5 +14,3 @@ var Footer = React.createClass({
     );
   }
 });
-
-export default Footer;

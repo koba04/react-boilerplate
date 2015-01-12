@@ -1,16 +1,15 @@
 'use strict';
 
-import React from 'react';
-import Router from 'react-router-component';
-import Top from './Top';
-import Artist from './Artist';
-import Country from './Country';
+import React                  from 'react';
+import {Locations, Location}  from 'react-router-component';
+import Top                    from './Top';
+import Artist                 from './Artist';
+import Country                from './Country';
 
-var App = React.createClass({
+export default React.createClass({
+  displayName: 'App',
   render() {
-    var Locations  = Router.Locations;
-    var Location   = Router.Location;
-    var title = `Artist Top Tracks (${ this.props.path })`;
+    let title = `Artist Top Tracks (${ this.props.path })`;
     return (
       <html lang="ja">
       <head>
@@ -36,6 +35,3 @@ var App = React.createClass({
     );
   }
 });
-
-export default App;
-

@@ -1,16 +1,15 @@
 'use strict';
 
-
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import AppConstants from '../constants/AppConstants';
 import {EventEmitter} from 'events';
-import assign from 'object-assign';
+import assign         from 'object-assign';
+import AppDispatcher  from '../dispatcher/AppDispatcher';
+import AppConstants   from '../constants/AppConstants';
 
-var ActionTypes = AppConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
-var tracks = [];
+let ActionTypes = AppConstants.ActionTypes;
+let CHANGE_EVENT = 'change';
+let tracks = [];
 
-var TrackStore = assign({}, EventEmitter.prototype, {
+let TrackStore = assign({}, EventEmitter.prototype, {
 
   emitChange() {
     this.emit(CHANGE_EVENT);
@@ -27,7 +26,7 @@ var TrackStore = assign({}, EventEmitter.prototype, {
 });
 
 TrackStore.dispatchToken = AppDispatcher.register( payload => {
-  var action = payload.action;
+  let action = payload.action;
 
   switch (action.type) {
     case ActionTypes.RECEIVE_TRACKS_BY_ARTIST:

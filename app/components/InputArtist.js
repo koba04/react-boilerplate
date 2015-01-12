@@ -1,7 +1,8 @@
-import React from 'react/addons';
-import AppTracksActionCreators from '../actions/AppTracksActionCreators';
+import React                    from 'react/addons';
+import AppTracksActionCreators  from '../actions/AppTracksActionCreators';
 
-var InputArtist = React.createClass({
+export default React.createClass({
+  displayName: 'InputArtist',
   mixins: [React.addons.LinkedStateMixin],
   getInitialState() {
     return {
@@ -10,7 +11,7 @@ var InputArtist = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    var artist = this.state.inputArtist;
+    let artist = this.state.inputArtist;
     if (artist) {
       AppTracksActionCreators.fetchByArtist(artist);
     }
@@ -33,5 +34,3 @@ var InputArtist = React.createClass({
     );
   }
 });
-
-export default InputArtist;

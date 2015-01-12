@@ -7,14 +7,13 @@ http://react-serverside-rendering.herokuapp.com/
 
 sever side rendering & Flux
 
+ES6 style
+
 * react
   * react-router-component
 * express
 * browserify
-  * watchify
-  * reactify
-  * stylify
-* insert-css
+* 6to5
 
 ## setup
 ```
@@ -28,7 +27,7 @@ npm run watch
 
 ## run server
 ```
-node server.js
+npm run start
 ```
 
 ## manual build

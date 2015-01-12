@@ -5,14 +5,14 @@ import InputArtist  from './InputArtist';
 import Tracks       from './Tracks';
 import TrackStore   from '../stores/TrackStore';
 
-var style = {
-  title: {
-    fontFamily: "'Poiret One', cursive"
-  }
-};
-
-var Artist = React.createClass({
+export default React.createClass({
+  displayName: 'Artist',
   render() {
+    let style = {
+      title: {
+        fontFamily: "'Poiret One', cursive"
+      }
+    };
     return (
       <div>
         <header className="page-header">
@@ -28,6 +28,3 @@ var Artist = React.createClass({
     );
   }
 });
-
-export default Artist;
-

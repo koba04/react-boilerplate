@@ -5,14 +5,14 @@ import SelectCountry  from './SelectCountry';
 import Tracks         from './Tracks';
 import TrackStore     from '../stores/TrackStore';
 
-var style = {
-  title: {
-    fontFamily: "'Roboto Condensed', sans-serif"
-  }
-}
-
-var Country = React.createClass({
+export default React.createClass({
+  displayName: 'Country',
   render() {
+    let style = {
+      title: {
+        fontFamily: "'Roboto Condensed', sans-serif"
+      }
+    }
     return (
       <div>
         <header className="page-header">
@@ -28,5 +28,3 @@ var Country = React.createClass({
     );
   }
 });
-
-export default Country;

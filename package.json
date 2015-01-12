@@ -1,11 +1,11 @@
 {
   "name": "react-boilerplate",
   "version": "0.3.0",
-  "description": "my faceook React.js boilerplate",
+  "description": "my React.js boilerplate",
   "scripts": {
     "watch": "watchify app/index.js -o dist/bundle.js -v",
     "build": "browserify app/index.js > dist/bundle.js",
-    "start": "node server.js",
+    "start": "6to5-node server",
     "test": "jest"
   },
   "repository": {
@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
+    "6to5-jest": "^1.0.0",
     "6to5ify": "^3.1.2",
     "browserify": "^5.11.0",
     "jest-cli": "^0.2.0",
-    "react-tools": "^0.12.1",
     "reactify": "^0.15.2",
     "watchify": "^2.1.1"
   },
@@ -34,7 +34,7 @@
     "backbone": "~1.1.2",
     "express": "^4.10.1",
     "flux": "^2.0.1",
-    "object-assign": "^1.0.0",
+    "object-assign": "^2.0.0",
     "react": "^0.12.0",
     "react-router-component": "STRML/react-router-component#react-0.12",
     "superagent": "^0.18.2"
@@ -45,7 +45,7 @@
     ]
   },
   "jest": {
-    "scriptPreprocessor": "preprocessor.js",
+    "scriptPreprocessor": "<rootDir>/node_modules/6to5-jest",
     "unmockedModulePathPatterns": [
       "node_modules/react"
     ]

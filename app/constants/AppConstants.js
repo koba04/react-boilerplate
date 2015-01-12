@@ -2,7 +2,7 @@
 
 import keyMirror from 'react/lib/keyMirror';
 
-var AppConstants = {
+export default {
   ActionTypes: keyMirror({
     RECEIVE_TRACKS_BY_ARTIST: null,
     RECEIVE_TRACKS_BY_COUNTRY: null
@@ -11,5 +11,3 @@ var AppConstants = {
     VIEW_ACTION: null
   })
 };
-
-export default AppConstants;

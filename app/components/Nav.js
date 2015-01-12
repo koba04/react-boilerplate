@@ -1,22 +1,22 @@
-import React from 'react';
+import React  from 'react';
 import {Link} from 'react-router-component';
 
-var style = {
-  nav: {
-    marginBottom: 20,
-    borderBottom: 'solid #eee'
-  }
-};
-
-var Nav = React.createClass({
+export default React.createClass({
+  displayName: 'Nav',
   propTypes: {
     current: React.PropTypes.string
   },
   render() {
-    var artistClassName = React.addons.classSet({
+    let style = {
+      nav: {
+        marginBottom: 20,
+        borderBottom: 'solid #eee'
+      }
+    };
+    let artistClassName = React.addons.classSet({
       active: this.props.current === "artist"
     });
-    var countryClassName = React.addons.classSet({
+    let countryClassName = React.addons.classSet({
       active: this.props.current === "country"
     });
     return (
@@ -27,5 +27,3 @@ var Nav = React.createClass({
     );
   }
 });
-
-export default Nav;

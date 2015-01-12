@@ -1,7 +1,8 @@
 import React from 'react';
 import AppTracksActionCreators from '../actions/AppTracksActionCreators';
 
-var SelectCountry = React.createClass({
+export default React.createClass({
+  displayName: 'SelectCountry',
   mixins: [React.addons.LinkedStateMixin],
   getDefaultProps() {
     return {
@@ -15,13 +16,13 @@ var SelectCountry = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    var country = this.state.selectCountry;
+    let country = this.state.selectCountry;
     if (country) {
       AppTracksActionCreators.fetchByCountry(country);
     }
   },
   render() {
-    var countries = this.props.countries.map( country => {
+    let countries = this.props.countries.map( country => {
       return (
         <option value={country} key={country}>{country}</option>
       );
@@ -46,5 +47,3 @@ var SelectCountry = React.createClass({
     );
   }
 });
-
-export default SelectCountry;

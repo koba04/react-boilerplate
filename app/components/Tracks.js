@@ -3,18 +3,8 @@
 import React      from 'react';
 import TrackStore from '../stores/TrackStore';
 
-let style = {
-  track: {
-    fontSize: 20,
-    marginRight: 10
-  },
-  artist: {
-    fontSize: 14,
-    marginRight: 10
-  }
-};
-
-let Tracks = React.createClass({
+export default React.createClass({
+  displayName: 'Tracks',
   getInitialState() {
     return {
       tracks: TrackStore.getAll(),
@@ -30,6 +20,16 @@ let Tracks = React.createClass({
     this.setState({ tracks: TrackStore.getAll() });
   },
   render() {
+    let style = {
+      track: {
+        fontSize: 20,
+        marginRight: 10
+      },
+      artist: {
+        fontSize: 14,
+        marginRight: 10
+      }
+    };
     let tracks = this.state.tracks.map( (track, index) => {
       return (
         <li className="list-group-item" key={index}>
@@ -49,5 +49,3 @@ let Tracks = React.createClass({
     );
   }
 });
-
-export default Tracks;
