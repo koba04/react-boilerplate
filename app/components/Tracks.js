@@ -1,12 +1,20 @@
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Tracks.styl'));
-}
+'use strict';
 
-var React       = require('react'),
-    TrackStore  = require('../stores/TrackStore')
-;
+import React      from 'react';
+import TrackStore from '../stores/TrackStore';
 
-module.exports = React.createClass({
+let style = {
+  track: {
+    fontSize: 20,
+    marginRight: 10
+  },
+  artist: {
+    fontSize: 14,
+    marginRight: 10
+  }
+};
+
+let Tracks = React.createClass({
   getInitialState() {
     return {
       tracks: TrackStore.getAll(),
@@ -22,12 +30,12 @@ module.exports = React.createClass({
     this.setState({ tracks: TrackStore.getAll() });
   },
   render() {
-    var tracks = this.state.tracks.map( (track, index) => {
+    let tracks = this.state.tracks.map( (track, index) => {
       return (
         <li className="list-group-item" key={index}>
           <span className="label label-info">{index+1}</span>
-          <a href={track.url} target="_blank"><span className="track">{track.name}</span></a>
-          <span className="artist">{track.artist.name}</span>
+          <a href={track.url} target="_blank"><span style={style.track}>{track.name}</span></a>
+          <span style={style.artist}>{track.artist.name}</span>
           <small className="listeners glyphicon glyphicon-headphones">{track.listeners}</small>
         </li>
       );
@@ -42,3 +50,4 @@ module.exports = React.createClass({
   }
 });
 
+export default Tracks;

@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
+    "6to5ify": "^3.1.2",
     "browserify": "^5.11.0",
     "jest-cli": "^0.2.0",
     "react-tools": "^0.12.1",
@@ -29,36 +30,25 @@
     "watchify": "^2.1.1"
   },
   "dependencies": {
+    "6to5": "^2.9.4",
     "backbone": "~1.1.2",
     "express": "^4.10.1",
     "flux": "^2.0.1",
-    "insert-css": "^0.2.0",
-    "node-jsx": "^0.12.0",
     "object-assign": "^1.0.0",
     "react": "^0.12.0",
     "react-router-component": "STRML/react-router-component#react-0.12",
-    "stylify": "^0.1.6",
     "superagent": "^0.18.2"
   },
   "browserify": {
     "transform": [
-      [
-        "reactify",
-        {
-          "harmony": true
-        },
-        {
-          "everything": true
-        }
-      ],
-      [
-        "stylify"
-      ]
+      [ "6to5ify" ]
     ]
   },
   "jest": {
     "scriptPreprocessor": "preprocessor.js",
-    "unmockedModulePathPatterns": ["node_modules/react"]
+    "unmockedModulePathPatterns": [
+      "node_modules/react"
+    ]
   },
   "engines": {
     "node": "0.10.33"

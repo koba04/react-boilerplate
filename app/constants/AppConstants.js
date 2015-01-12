@@ -1,6 +1,8 @@
-var keyMirror = require('react/lib/keyMirror');
+'use strict';
 
-module.exports = {
+import keyMirror from 'react/lib/keyMirror';
+
+var AppConstants = {
   ActionTypes: keyMirror({
     RECEIVE_TRACKS_BY_ARTIST: null,
     RECEIVE_TRACKS_BY_COUNTRY: null
@@ -9,3 +11,5 @@ module.exports = {
     VIEW_ACTION: null
   })
 };
+
+export default AppConstants;

@@ -1,25 +1,26 @@
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Artist.styl'));
-}
+import React        from 'react';
+import Nav          from './Nav';
+import Footer       from './Footer';
+import InputArtist  from './InputArtist';
+import Tracks       from './Tracks';
+import TrackStore   from '../stores/TrackStore';
 
-var React       = require('react'),
-    Nav         = require('./Nav'),
-    Footer      = require('./Footer'),
-    InputArtist = require('./InputArtist'),
-    Tracks      = require('./Tracks'),
-    TrackStore  = require('../stores/TrackStore')
-;
+var style = {
+  title: {
+    fontFamily: "'Poiret One', cursive"
+  }
+};
 
-module.exports = React.createClass({
+var Artist = React.createClass({
   render() {
     return (
-      <div className="artist">
+      <div>
         <header className="page-header">
-          <h1>Artist Top Tracks <small>by Last.FM</small></h1>
+          <h1 style={style.title}>Artist Top Tracks <small>by Last.FM</small></h1>
         </header>
         <Nav current="artist" />
         <article className="main-content">
-          <InputArtist onHandleSubmit={this.fetchArtist} />
+          <InputArtist />
           <Tracks />
         </article>
         <Footer />
@@ -27,4 +28,6 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default Artist;
 

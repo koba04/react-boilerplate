@@ -1,7 +1,7 @@
-var React = require('react');
-var Link = require('react-router-component').Link;
+import React from 'react';
+import {Link} from 'react-router-component';
 
-module.exports = React.createClass({
+var Footer = React.createClass({
   render() {
     return (
       <footer>
@@ -14,3 +14,4 @@ module.exports = React.createClass({
   }
 });
 
+export default Footer;

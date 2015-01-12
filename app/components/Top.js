@@ -1,18 +1,21 @@
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Top.styl'));
+'use strict';
+
+import React  from 'react';
+import Nav    from './Nav';
+import Footer from './Footer';
+
+let style = {
+  title: {
+    fontFamily: "'Playfair Display SC', serif"
+  }
 }
 
-var React = require('react'),
-    Nav   = require('./Nav'),
-    Footer  = require('./Footer')
-;
-
-module.exports = React.createClass({
+let Top = React.createClass({
   render() {
     return (
-      <div className="top">
+      <div>
         <header className="page-header">
-          <h1>TopPage</h1>
+          <h1 style={style.title}>TopPage</h1>
         </header>
         <Nav />
         <article>
@@ -24,3 +27,4 @@ module.exports = React.createClass({
   }
 });
 
+export default Top;

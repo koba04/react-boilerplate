@@ -1,15 +1,12 @@
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./App.styl'));
-}
+'use strict';
 
-var React               = require('react'),
-    Router              = require('react-router-component'),
-    Top                 = require('./Top'),
-    Artist              = require('./Artist'),
-    Country             = require('./Country')
-;
+import React from 'react';
+import Router from 'react-router-component';
+import Top from './Top';
+import Artist from './Artist';
+import Country from './Country';
 
-module.exports = React.createClass({
+var App = React.createClass({
   render() {
     var Locations  = Router.Locations;
     var Location   = Router.Location;
@@ -39,3 +36,6 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default App;
+

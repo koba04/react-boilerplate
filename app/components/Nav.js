@@ -1,11 +1,14 @@
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Nav.styl'));
-}
+import React from 'react';
+import {Link} from 'react-router-component';
 
-var React = require('react');
-var Link = require('react-router-component').Link;
+var style = {
+  nav: {
+    marginBottom: 20,
+    borderBottom: 'solid #eee'
+  }
+};
 
-module.exports = React.createClass({
+var Nav = React.createClass({
   propTypes: {
     current: React.PropTypes.string
   },
@@ -17,13 +20,12 @@ module.exports = React.createClass({
       active: this.props.current === "country"
     });
     return (
-      <div className="nav-content">
-        <ul className="nav nav-pills nav-justified">
-          <li className={artistClassName}><Link href="/artist">Artist</Link></li>
-          <li className={countryClassName}><Link href="/country">Country</Link></li>
-        </ul>
-      </div>
+      <ul className="nav nav-pills nav-justified" style={style.nav}>
+        <li className={artistClassName}><Link href="/artist">Artist</Link></li>
+        <li className={countryClassName}><Link href="/country">Country</Link></li>
+      </ul>
     );
   }
 });
 
+export default Nav;

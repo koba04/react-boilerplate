@@ -1,15 +1,18 @@
-var Dispatcher    = require('flux').Dispatcher,
-    assign        = require('object-assign'),
-    AppConstants  = require('../constants/AppConstants')
-;
+'use strict';
+
+import {Dispatcher} from 'flux';
+import assign from 'object-assign';
+import AppConstants from '../constants/AppConstants';
 
 var PayloadSources = AppConstants.PayloadSources;
 
-module.exports = assign(new Dispatcher(), {
-  handleViewAction: function(action) {
+var AppDispatcher = assign(new Dispatcher(), {
+  handleViewAction(action) {
     this.dispatch({
       source: PayloadSources.VIEW_ACTION,
       action: action
     });
   }
 });
+
+export default AppDispatcher;

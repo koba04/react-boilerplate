@@ -1,199 +1,319 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js":[function(require,module,exports){
-var request = require('superagent'),
-    AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants  = require('../constants/AppConstants')
-;
+"use strict";
+
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var request = _interopRequire(require("superagent"));
+
+var AppDispatcher = _interopRequire(require("../dispatcher/AppDispatcher"));
+
+var AppConstants = _interopRequire(require("../constants/AppConstants"));
 
 var ActionTypes = AppConstants.ActionTypes;
 var urlRoot = "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&";
 
 // TODO Loading
-module.exports = {
-  fetchByArtist: function(artist) {
-    request.get(
-      urlRoot + 'method=artist.gettoptracks&artist=' + encodeURIComponent(artist),
-      function(res) {
-        AppDispatcher.handleViewAction({
-          type: ActionTypes.RECEIVE_TRACKS_BY_ARTIST,
-          tracks: res.body.toptracks.track
-        });
-      }.bind(this)
-    );
+var AppTracksActionCreators = {
+  fetchByArtist: function fetchByArtist(artist) {
+    request.get("" + urlRoot + "method=artist.gettoptracks&artist=" + encodeURIComponent(artist), function (res) {
+      AppDispatcher.handleViewAction({
+        type: ActionTypes.RECEIVE_TRACKS_BY_ARTIST,
+        tracks: res.body.toptracks.track
+      });
+    });
   },
-  fetchByCountry: function(country) {
-    request.get(
-      urlRoot + 'method=geo.gettoptracks&country=' + encodeURIComponent(country),
-      function(res) {
-        AppDispatcher.handleViewAction({
-          type: ActionTypes.RECEIVE_TRACKS_BY_ARTIST,
-          tracks: res.body.toptracks.track
-        });
-      }.bind(this)
-    );
+  fetchByCountry: function fetchByCountry(country) {
+    request.get("" + urlRoot + "method=geo.gettoptracks&country=" + encodeURIComponent(country), function (res) {
+      AppDispatcher.handleViewAction({
+        type: ActionTypes.RECEIVE_TRACKS_BY_ARTIST,
+        tracks: res.body.toptracks.track
+      });
+    });
   }
 };
 
+module.exports = AppTracksActionCreators;
+
 },{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","superagent":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/lib/client.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/App.js":[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./App.styl'));
-}
+"use strict";
 
-var React               = require('react'),
-    Router              = require('react-router-component'),
-    Top                 = require('./Top'),
-    Artist              = require('./Artist'),
-    Country             = require('./Country')
-;
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
 
-module.exports = React.createClass({displayName: 'exports',
-  render:function() {
-    var Locations  = Router.Locations;
-    var Location   = Router.Location;
-    var title = ("Artist Top Tracks (" +  this.props.path + ")");
-    return (
-      React.createElement("html", {lang: "ja"}, 
-      React.createElement("head", null, 
-        React.createElement("title", null, title), 
-        React.createElement("meta", {name: "viewport", content: "width=device-width, initial-scale=1"}), 
-        React.createElement("meta", {httpEquiv: "Cache-Control", content: "no-cache"}), 
-        React.createElement("meta", {httpEquiv: "Pragma", content: "no-cache"}), 
-        React.createElement("meta", {charSet: "utf8"}), 
-        React.createElement("link", {rel: "stylesheet", href: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"}), 
-        React.createElement("link", {rel: "stylesheet", href: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"})
-      ), 
-      React.createElement("body", null, 
-        React.createElement("div", {id: "app", className: "container"}, 
-          React.createElement(Locations, {path: this.props.path}, 
-            React.createElement(Location, {path: "/", handler: Top}), 
-            React.createElement(Location, {path: "/artist", handler: Artist}), 
-            React.createElement(Location, {path: "/country", handler: Country})
+var React = _interopRequire(require("react"));
+
+var Router = _interopRequire(require("react-router-component"));
+
+var Top = _interopRequire(require("./Top"));
+
+var Artist = _interopRequire(require("./Artist"));
+
+var Country = _interopRequire(require("./Country"));
+
+var App = React.createClass({
+  displayName: "App",
+  render: function render() {
+    var Locations = Router.Locations;
+    var Location = Router.Location;
+    var title = "Artist Top Tracks (" + this.props.path + ")";
+    return React.createElement(
+      "html",
+      { lang: "ja" },
+      React.createElement(
+        "head",
+        null,
+        React.createElement(
+          "title",
+          null,
+          title
+        ),
+        React.createElement("meta", { name: "viewport", content: "width=device-width, initial-scale=1" }),
+        React.createElement("meta", { httpEquiv: "Cache-Control", content: "no-cache" }),
+        React.createElement("meta", { httpEquiv: "Pragma", content: "no-cache" }),
+        React.createElement("meta", { charSet: "utf8" }),
+        React.createElement("link", { rel: "stylesheet", href: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" }),
+        React.createElement("link", { rel: "stylesheet", href: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" })
+      ),
+      React.createElement(
+        "body",
+        null,
+        React.createElement(
+          "div",
+          { id: "app", className: "container" },
+          React.createElement(
+            Locations,
+            { path: this.props.path },
+            React.createElement(Location, { path: "/", handler: Top }),
+            React.createElement(Location, { path: "/artist", handler: Artist }),
+            React.createElement(Location, { path: "/country", handler: Country })
           )
         )
-      ), 
-      React.createElement("script", {src: "bundle.js"})
-      )
+      ),
+      React.createElement("script", { src: "bundle.js" })
     );
   }
 });
 
-},{"./App.styl":"/Users/koba04/work/github/react-boilerplate/app/components/App.styl","./Artist":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js","./Country":"/Users/koba04/work/github/react-boilerplate/app/components/Country.js","./Top":"/Users/koba04/work/github/react-boilerplate/app/components/Top.js","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/App.styl":[function(require,module,exports){
-module.exports = "#app .route-enter{-webkit-animation:fadein .5s;-webkit-animation-delay:.2s;animation:fadein .5s;animation-delay:.2s;opacity:0}#app .route-leave{-webkit-animation:fadeout .2s;animation:fadeout .2s}@-moz-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-webkit-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-o-keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@keyframes fadein{0%{transform:scale(0.5);-webkit-transform:scale(0.5);opacity:0}50%{transform:scale(1.2);-webkit-transform:scale(1.2);opacity:.7}100%{transform:scale(1);-webkit-transform:scale(1);opacity:1}}@-moz-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@-o-keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}@keyframes fadeout{0%{transform:scale(1);-webkit-transform:scale(1)}100%{transform:scale(0);-webkit-transform:scale(0)}}";
-},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js":[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Artist.styl'));
-}
+module.exports = App;
 
-var React       = require('react'),
-    Nav         = require('./Nav'),
-    Footer      = require('./Footer'),
-    InputArtist = require('./InputArtist'),
-    Tracks      = require('./Tracks'),
-    TrackStore  = require('../stores/TrackStore')
-;
+},{"./Artist":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js","./Country":"/Users/koba04/work/github/react-boilerplate/app/components/Country.js","./Top":"/Users/koba04/work/github/react-boilerplate/app/components/Top.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js":[function(require,module,exports){
+"use strict";
 
-module.exports = React.createClass({displayName: 'exports',
-  render:function() {
-    return (
-      React.createElement("div", {className: "artist"}, 
-        React.createElement("header", {className: "page-header"}, 
-          React.createElement("h1", null, "Artist Top Tracks ", React.createElement("small", null, "by Last.FM"))
-        ), 
-        React.createElement(Nav, {current: "artist"}), 
-        React.createElement("article", {className: "main-content"}, 
-          React.createElement(InputArtist, {onHandleSubmit: this.fetchArtist}), 
-          React.createElement(Tracks, null)
-        ), 
-        React.createElement(Footer, null)
-      )
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var React = _interopRequire(require("react"));
+
+var Nav = _interopRequire(require("./Nav"));
+
+var Footer = _interopRequire(require("./Footer"));
+
+var InputArtist = _interopRequire(require("./InputArtist"));
+
+var Tracks = _interopRequire(require("./Tracks"));
+
+var TrackStore = _interopRequire(require("../stores/TrackStore"));
+
+var style = {
+  title: {
+    fontFamily: "'Poiret One', cursive"
+  }
+};
+
+var Artist = React.createClass({
+  displayName: "Artist",
+  render: function render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "header",
+        { className: "page-header" },
+        React.createElement(
+          "h1",
+          { style: style.title },
+          "Artist Top Tracks ",
+          React.createElement(
+            "small",
+            null,
+            "by Last.FM"
+          )
+        )
+      ),
+      React.createElement(Nav, { current: "artist" }),
+      React.createElement(
+        "article",
+        { className: "main-content" },
+        React.createElement(InputArtist, null),
+        React.createElement(Tracks, null)
+      ),
+      React.createElement(Footer, null)
     );
   }
 });
 
+module.exports = Artist;
 
-},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Artist.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.styl","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./InputArtist":"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.styl":[function(require,module,exports){
-module.exports = ".artist h1{font-family:'Poiret One',cursive}";
-},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.js":[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Country.styl'));
-}
+},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./InputArtist":"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.js":[function(require,module,exports){
+"use strict";
 
-var React         = require('react'),
-    Nav           = require('./Nav'),
-    Footer        = require('./Footer'),
-    SelectCountry = require('./SelectCountry'),
-    Tracks        = require('./Tracks'),
-    TrackStore  = require('../stores/TrackStore')
-;
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
 
-module.exports = React.createClass({displayName: 'exports',
-  render:function() {
-    return (
-      React.createElement("div", {className: "country"}, 
-        React.createElement("header", {className: "page-header"}, 
-          React.createElement("h1", null, "Country Top Tracks ", React.createElement("small", null, "by Last.FM"))
-        ), 
-        React.createElement(Nav, {current: "country"}), 
-        React.createElement("article", {className: "main-content"}, 
-          React.createElement(SelectCountry, null), 
-          React.createElement(Tracks, null)
-        ), 
-        React.createElement(Footer, null)
-      )
+var React = _interopRequire(require("react"));
+
+var Nav = _interopRequire(require("./Nav"));
+
+var Footer = _interopRequire(require("./Footer"));
+
+var SelectCountry = _interopRequire(require("./SelectCountry"));
+
+var Tracks = _interopRequire(require("./Tracks"));
+
+var TrackStore = _interopRequire(require("../stores/TrackStore"));
+
+var style = {
+  title: {
+    fontFamily: "'Roboto Condensed', sans-serif"
+  }
+};
+
+var Country = React.createClass({
+  displayName: "Country",
+  render: function render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "header",
+        { className: "page-header" },
+        React.createElement(
+          "h1",
+          { style: style.title },
+          "Country Top Tracks ",
+          React.createElement(
+            "small",
+            null,
+            "by Last.FM"
+          )
+        )
+      ),
+      React.createElement(Nav, { current: "country" }),
+      React.createElement(
+        "article",
+        { className: "main-content" },
+        React.createElement(SelectCountry, null),
+        React.createElement(Tracks, null)
+      ),
+      React.createElement(Footer, null)
     );
   }
 });
 
-},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Country.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Country.styl","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./SelectCountry":"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.styl":[function(require,module,exports){
-module.exports = ".country h1{font-family:'Roboto Condensed',sans-serif}";
-},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js":[function(require,module,exports){
-var React = require('react');
-var Link = require('react-router-component').Link;
+module.exports = Country;
 
-module.exports = React.createClass({displayName: 'exports',
-  render:function() {
-    return (
-      React.createElement("footer", null, 
-        React.createElement("div", {className: "well well-lg"}, 
-          React.createElement(Link, {href: "/"}, "TOP"), " | ", 
-          React.createElement("a", {href: "https://github.com/koba04/react-boilerplate"}, "github")
+},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./SelectCountry":"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js":[function(require,module,exports){
+"use strict";
+
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var React = _interopRequire(require("react"));
+
+var Link = require("react-router-component").Link;
+
+
+var Footer = React.createClass({
+  displayName: "Footer",
+  render: function render() {
+    return React.createElement(
+      "footer",
+      null,
+      React.createElement(
+        "div",
+        { className: "well well-lg" },
+        React.createElement(
+          Link,
+          { href: "/" },
+          "TOP"
+        ),
+        " | ",
+        React.createElement(
+          "a",
+          { href: "https://github.com/koba04/react-boilerplate" },
+          "github"
         )
       )
     );
   }
 });
 
+module.exports = Footer;
 
 },{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js":[function(require,module,exports){
-var React   = require('react/addons'),
-    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
-;
+"use strict";
 
-module.exports = React.createClass({displayName: 'exports',
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var React = _interopRequire(require("react/addons"));
+
+var AppTracksActionCreators = _interopRequire(require("../actions/AppTracksActionCreators"));
+
+var InputArtist = React.createClass({
+  displayName: "InputArtist",
   mixins: [React.addons.LinkedStateMixin],
-  getInitialState:function() {
+  getInitialState: function getInitialState() {
     return {
-      inputArtist: 'radiohead'
+      inputArtist: "radiohead"
     };
   },
-  handleSubmit:function(e) {
+  handleSubmit: function handleSubmit(e) {
     e.preventDefault();
     var artist = this.state.inputArtist;
     if (artist) {
       AppTracksActionCreators.fetchByArtist(artist);
     }
   },
-  render:function() {
-    return (
-      React.createElement("form", {className: "form-horizontal", role: "form", onSubmit: this.handleSubmit}, 
-        React.createElement("div", {className: "form-group"}, 
-          React.createElement("label", {htmlFor: "js-input-location", className: "col-sm-1 control-label"}, "Artist"), 
-          React.createElement("div", {className: "col-sm-11"}, 
-            React.createElement("input", {type: "text", className: "form-control", placeholder: "Input Atrist Name", valueLink: this.linkState('inputArtist'), required: true})
-          )
-        ), 
-        React.createElement("div", {className: "form-group"}, 
-          React.createElement("div", {className: "col-sm-offset-1 col-sm-11"}, 
-            React.createElement("button", {type: "submit", className: "btn btn-primary"}, React.createElement("span", {className: "glyphicon glyphicon-search"}, "search"))
+  render: function render() {
+    return React.createElement(
+      "form",
+      { className: "form-horizontal", role: "form", onSubmit: this.handleSubmit },
+      React.createElement(
+        "div",
+        { className: "form-group" },
+        React.createElement(
+          "label",
+          { htmlFor: "js-input-location", className: "col-sm-1 control-label" },
+          "Artist"
+        ),
+        React.createElement(
+          "div",
+          { className: "col-sm-11" },
+          React.createElement("input", { type: "text", className: "form-control", placeholder: "Input Atrist Name", valueLink: this.linkState("inputArtist"), required: true })
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "form-group" },
+        React.createElement(
+          "div",
+          { className: "col-sm-offset-1 col-sm-11" },
+          React.createElement(
+            "button",
+            { type: "submit", className: "btn btn-primary" },
+            React.createElement(
+              "span",
+              { className: "glyphicon glyphicon-search" },
+              "search"
+            )
           )
         )
       )
@@ -201,173 +321,293 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
+module.exports = InputArtist;
 
 },{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react/addons":"/Users/koba04/work/github/react-boilerplate/node_modules/react/addons.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js":[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Nav.styl'));
-}
+"use strict";
 
-var React = require('react');
-var Link = require('react-router-component').Link;
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
 
-module.exports = React.createClass({displayName: 'exports',
+var React = _interopRequire(require("react"));
+
+var Link = require("react-router-component").Link;
+
+
+var style = {
+  nav: {
+    marginBottom: 20,
+    borderBottom: "solid #eee"
+  }
+};
+
+var Nav = React.createClass({
+  displayName: "Nav",
   propTypes: {
     current: React.PropTypes.string
   },
-  render:function() {
+  render: function render() {
     var artistClassName = React.addons.classSet({
       active: this.props.current === "artist"
     });
     var countryClassName = React.addons.classSet({
       active: this.props.current === "country"
     });
-    return (
-      React.createElement("div", {className: "nav-content"}, 
-        React.createElement("ul", {className: "nav nav-pills nav-justified"}, 
-          React.createElement("li", {className: artistClassName}, React.createElement(Link, {href: "/artist"}, "Artist")), 
-          React.createElement("li", {className: countryClassName}, React.createElement(Link, {href: "/country"}, "Country"))
+    return React.createElement(
+      "ul",
+      { className: "nav nav-pills nav-justified", style: style.nav },
+      React.createElement(
+        "li",
+        { className: artistClassName },
+        React.createElement(
+          Link,
+          { href: "/artist" },
+          "Artist"
+        )
+      ),
+      React.createElement(
+        "li",
+        { className: countryClassName },
+        React.createElement(
+          Link,
+          { href: "/country" },
+          "Country"
         )
       )
     );
   }
 });
 
+module.exports = Nav;
 
-},{"./Nav.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Nav.styl":[function(require,module,exports){
-module.exports = ".nav-content .nav{margin-bottom:20px;border-bottom:solid #eee}";
-},{}],"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js":[function(require,module,exports){
-var React = require('react'),
-    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
-;
+},{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js":[function(require,module,exports){
+"use strict";
 
-module.exports = React.createClass({displayName: 'exports',
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var React = _interopRequire(require("react"));
+
+var AppTracksActionCreators = _interopRequire(require("../actions/AppTracksActionCreators"));
+
+var SelectCountry = React.createClass({
+  displayName: "SelectCountry",
   mixins: [React.addons.LinkedStateMixin],
-  getDefaultProps: function() {
+  getDefaultProps: function getDefaultProps() {
     return {
-      countries: ['Japan', 'United States', 'United Kingdom']
+      countries: ["Japan", "United States", "United Kingdom"]
     };
   },
-  getInitialState:function() {
+  getInitialState: function getInitialState() {
     return {
       selectCountry: this.props.countries[0]
     };
   },
-  handleSubmit:function(e) {
+  handleSubmit: function handleSubmit(e) {
     e.preventDefault();
     var country = this.state.selectCountry;
     if (country) {
       AppTracksActionCreators.fetchByCountry(country);
     }
   },
-  render:function() {
-    var countries = this.props.countries.map( function(country)  {
-      return (
-        React.createElement("option", {value: country, key: country}, country)
+  render: function render() {
+    var countries = this.props.countries.map(function (country) {
+      return React.createElement(
+        "option",
+        { value: country, key: country },
+        country
       );
     });
 
-    return (
-      React.createElement("form", {className: "form-horizontal", role: "form", onSubmit: this.handleSubmit}, 
-        React.createElement("div", {className: "form-group"}, 
-          React.createElement("label", {htmlFor: "inputCountry", className: "col-sm-1 control-label"}, "Country"), 
-          React.createElement("div", {className: "col-sm-5"}, 
-            React.createElement("select", {className: "form-control", valueLink: this.linkState('selectCountry')}, 
-              countries
+    return React.createElement(
+      "form",
+      { className: "form-horizontal", role: "form", onSubmit: this.handleSubmit },
+      React.createElement(
+        "div",
+        { className: "form-group" },
+        React.createElement(
+          "label",
+          { htmlFor: "inputCountry", className: "col-sm-1 control-label" },
+          "Country"
+        ),
+        React.createElement(
+          "div",
+          { className: "col-sm-5" },
+          React.createElement(
+            "select",
+            { className: "form-control", valueLink: this.linkState("selectCountry") },
+            countries
+          )
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "form-group" },
+        React.createElement(
+          "div",
+          { className: "col-sm-offset-1 col-sm-11" },
+          React.createElement(
+            "button",
+            { type: "submit", className: "btn btn-primary" },
+            React.createElement(
+              "span",
+              { className: "glyphicon glyphicon-search" },
+              "search"
             )
           )
-        ), 
-        React.createElement("div", {className: "form-group"}, 
-          React.createElement("div", {className: "col-sm-offset-1 col-sm-11"}, 
-            React.createElement("button", {type: "submit", className: "btn btn-primary"}, React.createElement("span", {className: "glyphicon glyphicon-search"}, "search"))
-          )
         )
       )
     );
   }
 });
 
+module.exports = SelectCountry;
+
 },{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Top.js":[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Top.styl'));
-}
+"use strict";
 
-var React = require('react'),
-    Nav   = require('./Nav'),
-    Footer  = require('./Footer')
-;
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
 
-module.exports = React.createClass({displayName: 'exports',
-  render:function() {
-    return (
-      React.createElement("div", {className: "top"}, 
-        React.createElement("header", {className: "page-header"}, 
-          React.createElement("h1", null, "TopPage")
-        ), 
-        React.createElement(Nav, null), 
-        React.createElement("article", null, 
-          React.createElement("p", null, "Please select artist or country")
-        ), 
-        React.createElement(Footer, null)
-      )
+var React = _interopRequire(require("react"));
+
+var Nav = _interopRequire(require("./Nav"));
+
+var Footer = _interopRequire(require("./Footer"));
+
+var style = {
+  title: {
+    fontFamily: "'Playfair Display SC', serif"
+  }
+};
+
+var Top = React.createClass({
+  displayName: "Top",
+  render: function render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "header",
+        { className: "page-header" },
+        React.createElement(
+          "h1",
+          { style: style.title },
+          "TopPage"
+        )
+      ),
+      React.createElement(Nav, null),
+      React.createElement(
+        "article",
+        null,
+        React.createElement(
+          "p",
+          null,
+          "Please select artist or country"
+        )
+      ),
+      React.createElement(Footer, null)
     );
   }
 });
 
+module.exports = Top;
 
-},{"./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Top.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Top.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Top.styl":[function(require,module,exports){
-module.exports = ".top h1{font-family:'Playfair Display SC',serif}";
-},{}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js":[function(require,module,exports){
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Tracks.styl'));
-}
+},{"./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js":[function(require,module,exports){
+"use strict";
 
-var React       = require('react'),
-    TrackStore  = require('../stores/TrackStore')
-;
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
 
-module.exports = React.createClass({displayName: 'exports',
-  getInitialState:function() {
-    return {
-      tracks: TrackStore.getAll(),
-    };
+var React = _interopRequire(require("react"));
+
+var TrackStore = _interopRequire(require("../stores/TrackStore"));
+
+var style = {
+  track: {
+    fontSize: 20,
+    marginRight: 10
   },
-  componentDidMount: function() {
+  artist: {
+    fontSize: 14,
+    marginRight: 10
+  }
+};
+
+var Tracks = React.createClass({
+  displayName: "Tracks",
+  getInitialState: function getInitialState() {
+    return {
+      tracks: TrackStore.getAll() };
+  },
+  componentDidMount: function () {
     TrackStore.addChangeListener(this._onChange);
   },
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     TrackStore.removeChangeListener(this._onChange);
   },
-  _onChange: function() {
+  _onChange: function () {
     this.setState({ tracks: TrackStore.getAll() });
   },
-  render:function() {
-    var tracks = this.state.tracks.map( function(track, index)  {
-      return (
-        React.createElement("li", {className: "list-group-item", key: index}, 
-          React.createElement("span", {className: "label label-info"}, index+1), 
-          React.createElement("a", {href: track.url, target: "_blank"}, React.createElement("span", {className: "track"}, track.name)), 
-          React.createElement("span", {className: "artist"}, track.artist.name), 
-          React.createElement("small", {className: "listeners glyphicon glyphicon-headphones"}, track.listeners)
+  render: function render() {
+    var tracks = this.state.tracks.map(function (track, index) {
+      return React.createElement(
+        "li",
+        { className: "list-group-item", key: index },
+        React.createElement(
+          "span",
+          { className: "label label-info" },
+          index + 1
+        ),
+        React.createElement(
+          "a",
+          { href: track.url, target: "_blank" },
+          React.createElement(
+            "span",
+            { style: style.track },
+            track.name
+          )
+        ),
+        React.createElement(
+          "span",
+          { style: style.artist },
+          track.artist.name
+        ),
+        React.createElement(
+          "small",
+          { className: "listeners glyphicon glyphicon-headphones" },
+          track.listeners
         )
       );
     });
-    return (
-      React.createElement("div", {className: "tracks"}, 
-        React.createElement("ul", {className: "list-group"}, 
-          tracks
-        )
+    return React.createElement(
+      "div",
+      { className: "tracks" },
+      React.createElement(
+        "ul",
+        { className: "list-group" },
+        tracks
       )
     );
   }
 });
 
+module.exports = Tracks;
 
-},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Tracks.styl":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl","insert-css":"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.styl":[function(require,module,exports){
-module.exports = ".tracks .track{font-size:20px;margin-right:10px}.tracks .artist{font-size:14px;margin-right:10px}";
-},{}],"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js":[function(require,module,exports){
-var keyMirror = require('react/lib/keyMirror');
+},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js":[function(require,module,exports){
+"use strict";
 
-module.exports = {
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var keyMirror = _interopRequire(require("react/lib/keyMirror"));
+
+var AppConstants = {
   ActionTypes: keyMirror({
     RECEIVE_TRACKS_BY_ARTIST: null,
     RECEIVE_TRACKS_BY_COUNTRY: null
@@ -377,16 +617,24 @@ module.exports = {
   })
 };
 
+module.exports = AppConstants;
+
 },{"react/lib/keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js":[function(require,module,exports){
-var Dispatcher    = require('flux').Dispatcher,
-    assign        = require('object-assign'),
-    AppConstants  = require('../constants/AppConstants')
-;
+"use strict";
+
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var Dispatcher = require("flux").Dispatcher;
+var assign = _interopRequire(require("object-assign"));
+
+var AppConstants = _interopRequire(require("../constants/AppConstants"));
 
 var PayloadSources = AppConstants.PayloadSources;
 
-module.exports = assign(new Dispatcher(), {
-  handleViewAction: function(action) {
+var AppDispatcher = assign(new Dispatcher(), {
+  handleViewAction: function handleViewAction(action) {
     this.dispatch({
       source: PayloadSources.VIEW_ACTION,
       action: action
@@ -394,45 +642,58 @@ module.exports = assign(new Dispatcher(), {
   }
 });
 
-},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","flux":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/index.js":[function(require,module,exports){
-// browser's entry point
-var React   = require('react'),
-    App     = require('./components/App')
-;
+module.exports = AppDispatcher;
 
-React.render(
-  React.createElement(App, { path: window.location.pathname }),
-  document
-);
+},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","flux":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/index.js":[function(require,module,exports){
+"use strict";
+
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+// browser's entry point
+
+var React = _interopRequire(require("react"));
+
+var App = _interopRequire(require("./components/App"));
+
+React.render(React.createElement(App, { path: window.location.pathname }), document);
 
 },{"./components/App":"/Users/koba04/work/github/react-boilerplate/app/components/App.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js":[function(require,module,exports){
-var AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants  = require('../constants/AppConstants'),
-    EventEmitter  = require('events').EventEmitter,
-    assign        = require('object-assign')
-;
+"use strict";
+
+
+var _interopRequire = function (obj) {
+  return obj && (obj["default"] || obj);
+};
+
+var AppDispatcher = _interopRequire(require("../dispatcher/AppDispatcher"));
+
+var AppConstants = _interopRequire(require("../constants/AppConstants"));
+
+var EventEmitter = require("events").EventEmitter;
+var assign = _interopRequire(require("object-assign"));
 
 var ActionTypes = AppConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
+var CHANGE_EVENT = "change";
 var tracks = [];
 
 var TrackStore = assign({}, EventEmitter.prototype, {
 
-  emitChange: function() {
+  emitChange: function emitChange() {
     this.emit(CHANGE_EVENT);
   },
-  addChangeListener: function(callback) {
+  addChangeListener: function addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   },
-  removeChangeListener: function(callback) {
+  removeChangeListener: function removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
-  getAll: function() {
+  getAll: function getAll() {
     return tracks;
-  },
-});
+  } });
 
-TrackStore.dispatchToken = AppDispatcher.register(function(payload) {
+TrackStore.dispatchToken = AppDispatcher.register(function (payload) {
   var action = payload.action;
 
   switch (action.type) {
@@ -448,7 +709,6 @@ TrackStore.dispatchToken = AppDispatcher.register(function(payload) {
 });
 
 module.exports = TrackStore;
-
 
 },{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","events":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js":[function(require,module,exports){
 /**
@@ -768,30 +1028,6 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
-
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/insert-css/index.js":[function(require,module,exports){
-var inserted = {};
-
-module.exports = function (css, options) {
-    if (inserted[css]) return;
-    inserted[css] = true;
-    
-    var elem = document.createElement('style');
-    elem.setAttribute('type', 'text/css');
-
-    if ('textContent' in elem) {
-      elem.textContent = css;
-    } else {
-      elem.styleSheet.cssText = css;
-    }
-    
-    var head = document.getElementsByTagName('head')[0];
-    if (options && options.prepend) {
-        head.insertBefore(elem, head.childNodes[0]);
-    } else {
-        head.appendChild(elem);
-    }
-};
 
 },{}],"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js":[function(require,module,exports){
 'use strict';

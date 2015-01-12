@@ -1,8 +1,10 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher'),
-    AppConstants  = require('../constants/AppConstants'),
-    EventEmitter  = require('events').EventEmitter,
-    assign        = require('object-assign')
-;
+'use strict';
+
+
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import AppConstants from '../constants/AppConstants';
+import {EventEmitter} from 'events';
+import assign from 'object-assign';
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -10,21 +12,21 @@ var tracks = [];
 
 var TrackStore = assign({}, EventEmitter.prototype, {
 
-  emitChange: function() {
+  emitChange() {
     this.emit(CHANGE_EVENT);
   },
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   },
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
-  getAll: function() {
+  getAll() {
     return tracks;
   },
 });
 
-TrackStore.dispatchToken = AppDispatcher.register(function(payload) {
+TrackStore.dispatchToken = AppDispatcher.register( payload => {
   var action = payload.action;
 
   switch (action.type) {

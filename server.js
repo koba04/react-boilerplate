@@ -2,8 +2,8 @@ var express = require('express'),
     app     = express(),
     React   = require('react')
 ;
+require("6to5/register");
 
-require('node-jsx').install({ harmony: true });
 var App = require('./app/components/App');
 
 var handler = function(name) {

@@ -1,21 +1,22 @@
-if (typeof window !== "undefined") {
-  require('insert-css')(require('./Country.styl'));
+import React          from 'react';
+import Nav            from './Nav';
+import Footer         from './Footer';
+import SelectCountry  from './SelectCountry';
+import Tracks         from './Tracks';
+import TrackStore     from '../stores/TrackStore';
+
+var style = {
+  title: {
+    fontFamily: "'Roboto Condensed', sans-serif"
+  }
 }
 
-var React         = require('react'),
-    Nav           = require('./Nav'),
-    Footer        = require('./Footer'),
-    SelectCountry = require('./SelectCountry'),
-    Tracks        = require('./Tracks'),
-    TrackStore  = require('../stores/TrackStore')
-;
-
-module.exports = React.createClass({
+var Country = React.createClass({
   render() {
     return (
-      <div className="country">
+      <div>
         <header className="page-header">
-          <h1>Country Top Tracks <small>by Last.FM</small></h1>
+          <h1 style={style.title}>Country Top Tracks <small>by Last.FM</small></h1>
         </header>
         <Nav current="country" />
         <article className="main-content">
@@ -27,3 +28,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+export default Country;

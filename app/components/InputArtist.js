@@ -1,8 +1,7 @@
-var React   = require('react/addons'),
-    AppTracksActionCreators = require('../actions/AppTracksActionCreators')
-;
+import React from 'react/addons';
+import AppTracksActionCreators from '../actions/AppTracksActionCreators';
 
-module.exports = React.createClass({
+var InputArtist = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
   getInitialState() {
     return {
@@ -35,3 +34,4 @@ module.exports = React.createClass({
   }
 });
 
+export default InputArtist;
