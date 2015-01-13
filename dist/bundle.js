@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -34,7 +34,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","superagent":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/lib/client.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/App.js":[function(require,module,exports){
+},{"../constants/AppConstants":11,"../dispatcher/AppDispatcher":12,"superagent":205}],2:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -93,7 +93,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"./Artist":"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js","./Country":"/Users/koba04/work/github/react-boilerplate/app/components/Country.js","./Top":"/Users/koba04/work/github/react-boilerplate/app/components/Top.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Artist.js":[function(require,module,exports){
+},{"./Artist":3,"./Country":4,"./Top":9,"react":204,"react-router-component":21}],3:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -149,7 +149,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./InputArtist":"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Country.js":[function(require,module,exports){
+},{"../stores/TrackStore":14,"./Footer":5,"./InputArtist":6,"./Nav":7,"./Tracks":10,"react":204}],4:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -205,7 +205,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","./SelectCountry":"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js","./Tracks":"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js":[function(require,module,exports){
+},{"../stores/TrackStore":14,"./Footer":5,"./Nav":7,"./SelectCountry":8,"./Tracks":10,"react":204}],5:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -240,7 +240,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/InputArtist.js":[function(require,module,exports){
+},{"react":204,"react-router-component":21}],6:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -305,7 +305,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react/addons":"/Users/koba04/work/github/react-boilerplate/node_modules/react/addons.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js":[function(require,module,exports){
+},{"../actions/AppTracksActionCreators":1,"react/addons":43}],7:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -358,7 +358,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react-router-component":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/SelectCountry.js":[function(require,module,exports){
+},{"react":204,"react-router-component":21}],8:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -440,7 +440,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"../actions/AppTracksActionCreators":"/Users/koba04/work/github/react-boilerplate/app/actions/AppTracksActionCreators.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Top.js":[function(require,module,exports){
+},{"../actions/AppTracksActionCreators":1,"react":204}],9:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -488,7 +488,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"./Footer":"/Users/koba04/work/github/react-boilerplate/app/components/Footer.js","./Nav":"/Users/koba04/work/github/react-boilerplate/app/components/Nav.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/components/Tracks.js":[function(require,module,exports){
+},{"./Footer":5,"./Nav":7,"react":204}],10:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -567,7 +567,7 @@ module.exports = React.createClass({
   }
 });
 
-},{"../stores/TrackStore":"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js":[function(require,module,exports){
+},{"../stores/TrackStore":14,"react":204}],11:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -586,7 +586,7 @@ module.exports = {
   })
 };
 
-},{"react/lib/keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js":[function(require,module,exports){
+},{"react/lib/keyMirror":189}],12:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -609,7 +609,7 @@ module.exports = assign(new Dispatcher(), {
   }
 });
 
-},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","flux":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/app/index.js":[function(require,module,exports){
+},{"../constants/AppConstants":11,"flux":17,"object-assign":20}],13:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -624,7 +624,7 @@ var App = _interopRequire(require("./components/App"));
 
 React.render(React.createElement(App, { path: window.location.pathname }), document);
 
-},{"./components/App":"/Users/koba04/work/github/react-boilerplate/app/components/App.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/app/stores/TrackStore.js":[function(require,module,exports){
+},{"./components/App":2,"react":204}],14:[function(require,module,exports){
 "use strict";
 
 var _interopRequire = function (obj) {
@@ -674,7 +674,375 @@ TrackStore.dispatchToken = AppDispatcher.register(function (payload) {
 
 module.exports = TrackStore;
 
-},{"../constants/AppConstants":"/Users/koba04/work/github/react-boilerplate/app/constants/AppConstants.js","../dispatcher/AppDispatcher":"/Users/koba04/work/github/react-boilerplate/app/dispatcher/AppDispatcher.js","events":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","object-assign":"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/index.js":[function(require,module,exports){
+},{"../constants/AppConstants":11,"../dispatcher/AppDispatcher":12,"events":15,"object-assign":20}],15:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+function EventEmitter() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || undefined;
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+EventEmitter.defaultMaxListeners = 10;
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!isNumber(n) || n < 0 || isNaN(n))
+    throw TypeError('n must be a positive number');
+  this._maxListeners = n;
+  return this;
+};
+
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
+
+  if (!this._events)
+    this._events = {};
+
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events.error ||
+        (isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+        throw er; // Unhandled 'error' event
+      }
+      throw TypeError('Uncaught, unspecified "error" event.');
+    }
+  }
+
+  handler = this._events[type];
+
+  if (isUndefined(handler))
+    return false;
+
+  if (isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        len = arguments.length;
+        args = new Array(len - 1);
+        for (i = 1; i < len; i++)
+          args[i - 1] = arguments[i];
+        handler.apply(this, args);
+    }
+  } else if (isObject(handler)) {
+    len = arguments.length;
+    args = new Array(len - 1);
+    for (i = 1; i < len; i++)
+      args[i - 1] = arguments[i];
+
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++)
+      listeners[i].apply(this, args);
+  }
+
+  return true;
+};
+
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events)
+    this._events = {};
+
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
+  if (this._events.newListener)
+    this.emit('newListener', type,
+              isFunction(listener.listener) ?
+              listener.listener : listener);
+
+  if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  else
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+
+  // Check for listener leak
+  if (isObject(this._events[type]) && !this._events[type].warned) {
+    var m;
+    if (!isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      console.error('(node) warning: possible EventEmitter memory ' +
+                    'leak detected. %d listeners added. ' +
+                    'Use emitter.setMaxListeners() to increase limit.',
+                    this._events[type].length);
+      if (typeof console.trace === 'function') {
+        // not supported in IE 10
+        console.trace();
+      }
+    }
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  var fired = false;
+
+  function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+
+  g.listener = listener;
+  this.on(type, g);
+
+  return this;
+};
+
+// emits a 'removeListener' event iff the listener was removed
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events || !this._events[type])
+    return this;
+
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+
+  if (list === listener ||
+      (isFunction(list.listener) && list.listener === listener)) {
+    delete this._events[type];
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+
+  } else if (isObject(list)) {
+    for (i = length; i-- > 0;) {
+      if (list[i] === listener ||
+          (list[i].listener && list[i].listener === listener)) {
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0)
+      return this;
+
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+
+  if (!this._events)
+    return this;
+
+  // not listening for removeListener, no need to emit
+  if (!this._events.removeListener) {
+    if (arguments.length === 0)
+      this._events = {};
+    else if (this._events[type])
+      delete this._events[type];
+    return this;
+  }
+
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = {};
+    return this;
+  }
+
+  listeners = this._events[type];
+
+  if (isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else {
+    // LIFO order
+    while (listeners.length)
+      this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type])
+    ret = [];
+  else if (isFunction(this._events[type]))
+    ret = [this._events[type]];
+  else
+    ret = this._events[type].slice();
+  return ret;
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  var ret;
+  if (!emitter._events || !emitter._events[type])
+    ret = 0;
+  else if (isFunction(emitter._events[type]))
+    ret = 1;
+  else
+    ret = emitter._events[type].length;
+  return ret;
+};
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+
+},{}],16:[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}],17:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -686,7 +1054,7 @@ module.exports = TrackStore;
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-},{"./lib/Dispatcher":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/Dispatcher.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/Dispatcher.js":[function(require,module,exports){
+},{"./lib/Dispatcher":18}],18:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -938,7 +1306,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/invariant.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/flux/lib/invariant.js":[function(require,module,exports){
+},{"./invariant":19}],19:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -993,7 +1361,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/object-assign/index.js":[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 function ToObject(val) {
@@ -1021,7 +1389,7 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/index.js":[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 
 var Router                    = require('./lib/Router');
@@ -1058,7 +1426,7 @@ module.exports = {
   CaptureClicks: CaptureClicks
 };
 
-},{"./lib/AsyncRouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js","./lib/CaptureClicks":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/CaptureClicks.js","./lib/Link":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Link.js","./lib/NavigatableMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/NavigatableMixin.js","./lib/Route":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Route.js","./lib/RouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js","./lib/Router":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Router.js","./lib/RouterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js","./lib/environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js":[function(require,module,exports){
+},{"./lib/AsyncRouteRenderingMixin":22,"./lib/CaptureClicks":23,"./lib/Link":24,"./lib/NavigatableMixin":25,"./lib/Route":26,"./lib/RouteRenderingMixin":27,"./lib/Router":28,"./lib/RouterMixin":29,"./lib/environment":34}],22:[function(require,module,exports){
 "use strict";
 
 var assign              = Object.assign || require('object.assign');
@@ -1113,7 +1481,7 @@ var AsyncRouteRenderingMixin = {
 
 module.exports = AsyncRouteRenderingMixin;
 
-},{"./RouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react-async/lib/isAsyncComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js","react-async/lib/prefetchAsyncState":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/prefetchAsyncState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/CaptureClicks.js":[function(require,module,exports){
+},{"./RouteRenderingMixin":27,"object.assign":36,"react-async/lib/isAsyncComponent":39,"react-async/lib/prefetchAsyncState":40}],23:[function(require,module,exports){
 "use strict";
 
 var React       = require('react');
@@ -1236,7 +1604,7 @@ var CaptureClicks = React.createClass({
 
 module.exports = CaptureClicks;
 
-},{"./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","urllite/lib/core":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/urllite/lib/core.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Link.js":[function(require,module,exports){
+},{"./environment":34,"object.assign":36,"react":204,"urllite/lib/core":42}],24:[function(require,module,exports){
 "use strict";
 
 var React             = require('react');
@@ -1320,7 +1688,7 @@ var Link = React.createClass({
 
 module.exports = Link;
 
-},{"./NavigatableMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/NavigatableMixin.js","./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/NavigatableMixin.js":[function(require,module,exports){
+},{"./NavigatableMixin":25,"./environment":34,"object.assign":36,"react":204}],25:[function(require,module,exports){
 "use strict";
 
 var React       = require('react');
@@ -1361,7 +1729,7 @@ var NavigatableMixin = {
 
 module.exports = NavigatableMixin;
 
-},{"./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Route.js":[function(require,module,exports){
+},{"./environment":34,"react":204}],26:[function(require,module,exports){
 "use strict";
 
 var React     = require('react');
@@ -1403,7 +1771,7 @@ module.exports = {
   NotFound: createClass('NotFound')
 };
 
-},{"react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouteRenderingMixin.js":[function(require,module,exports){
+},{"react":204}],27:[function(require,module,exports){
 "use strict";
 
 var React  = require('react');
@@ -1430,7 +1798,7 @@ var RouteRenderingMixin = {
 
 module.exports = RouteRenderingMixin;
 
-},{"object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/Router.js":[function(require,module,exports){
+},{"object.assign":36,"react":204,"react/lib/cloneWithProps":156}],28:[function(require,module,exports){
 "use strict";
 
 var React                     = require('react');
@@ -1479,7 +1847,7 @@ module.exports = {
   Pages: createRouter('Pages', 'body')
 }
 
-},{"./AsyncRouteRenderingMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/AsyncRouteRenderingMixin.js","./RouterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/RouterMixin.js":[function(require,module,exports){
+},{"./AsyncRouteRenderingMixin":22,"./RouterMixin":29,"object.assign":36,"react":204}],29:[function(require,module,exports){
 "use strict";
 
 var React         = require('react');
@@ -1694,7 +2062,7 @@ function isString(o) {
 
 module.exports = RouterMixin;
 
-},{"./environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js","./matchRoutes":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/matchRoutes.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/DummyEnvironment.js":[function(require,module,exports){
+},{"./environment":34,"./matchRoutes":35,"object.assign":36,"react":204,"react/lib/invariant":183}],30:[function(require,module,exports){
 "use strict";
 
 var Environment   = require('./Environment');
@@ -1730,7 +2098,7 @@ DummyEnvironment.prototype.stop = emptyFunction;
 
 module.exports = DummyEnvironment;
 
-},{"./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js","react/lib/emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js":[function(require,module,exports){
+},{"./Environment":31,"react/lib/emptyFunction":164}],31:[function(require,module,exports){
 "use strict";
 
 var ReactUpdates  = require('react/lib/ReactUpdates');
@@ -1828,7 +2196,7 @@ Environment.prototype.unregister = function unregister(router) {
 
 module.exports = Environment;
 
-},{"react/lib/ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/HashEnvironment.js":[function(require,module,exports){
+},{"react/lib/ReactUpdates":133}],32:[function(require,module,exports){
 "use strict";
 
 var Environment = require('./Environment');
@@ -1883,7 +2251,7 @@ HashEnvironment.prototype.onHashChange = function() {
 
 module.exports = HashEnvironment;
 
-},{"./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/PathnameEnvironment.js":[function(require,module,exports){
+},{"./Environment":31}],33:[function(require,module,exports){
 "use strict";
 
 var Environment = require('./Environment');
@@ -1933,7 +2301,7 @@ PathnameEnvironment.prototype.onPopState = function(e) {
 
 module.exports = PathnameEnvironment;
 
-},{"./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/index.js":[function(require,module,exports){
+},{"./Environment":31}],34:[function(require,module,exports){
 "use strict";
 /**
  * Routing environment.
@@ -2003,7 +2371,7 @@ module.exports = {
   Mixin: Mixin
 };
 
-},{"./DummyEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/DummyEnvironment.js","./Environment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/Environment.js","./HashEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/HashEnvironment.js","./PathnameEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/environment/PathnameEnvironment.js","react/lib/ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/lib/matchRoutes.js":[function(require,module,exports){
+},{"./DummyEnvironment":30,"./Environment":31,"./HashEnvironment":32,"./PathnameEnvironment":33,"react/lib/ExecutionEnvironment":65}],35:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -2119,7 +2487,7 @@ Match.prototype.getHandler = function() {
 module.exports = matchRoutes;
 
 }).call(this,require('_process'))
-},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js","object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js","react":"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js","react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","url-pattern":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/url-pattern/src/url-pattern.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/index.js":[function(require,module,exports){
+},{"_process":16,"object.assign":36,"react":204,"react/lib/cloneWithProps":156,"react/lib/invariant":183,"url-pattern":41}],36:[function(require,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es6-shim
@@ -2152,7 +2520,7 @@ assignShim.shim = function shimObjectAssign() {
 module.exports = assignShim;
 
 
-},{"object-keys":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/index.js":[function(require,module,exports){
+},{"object-keys":37}],37:[function(require,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
@@ -2223,7 +2591,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./isArguments":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/isArguments.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/object.assign/node_modules/object-keys/isArguments.js":[function(require,module,exports){
+},{"./isArguments":38}],38:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -2242,7 +2610,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js":[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 "use strict";
 
 /**
@@ -2256,7 +2624,7 @@ function isAsyncComponent(component) {
 
 module.exports = isAsyncComponent;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/prefetchAsyncState.js":[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 "use strict";
 
 var invariant         = require('react/lib/invariant');
@@ -2295,7 +2663,7 @@ function prefetchAsyncState(component, cb) {
 
 module.exports = prefetchAsyncState;
 
-},{"./isAsyncComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/react-async/lib/isAsyncComponent.js","react/lib/cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","react/lib/invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/url-pattern/src/url-pattern.js":[function(require,module,exports){
+},{"./isAsyncComponent":39,"react/lib/cloneWithProps":156,"react/lib/invariant":183}],41:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -2404,7 +2772,7 @@ module.exports = {
   }
 };
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react-router-component/node_modules/urllite/lib/core.js":[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 (function() {
   var URL, URL_PATTERN, defaults, urllite,
     __hasProp = {}.hasOwnProperty,
@@ -2487,10 +2855,10 @@ module.exports = {
 
 }).call(this);
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/addons.js":[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 module.exports = require('./lib/ReactWithAddons');
 
-},{"./lib/ReactWithAddons":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactWithAddons.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js":[function(require,module,exports){
+},{"./lib/ReactWithAddons":134}],44:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -2517,7 +2885,7 @@ var AutoFocusMixin = {
 
 module.exports = AutoFocusMixin;
 
-},{"./focusNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/focusNode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/BeforeInputEventPlugin.js":[function(require,module,exports){
+},{"./focusNode":168}],45:[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -2739,7 +3107,7 @@ var BeforeInputEventPlugin = {
 
 module.exports = BeforeInputEventPlugin;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./SyntheticInputEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticInputEvent.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSCore.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPropagators":64,"./ExecutionEnvironment":65,"./SyntheticInputEvent":144,"./keyOf":190}],46:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -2851,7 +3219,7 @@ var CSSCore = {
 module.exports = CSSCore;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSProperty.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],47:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -2967,7 +3335,7 @@ var CSSProperty = {
 
 module.exports = CSSProperty;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSPropertyOperations.js":[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -3102,7 +3470,7 @@ var CSSPropertyOperations = {
 module.exports = CSSPropertyOperations;
 
 }).call(this,require('_process'))
-},{"./CSSProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSProperty.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./camelizeStyleName":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelizeStyleName.js","./dangerousStyleValue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/dangerousStyleValue.js","./hyphenateStyleName":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenateStyleName.js","./memoizeStringOnly":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/memoizeStringOnly.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js":[function(require,module,exports){
+},{"./CSSProperty":47,"./ExecutionEnvironment":65,"./camelizeStyleName":155,"./dangerousStyleValue":162,"./hyphenateStyleName":181,"./memoizeStringOnly":192,"./warning":203,"_process":16}],49:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -3202,7 +3570,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ChangeEventPlugin.js":[function(require,module,exports){
+},{"./Object.assign":71,"./PooledClass":72,"./invariant":183,"_process":16}],50:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -3584,7 +3952,7 @@ var ChangeEventPlugin = {
 
 module.exports = ChangeEventPlugin;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./isEventSupported":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js","./isTextInputElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextInputElement.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ClientReactRootIndex.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPluginHub":61,"./EventPropagators":64,"./ExecutionEnvironment":65,"./ReactUpdates":133,"./SyntheticEvent":142,"./isEventSupported":184,"./isTextInputElement":186,"./keyOf":190}],51:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -3609,7 +3977,7 @@ var ClientReactRootIndex = {
 
 module.exports = ClientReactRootIndex;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CompositionEventPlugin.js":[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -3868,7 +4236,7 @@ var CompositionEventPlugin = {
 
 module.exports = CompositionEventPlugin;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./ReactInputSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js","./SyntheticCompositionEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticCompositionEvent.js","./getTextContentAccessor":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMChildrenOperations.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPropagators":64,"./ExecutionEnvironment":65,"./ReactInputSelection":107,"./SyntheticCompositionEvent":140,"./getTextContentAccessor":178,"./keyOf":190}],53:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -4043,7 +4411,7 @@ var DOMChildrenOperations = {
 module.exports = DOMChildrenOperations;
 
 }).call(this,require('_process'))
-},{"./Danger":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Danger.js","./ReactMultiChildUpdateTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./getTextContentAccessor":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js":[function(require,module,exports){
+},{"./Danger":56,"./ReactMultiChildUpdateTypes":114,"./getTextContentAccessor":178,"./invariant":183,"_process":16}],54:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -4342,7 +4710,7 @@ var DOMProperty = {
 module.exports = DOMProperty;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],55:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -4539,7 +4907,7 @@ var DOMPropertyOperations = {
 module.exports = DOMPropertyOperations;
 
 }).call(this,require('_process'))
-},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./escapeTextForBrowser":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js","./memoizeStringOnly":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/memoizeStringOnly.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Danger.js":[function(require,module,exports){
+},{"./DOMProperty":54,"./escapeTextForBrowser":166,"./memoizeStringOnly":192,"./warning":203,"_process":16}],56:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -4725,7 +5093,7 @@ var Danger = {
 module.exports = Danger;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./createNodesFromMarkup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createNodesFromMarkup.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","./getMarkupWrap":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getMarkupWrap.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DefaultEventPluginOrder.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65,"./createNodesFromMarkup":160,"./emptyFunction":164,"./getMarkupWrap":175,"./invariant":183,"_process":16}],57:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -4765,7 +5133,7 @@ var DefaultEventPluginOrder = [
 
 module.exports = DefaultEventPluginOrder;
 
-},{"./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EnterLeaveEventPlugin.js":[function(require,module,exports){
+},{"./keyOf":190}],58:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -4905,7 +5273,7 @@ var EnterLeaveEventPlugin = {
 
 module.exports = EnterLeaveEventPlugin;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPropagators":64,"./ReactMount":112,"./SyntheticMouseEvent":146,"./keyOf":190}],59:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -4977,7 +5345,7 @@ var EventConstants = {
 
 module.exports = EventConstants;
 
-},{"./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventListener.js":[function(require,module,exports){
+},{"./keyMirror":189}],60:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014 Facebook, Inc.
@@ -5067,7 +5435,7 @@ var EventListener = {
 module.exports = EventListener;
 
 }).call(this,require('_process'))
-},{"./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js":[function(require,module,exports){
+},{"./emptyFunction":164,"_process":16}],61:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5343,7 +5711,7 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
 
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginRegistry.js","./EventPluginUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js","./accumulateInto":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginRegistry.js":[function(require,module,exports){
+},{"./EventPluginRegistry":62,"./EventPluginUtils":63,"./accumulateInto":152,"./forEachAccumulated":169,"./invariant":183,"_process":16}],62:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5623,7 +5991,7 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],63:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5844,7 +6212,7 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
 
 }).call(this,require('_process'))
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js":[function(require,module,exports){
+},{"./EventConstants":59,"./invariant":183,"_process":16}],64:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -5986,7 +6354,7 @@ var EventPropagators = {
 module.exports = EventPropagators;
 
 }).call(this,require('_process'))
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./accumulateInto":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPluginHub":61,"./accumulateInto":152,"./forEachAccumulated":169,"_process":16}],65:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -6031,7 +6399,7 @@ var ExecutionEnvironment = {
 
 module.exports = ExecutionEnvironment;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/HTMLDOMPropertyConfig.js":[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -6217,7 +6585,7 @@ var HTMLDOMPropertyConfig = {
 
 module.exports = HTMLDOMPropertyConfig;
 
-},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedStateMixin.js":[function(require,module,exports){
+},{"./DOMProperty":54,"./ExecutionEnvironment":65}],67:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -6258,7 +6626,7 @@ var LinkedStateMixin = {
 
 module.exports = LinkedStateMixin;
 
-},{"./ReactLink":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLink.js","./ReactStateSetters":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactStateSetters.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js":[function(require,module,exports){
+},{"./ReactLink":110,"./ReactStateSetters":127}],68:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6414,7 +6782,7 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
 
 }).call(this,require('_process'))
-},{"./ReactPropTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypes.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LocalEventTrapMixin.js":[function(require,module,exports){
+},{"./ReactPropTypes":121,"./invariant":183,"_process":16}],69:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -6464,7 +6832,7 @@ var LocalEventTrapMixin = {
 module.exports = LocalEventTrapMixin;
 
 }).call(this,require('_process'))
-},{"./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./accumulateInto":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/MobileSafariClickEventPlugin.js":[function(require,module,exports){
+},{"./ReactBrowserEventEmitter":75,"./accumulateInto":152,"./forEachAccumulated":169,"./invariant":183,"_process":16}],70:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -6522,7 +6890,7 @@ var MobileSafariClickEventPlugin = {
 
 module.exports = MobileSafariClickEventPlugin;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js":[function(require,module,exports){
+},{"./EventConstants":59,"./emptyFunction":164}],71:[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -6569,7 +6937,7 @@ function assign(target, sources) {
 
 module.exports = assign;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js":[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6685,7 +7053,7 @@ var PooledClass = {
 module.exports = PooledClass;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],73:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6868,12 +7236,12 @@ if ("production" !== process.env.NODE_ENV) {
 
 // Version exists only in the open-source version of React, not in Facebook's
 // internal version.
-React.version = '0.12.0';
+React.version = '0.12.1';
 
 module.exports = React;
 
 }).call(this,require('_process'))
-},{"./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./EventPluginUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactChildren.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactContext":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactDOMComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMComponent.js","./ReactDefaultInjection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultInjection.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactPropTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypes.js","./ReactServerRendering":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRendering.js","./ReactTextComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js","./deprecated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js","./onlyChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/onlyChild.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js":[function(require,module,exports){
+},{"./DOMPropertyOperations":55,"./EventPluginUtils":63,"./ExecutionEnvironment":65,"./Object.assign":71,"./ReactChildren":78,"./ReactComponent":79,"./ReactCompositeComponent":82,"./ReactContext":83,"./ReactCurrentOwner":84,"./ReactDOM":85,"./ReactDOMComponent":87,"./ReactDefaultInjection":97,"./ReactElement":100,"./ReactElementValidator":101,"./ReactInstanceHandles":108,"./ReactLegacyElement":109,"./ReactMount":112,"./ReactMultiChild":113,"./ReactPerf":117,"./ReactPropTypes":121,"./ReactServerRendering":125,"./ReactTextComponent":129,"./deprecated":163,"./onlyChild":194,"_process":16}],74:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -6916,7 +7284,7 @@ var ReactBrowserComponentMixin = {
 module.exports = ReactBrowserComponentMixin;
 
 }).call(this,require('_process'))
-},{"./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js":[function(require,module,exports){
+},{"./ReactEmptyComponent":102,"./ReactMount":112,"./invariant":183,"_process":16}],75:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -7271,7 +7639,7 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
 
 module.exports = ReactBrowserEventEmitter;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./EventPluginRegistry":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginRegistry.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactEventEmitterMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventEmitterMixin.js","./ViewportMetrics":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ViewportMetrics.js","./isEventSupported":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroup.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPluginHub":61,"./EventPluginRegistry":62,"./Object.assign":71,"./ReactEventEmitterMixin":104,"./ViewportMetrics":151,"./isEventSupported":184}],76:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -7338,7 +7706,7 @@ var ReactCSSTransitionGroup = React.createClass({
 
 module.exports = ReactCSSTransitionGroup;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactCSSTransitionGroupChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroupChild.js","./ReactTransitionGroup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionGroup.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroupChild.js":[function(require,module,exports){
+},{"./Object.assign":71,"./React":73,"./ReactCSSTransitionGroupChild":77,"./ReactTransitionGroup":132}],77:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -7473,7 +7841,7 @@ var ReactCSSTransitionGroupChild = React.createClass({
 module.exports = ReactCSSTransitionGroupChild;
 
 }).call(this,require('_process'))
-},{"./CSSCore":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSCore.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactTransitionEvents":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionEvents.js","./onlyChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/onlyChild.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactChildren.js":[function(require,module,exports){
+},{"./CSSCore":46,"./React":73,"./ReactTransitionEvents":131,"./onlyChild":194,"_process":16}],78:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -7623,7 +7991,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 }).call(this,require('_process'))
-},{"./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./traverseAllChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/traverseAllChildren.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js":[function(require,module,exports){
+},{"./PooledClass":72,"./traverseAllChildren":201,"./warning":203,"_process":16}],79:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -8066,7 +8434,7 @@ var ReactComponent = {
 module.exports = ReactComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactOwner.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentBrowserEnvironment.js":[function(require,module,exports){
+},{"./Object.assign":71,"./ReactElement":100,"./ReactOwner":116,"./ReactUpdates":133,"./invariant":183,"./keyMirror":189,"_process":16}],80:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -8188,7 +8556,7 @@ var ReactComponentBrowserEnvironment = {
 module.exports = ReactComponentBrowserEnvironment;
 
 }).call(this,require('_process'))
-},{"./ReactDOMIDOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMIDOperations.js","./ReactMarkupChecksum":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMarkupChecksum.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactReconcileTransaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactReconcileTransaction.js","./getReactRootElementInContainer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getReactRootElementInContainer.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./setInnerHTML":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/setInnerHTML.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentWithPureRenderMixin.js":[function(require,module,exports){
+},{"./ReactDOMIDOperations":89,"./ReactMarkupChecksum":111,"./ReactMount":112,"./ReactPerf":117,"./ReactReconcileTransaction":123,"./getReactRootElementInContainer":177,"./invariant":183,"./setInnerHTML":197,"_process":16}],81:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -8237,7 +8605,7 @@ var ReactComponentWithPureRenderMixin = {
 
 module.exports = ReactComponentWithPureRenderMixin;
 
-},{"./shallowEqual":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shallowEqual.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js":[function(require,module,exports){
+},{"./shallowEqual":198}],82:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -9550,7 +9918,7 @@ var ReactCompositeComponentMixin = {
       boundMethod.__reactBoundArguments = null;
       var componentName = component.constructor.displayName;
       var _bind = boundMethod.bind;
-      boundMethod.bind = function(newThis ) {var args=Array.prototype.slice.call(arguments,1);
+      boundMethod.bind = function(newThis ) {for (var args=[],$__0=1,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
         // User is trying to bind() an autobound method; we effectively will
         // ignore the value of "this" that the user is trying to use, so
         // let's warn.
@@ -9677,7 +10045,7 @@ var ReactCompositeComponent = {
 module.exports = ReactCompositeComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactContext":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js","./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactErrorUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactErrorUtils.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactOwner.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactPropTransferer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTransferer.js","./ReactPropTypeLocationNames":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocationNames.js","./ReactPropTypeLocations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocations.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./mapObject":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/mapObject.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js","./shouldUpdateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js":[function(require,module,exports){
+},{"./Object.assign":71,"./ReactComponent":79,"./ReactContext":83,"./ReactCurrentOwner":84,"./ReactElement":100,"./ReactElementValidator":101,"./ReactEmptyComponent":102,"./ReactErrorUtils":103,"./ReactLegacyElement":109,"./ReactOwner":116,"./ReactPerf":117,"./ReactPropTransferer":118,"./ReactPropTypeLocationNames":119,"./ReactPropTypeLocations":120,"./ReactUpdates":133,"./instantiateReactComponent":182,"./invariant":183,"./keyMirror":189,"./keyOf":190,"./mapObject":191,"./monitorCodeUse":193,"./shouldUpdateReactComponent":199,"./warning":203,"_process":16}],83:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -9739,7 +10107,7 @@ var ReactContext = {
 
 module.exports = ReactContext;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js":[function(require,module,exports){
+},{"./Object.assign":71}],84:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -9773,7 +10141,7 @@ var ReactCurrentOwner = {
 
 module.exports = ReactCurrentOwner;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js":[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -9956,7 +10324,7 @@ var ReactDOM = mapObject({
 module.exports = ReactDOM;
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./mapObject":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/mapObject.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMButton.js":[function(require,module,exports){
+},{"./ReactElement":100,"./ReactElementValidator":101,"./ReactLegacyElement":109,"./mapObject":191,"_process":16}],86:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -10021,7 +10389,7 @@ var ReactDOMButton = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMButton;
 
-},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMComponent.js":[function(require,module,exports){
+},{"./AutoFocusMixin":44,"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100,"./keyMirror":189}],87:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -10508,7 +10876,7 @@ assign(
 module.exports = ReactDOMComponent;
 
 }).call(this,require('_process'))
-},{"./CSSPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSPropertyOperations.js","./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./escapeTextForBrowser":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./isEventSupported":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMForm.js":[function(require,module,exports){
+},{"./CSSPropertyOperations":48,"./DOMProperty":54,"./DOMPropertyOperations":55,"./Object.assign":71,"./ReactBrowserComponentMixin":74,"./ReactBrowserEventEmitter":75,"./ReactComponent":79,"./ReactMount":112,"./ReactMultiChild":113,"./ReactPerf":117,"./escapeTextForBrowser":166,"./invariant":183,"./isEventSupported":184,"./keyOf":190,"./monitorCodeUse":193,"_process":16}],88:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -10558,7 +10926,7 @@ var ReactDOMForm = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMForm;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMIDOperations.js":[function(require,module,exports){
+},{"./EventConstants":59,"./LocalEventTrapMixin":69,"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100}],89:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -10744,7 +11112,7 @@ var ReactDOMIDOperations = {
 module.exports = ReactDOMIDOperations;
 
 }).call(this,require('_process'))
-},{"./CSSPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSPropertyOperations.js","./DOMChildrenOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMChildrenOperations.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./setInnerHTML":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/setInnerHTML.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMImg.js":[function(require,module,exports){
+},{"./CSSPropertyOperations":48,"./DOMChildrenOperations":53,"./DOMPropertyOperations":55,"./ReactMount":112,"./ReactPerf":117,"./invariant":183,"./setInnerHTML":197,"_process":16}],90:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -10792,7 +11160,7 @@ var ReactDOMImg = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMImg;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMInput.js":[function(require,module,exports){
+},{"./EventConstants":59,"./LocalEventTrapMixin":69,"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100}],91:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -10970,7 +11338,7 @@ var ReactDOMInput = ReactCompositeComponent.createClass({
 module.exports = ReactDOMInput;
 
 }).call(this,require('_process'))
-},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMOption.js":[function(require,module,exports){
+},{"./AutoFocusMixin":44,"./DOMPropertyOperations":55,"./LinkedValueUtils":68,"./Object.assign":71,"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100,"./ReactMount":112,"./ReactUpdates":133,"./invariant":183,"_process":16}],92:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -11023,7 +11391,7 @@ var ReactDOMOption = ReactCompositeComponent.createClass({
 module.exports = ReactDOMOption;
 
 }).call(this,require('_process'))
-},{"./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelect.js":[function(require,module,exports){
+},{"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100,"./warning":203,"_process":16}],93:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -11207,7 +11575,7 @@ var ReactDOMSelect = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMSelect;
 
-},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./LinkedValueUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelection.js":[function(require,module,exports){
+},{"./AutoFocusMixin":44,"./LinkedValueUtils":68,"./Object.assign":71,"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100,"./ReactUpdates":133}],94:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -11416,7 +11784,7 @@ var ReactDOMSelection = {
 
 module.exports = ReactDOMSelection;
 
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./getNodeForCharacterOffset":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getNodeForCharacterOffset.js","./getTextContentAccessor":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMTextarea.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65,"./getNodeForCharacterOffset":176,"./getTextContentAccessor":178}],95:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -11557,7 +11925,7 @@ var ReactDOMTextarea = ReactCompositeComponent.createClass({
 module.exports = ReactDOMTextarea;
 
 }).call(this,require('_process'))
-},{"./AutoFocusMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultBatchingStrategy.js":[function(require,module,exports){
+},{"./AutoFocusMixin":44,"./DOMPropertyOperations":55,"./LinkedValueUtils":68,"./Object.assign":71,"./ReactBrowserComponentMixin":74,"./ReactCompositeComponent":82,"./ReactDOM":85,"./ReactElement":100,"./ReactUpdates":133,"./invariant":183,"./warning":203,"_process":16}],96:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -11630,7 +11998,7 @@ var ReactDefaultBatchingStrategy = {
 
 module.exports = ReactDefaultBatchingStrategy;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultInjection.js":[function(require,module,exports){
+},{"./Object.assign":71,"./ReactUpdates":133,"./Transaction":150,"./emptyFunction":164}],97:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -11759,7 +12127,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/BeforeInputEventPlugin.js","./ChangeEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ChangeEventPlugin.js","./ClientReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ClientReactRootIndex.js","./CompositionEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CompositionEventPlugin.js","./DefaultEventPluginOrder":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DefaultEventPluginOrder.js","./EnterLeaveEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EnterLeaveEventPlugin.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./HTMLDOMPropertyConfig":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/HTMLDOMPropertyConfig.js","./MobileSafariClickEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/MobileSafariClickEventPlugin.js","./ReactBrowserComponentMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactComponentBrowserEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentBrowserEnvironment.js","./ReactDOMButton":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMButton.js","./ReactDOMComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMComponent.js","./ReactDOMForm":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMForm.js","./ReactDOMImg":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMImg.js","./ReactDOMInput":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMInput.js","./ReactDOMOption":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMOption.js","./ReactDOMSelect":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelect.js","./ReactDOMTextarea":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMTextarea.js","./ReactDefaultBatchingStrategy":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultBatchingStrategy.js","./ReactDefaultPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerf.js","./ReactEventListener":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventListener.js","./ReactInjection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInjection.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./SVGDOMPropertyConfig":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SVGDOMPropertyConfig.js","./SelectEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SelectEventPlugin.js","./ServerReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ServerReactRootIndex.js","./SimpleEventPlugin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SimpleEventPlugin.js","./createFullPageComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createFullPageComponent.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerf.js":[function(require,module,exports){
+},{"./BeforeInputEventPlugin":45,"./ChangeEventPlugin":50,"./ClientReactRootIndex":51,"./CompositionEventPlugin":52,"./DefaultEventPluginOrder":57,"./EnterLeaveEventPlugin":58,"./ExecutionEnvironment":65,"./HTMLDOMPropertyConfig":66,"./MobileSafariClickEventPlugin":70,"./ReactBrowserComponentMixin":74,"./ReactComponentBrowserEnvironment":80,"./ReactDOMButton":86,"./ReactDOMComponent":87,"./ReactDOMForm":88,"./ReactDOMImg":90,"./ReactDOMInput":91,"./ReactDOMOption":92,"./ReactDOMSelect":93,"./ReactDOMTextarea":95,"./ReactDefaultBatchingStrategy":96,"./ReactDefaultPerf":98,"./ReactEventListener":105,"./ReactInjection":106,"./ReactInstanceHandles":108,"./ReactMount":112,"./SVGDOMPropertyConfig":135,"./SelectEventPlugin":136,"./ServerReactRootIndex":137,"./SimpleEventPlugin":138,"./createFullPageComponent":159,"_process":16}],98:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -11899,7 +12267,7 @@ var ReactDefaultPerf = {
   },
 
   measure: function(moduleName, fnName, func) {
-    return function() {var args=Array.prototype.slice.call(arguments,0);
+    return function() {for (var args=[],$__0=0,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
       var totalTime;
       var rv;
       var start;
@@ -12019,7 +12387,7 @@ var ReactDefaultPerf = {
 
 module.exports = ReactDefaultPerf;
 
-},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./ReactDefaultPerfAnalysis":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerfAnalysis.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./performanceNow":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performanceNow.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerfAnalysis.js":[function(require,module,exports){
+},{"./DOMProperty":54,"./ReactDefaultPerfAnalysis":99,"./ReactMount":112,"./ReactPerf":117,"./performanceNow":196}],99:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12225,7 +12593,7 @@ var ReactDefaultPerfAnalysis = {
 
 module.exports = ReactDefaultPerfAnalysis;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js":[function(require,module,exports){
+},{"./Object.assign":71}],100:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -12471,7 +12839,7 @@ ReactElement.isValidElement = function(object) {
 module.exports = ReactElement;
 
 }).call(this,require('_process'))
-},{"./ReactContext":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElementValidator.js":[function(require,module,exports){
+},{"./ReactContext":83,"./ReactCurrentOwner":84,"./warning":203,"_process":16}],101:[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -12739,7 +13107,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 
-},{"./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocations.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js":[function(require,module,exports){
+},{"./ReactCurrentOwner":84,"./ReactElement":100,"./ReactPropTypeLocations":120,"./monitorCodeUse":193}],102:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -12816,7 +13184,7 @@ var ReactEmptyComponent = {
 module.exports = ReactEmptyComponent;
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactErrorUtils.js":[function(require,module,exports){
+},{"./ReactElement":100,"./invariant":183,"_process":16}],103:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12848,7 +13216,7 @@ var ReactErrorUtils = {
 
 module.exports = ReactErrorUtils;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventEmitterMixin.js":[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -12898,7 +13266,7 @@ var ReactEventEmitterMixin = {
 
 module.exports = ReactEventEmitterMixin;
 
-},{"./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEventListener.js":[function(require,module,exports){
+},{"./EventPluginHub":61}],105:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13082,7 +13450,7 @@ var ReactEventListener = {
 
 module.exports = ReactEventListener;
 
-},{"./EventListener":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventListener.js","./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./getEventTarget":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js","./getUnboundedScrollPosition":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInjection.js":[function(require,module,exports){
+},{"./EventListener":60,"./ExecutionEnvironment":65,"./Object.assign":71,"./PooledClass":72,"./ReactInstanceHandles":108,"./ReactMount":112,"./ReactUpdates":133,"./getEventTarget":174,"./getUnboundedScrollPosition":179}],106:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13122,7 +13490,7 @@ var ReactInjection = {
 
 module.exports = ReactInjection;
 
-},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactNativeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactNativeComponent.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./ReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactRootIndex.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js":[function(require,module,exports){
+},{"./DOMProperty":54,"./EventPluginHub":61,"./ReactBrowserEventEmitter":75,"./ReactComponent":79,"./ReactCompositeComponent":82,"./ReactEmptyComponent":102,"./ReactNativeComponent":115,"./ReactPerf":117,"./ReactRootIndex":124,"./ReactUpdates":133}],107:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13258,7 +13626,7 @@ var ReactInputSelection = {
 
 module.exports = ReactInputSelection;
 
-},{"./ReactDOMSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDOMSelection.js","./containsNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/containsNode.js","./focusNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/focusNode.js","./getActiveElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getActiveElement.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js":[function(require,module,exports){
+},{"./ReactDOMSelection":94,"./containsNode":157,"./focusNode":168,"./getActiveElement":170}],108:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -13593,7 +13961,7 @@ var ReactInstanceHandles = {
 module.exports = ReactInstanceHandles;
 
 }).call(this,require('_process'))
-},{"./ReactRootIndex":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactRootIndex.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js":[function(require,module,exports){
+},{"./ReactRootIndex":124,"./invariant":183,"_process":16}],109:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -13840,7 +14208,7 @@ ReactLegacyElementFactory._isLegacyCallWarningEnabled = true;
 module.exports = ReactLegacyElementFactory;
 
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./monitorCodeUse":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLink.js":[function(require,module,exports){
+},{"./ReactCurrentOwner":84,"./invariant":183,"./monitorCodeUse":193,"./warning":203,"_process":16}],110:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13913,7 +14281,7 @@ ReactLink.PropTypes = {
 
 module.exports = ReactLink;
 
-},{"./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMarkupChecksum.js":[function(require,module,exports){
+},{"./React":73}],111:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -13961,7 +14329,7 @@ var ReactMarkupChecksum = {
 
 module.exports = ReactMarkupChecksum;
 
-},{"./adler32":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/adler32.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js":[function(require,module,exports){
+},{"./adler32":153}],112:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -14659,7 +15027,7 @@ ReactMount.renderComponent = deprecated(
 module.exports = ReactMount;
 
 }).call(this,require('_process'))
-},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./containsNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/containsNode.js","./deprecated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js","./getReactRootElementInContainer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getReactRootElementInContainer.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./shouldUpdateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChild.js":[function(require,module,exports){
+},{"./DOMProperty":54,"./ReactBrowserEventEmitter":75,"./ReactCurrentOwner":84,"./ReactElement":100,"./ReactInstanceHandles":108,"./ReactLegacyElement":109,"./ReactPerf":117,"./containsNode":157,"./deprecated":163,"./getReactRootElementInContainer":177,"./instantiateReactComponent":182,"./invariant":183,"./shouldUpdateReactComponent":199,"./warning":203,"_process":16}],113:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15087,7 +15455,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 
-},{"./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactMultiChildUpdateTypes":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./flattenChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/flattenChildren.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./shouldUpdateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMultiChildUpdateTypes.js":[function(require,module,exports){
+},{"./ReactComponent":79,"./ReactMultiChildUpdateTypes":114,"./flattenChildren":167,"./instantiateReactComponent":182,"./shouldUpdateReactComponent":199}],114:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15120,7 +15488,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 
 module.exports = ReactMultiChildUpdateTypes;
 
-},{"./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactNativeComponent.js":[function(require,module,exports){
+},{"./keyMirror":189}],115:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -15193,7 +15561,7 @@ var ReactNativeComponent = {
 module.exports = ReactNativeComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactOwner.js":[function(require,module,exports){
+},{"./Object.assign":71,"./invariant":183,"_process":16}],116:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -15349,7 +15717,7 @@ var ReactOwner = {
 module.exports = ReactOwner;
 
 }).call(this,require('_process'))
-},{"./emptyObject":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyObject.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js":[function(require,module,exports){
+},{"./emptyObject":165,"./invariant":183,"_process":16}],117:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -15433,7 +15801,7 @@ function _noMeasure(objName, fnName, func) {
 module.exports = ReactPerf;
 
 }).call(this,require('_process'))
-},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTransferer.js":[function(require,module,exports){
+},{"_process":16}],118:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -15600,7 +15968,7 @@ var ReactPropTransferer = {
 module.exports = ReactPropTransferer;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./joinClasses":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/joinClasses.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocationNames.js":[function(require,module,exports){
+},{"./Object.assign":71,"./emptyFunction":164,"./invariant":183,"./joinClasses":188,"./warning":203,"_process":16}],119:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -15628,7 +15996,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = ReactPropTypeLocationNames;
 
 }).call(this,require('_process'))
-},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocations.js":[function(require,module,exports){
+},{"_process":16}],120:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -15652,7 +16020,7 @@ var ReactPropTypeLocations = keyMirror({
 
 module.exports = ReactPropTypeLocations;
 
-},{"./keyMirror":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypes.js":[function(require,module,exports){
+},{"./keyMirror":189}],121:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16006,7 +16374,7 @@ function getPreciseType(propValue) {
 
 module.exports = ReactPropTypes;
 
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocationNames":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTypeLocationNames.js","./deprecated":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPutListenerQueue.js":[function(require,module,exports){
+},{"./ReactElement":100,"./ReactPropTypeLocationNames":119,"./deprecated":163,"./emptyFunction":164}],122:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16062,7 +16430,7 @@ PooledClass.addPoolingTo(ReactPutListenerQueue);
 
 module.exports = ReactPutListenerQueue;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactReconcileTransaction.js":[function(require,module,exports){
+},{"./Object.assign":71,"./PooledClass":72,"./ReactBrowserEventEmitter":75}],123:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16238,7 +16606,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 
-},{"./CallbackQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactInputSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js","./ReactPutListenerQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactRootIndex.js":[function(require,module,exports){
+},{"./CallbackQueue":49,"./Object.assign":71,"./PooledClass":72,"./ReactBrowserEventEmitter":75,"./ReactInputSelection":107,"./ReactPutListenerQueue":122,"./Transaction":150}],124:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16269,7 +16637,7 @@ var ReactRootIndex = {
 
 module.exports = ReactRootIndex;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRendering.js":[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -16349,7 +16717,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./ReactMarkupChecksum":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMarkupChecksum.js","./ReactServerRenderingTransaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRenderingTransaction.js","./instantiateReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactServerRenderingTransaction.js":[function(require,module,exports){
+},{"./ReactElement":100,"./ReactInstanceHandles":108,"./ReactMarkupChecksum":111,"./ReactServerRenderingTransaction":126,"./instantiateReactComponent":182,"./invariant":183,"_process":16}],126:[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -16462,7 +16830,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 
-},{"./CallbackQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactPutListenerQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactStateSetters.js":[function(require,module,exports){
+},{"./CallbackQueue":49,"./Object.assign":71,"./PooledClass":72,"./ReactPutListenerQueue":122,"./Transaction":150,"./emptyFunction":164}],127:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16568,7 +16936,7 @@ ReactStateSetters.Mixin = {
 
 module.exports = ReactStateSetters;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTestUtils.js":[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -16980,7 +17348,7 @@ for (eventType in topLevelTypes) {
 
 module.exports = ReactTestUtils;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginHub.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactBrowserEventEmitter":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactMount":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactMount.js","./ReactTextComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPluginHub":61,"./EventPropagators":64,"./Object.assign":71,"./React":73,"./ReactBrowserEventEmitter":75,"./ReactElement":100,"./ReactMount":112,"./ReactTextComponent":129,"./ReactUpdates":133,"./SyntheticEvent":142}],129:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17086,7 +17454,7 @@ ReactTextComponentFactory.type = ReactTextComponent;
 
 module.exports = ReactTextComponentFactory;
 
-},{"./DOMPropertyOperations":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./ReactComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponent.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./escapeTextForBrowser":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionChildMapping.js":[function(require,module,exports){
+},{"./DOMPropertyOperations":55,"./Object.assign":71,"./ReactComponent":79,"./ReactElement":100,"./escapeTextForBrowser":166}],130:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17187,7 +17555,7 @@ var ReactTransitionChildMapping = {
 
 module.exports = ReactTransitionChildMapping;
 
-},{"./ReactChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactChildren.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionEvents.js":[function(require,module,exports){
+},{"./ReactChildren":78}],131:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17298,7 +17666,7 @@ var ReactTransitionEvents = {
 
 module.exports = ReactTransitionEvents;
 
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionGroup.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65}],132:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17487,7 +17855,7 @@ var ReactTransitionGroup = React.createClass({
 
 module.exports = ReactTransitionGroup;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactTransitionChildMapping":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionChildMapping.js","./cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js":[function(require,module,exports){
+},{"./Object.assign":71,"./React":73,"./ReactTransitionChildMapping":130,"./cloneWithProps":156,"./emptyFunction":164}],133:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -17777,7 +18145,7 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 
 }).call(this,require('_process'))
-},{"./CallbackQueue":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./ReactCurrentOwner":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCurrentOwner.js","./ReactPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPerf.js","./Transaction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactWithAddons.js":[function(require,module,exports){
+},{"./CallbackQueue":49,"./Object.assign":71,"./PooledClass":72,"./ReactCurrentOwner":84,"./ReactPerf":117,"./Transaction":150,"./invariant":183,"./warning":203,"_process":16}],134:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -17831,7 +18199,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = React;
 
 }).call(this,require('_process'))
-},{"./LinkedStateMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/LinkedStateMixin.js","./React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js","./ReactCSSTransitionGroup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCSSTransitionGroup.js","./ReactComponentWithPureRenderMixin":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactComponentWithPureRenderMixin.js","./ReactDefaultPerf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactDefaultPerf.js","./ReactTestUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTestUtils.js","./ReactTransitionGroup":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTransitionGroup.js","./ReactUpdates":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactUpdates.js","./cloneWithProps":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js","./cx":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cx.js","./update":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/update.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SVGDOMPropertyConfig.js":[function(require,module,exports){
+},{"./LinkedStateMixin":67,"./React":73,"./ReactCSSTransitionGroup":76,"./ReactComponentWithPureRenderMixin":81,"./ReactDefaultPerf":98,"./ReactTestUtils":128,"./ReactTransitionGroup":132,"./ReactUpdates":133,"./cloneWithProps":156,"./cx":161,"./update":202,"_process":16}],135:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -17923,7 +18291,7 @@ var SVGDOMPropertyConfig = {
 
 module.exports = SVGDOMPropertyConfig;
 
-},{"./DOMProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/DOMProperty.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SelectEventPlugin.js":[function(require,module,exports){
+},{"./DOMProperty":54}],136:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18118,7 +18486,7 @@ var SelectEventPlugin = {
 
 module.exports = SelectEventPlugin;
 
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./ReactInputSelection":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInputSelection.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./getActiveElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getActiveElement.js","./isTextInputElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextInputElement.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./shallowEqual":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shallowEqual.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ServerReactRootIndex.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPropagators":64,"./ReactInputSelection":107,"./SyntheticEvent":142,"./getActiveElement":170,"./isTextInputElement":186,"./keyOf":190,"./shallowEqual":198}],137:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18149,7 +18517,7 @@ var ServerReactRootIndex = {
 
 module.exports = ServerReactRootIndex;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SimpleEventPlugin.js":[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -18577,7 +18945,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 
 }).call(this,require('_process'))
-},{"./EventConstants":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventConstants.js","./EventPluginUtils":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPluginUtils.js","./EventPropagators":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/EventPropagators.js","./SyntheticClipboardEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticClipboardEvent.js","./SyntheticDragEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticDragEvent.js","./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./SyntheticFocusEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticFocusEvent.js","./SyntheticKeyboardEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticKeyboardEvent.js","./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js","./SyntheticTouchEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticTouchEvent.js","./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./SyntheticWheelEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticWheelEvent.js","./getEventCharCode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticClipboardEvent.js":[function(require,module,exports){
+},{"./EventConstants":59,"./EventPluginUtils":63,"./EventPropagators":64,"./SyntheticClipboardEvent":139,"./SyntheticDragEvent":141,"./SyntheticEvent":142,"./SyntheticFocusEvent":143,"./SyntheticKeyboardEvent":145,"./SyntheticMouseEvent":146,"./SyntheticTouchEvent":147,"./SyntheticUIEvent":148,"./SyntheticWheelEvent":149,"./getEventCharCode":171,"./invariant":183,"./keyOf":190,"./warning":203,"_process":16}],139:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18623,7 +18991,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 module.exports = SyntheticClipboardEvent;
 
 
-},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticCompositionEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":142}],140:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18669,7 +19037,7 @@ SyntheticEvent.augmentClass(
 module.exports = SyntheticCompositionEvent;
 
 
-},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticDragEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":142}],141:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18708,7 +19076,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
 
-},{"./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js":[function(require,module,exports){
+},{"./SyntheticMouseEvent":146}],142:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18866,7 +19234,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.threeArgumentPooler);
 
 module.exports = SyntheticEvent;
 
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/PooledClass.js","./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","./getEventTarget":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticFocusEvent.js":[function(require,module,exports){
+},{"./Object.assign":71,"./PooledClass":72,"./emptyFunction":164,"./getEventTarget":174}],143:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -18905,7 +19273,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
 
-},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticInputEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":148}],144:[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -18952,7 +19320,7 @@ SyntheticEvent.augmentClass(
 module.exports = SyntheticInputEvent;
 
 
-},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticKeyboardEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":142}],145:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19039,7 +19407,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
 
-},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./getEventCharCode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js","./getEventKey":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventKey.js","./getEventModifierState":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":148,"./getEventCharCode":171,"./getEventKey":172,"./getEventModifierState":173}],146:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19122,7 +19490,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
 
-},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./ViewportMetrics":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ViewportMetrics.js","./getEventModifierState":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticTouchEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":148,"./ViewportMetrics":151,"./getEventModifierState":173}],147:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19170,7 +19538,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
 
-},{"./SyntheticUIEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js","./getEventModifierState":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticUIEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":148,"./getEventModifierState":173}],148:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19232,7 +19600,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
 
-},{"./SyntheticEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticEvent.js","./getEventTarget":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticWheelEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":142,"./getEventTarget":174}],149:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19293,7 +19661,7 @@ SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
 
-},{"./SyntheticMouseEvent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/SyntheticMouseEvent.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Transaction.js":[function(require,module,exports){
+},{"./SyntheticMouseEvent":146}],150:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -19534,7 +19902,7 @@ var Transaction = {
 module.exports = Transaction;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ViewportMetrics.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],151:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19566,7 +19934,7 @@ var ViewportMetrics = {
 
 module.exports = ViewportMetrics;
 
-},{"./getUnboundedScrollPosition":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/accumulateInto.js":[function(require,module,exports){
+},{"./getUnboundedScrollPosition":179}],152:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -19632,7 +20000,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/adler32.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],153:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19666,7 +20034,7 @@ function adler32(data) {
 
 module.exports = adler32;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelize.js":[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19698,7 +20066,7 @@ function camelize(string) {
 
 module.exports = camelize;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelizeStyleName.js":[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -19740,7 +20108,7 @@ function camelizeStyleName(string) {
 
 module.exports = camelizeStyleName;
 
-},{"./camelize":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/camelize.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cloneWithProps.js":[function(require,module,exports){
+},{"./camelize":154}],156:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -19799,7 +20167,7 @@ function cloneWithProps(child, props) {
 module.exports = cloneWithProps;
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactPropTransferer":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactPropTransferer.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/containsNode.js":[function(require,module,exports){
+},{"./ReactElement":100,"./ReactPropTransferer":118,"./keyOf":190,"./warning":203,"_process":16}],157:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19843,7 +20211,7 @@ function containsNode(outerNode, innerNode) {
 
 module.exports = containsNode;
 
-},{"./isTextNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextNode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createArrayFrom.js":[function(require,module,exports){
+},{"./isTextNode":187}],158:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -19929,7 +20297,7 @@ function createArrayFrom(obj) {
 
 module.exports = createArrayFrom;
 
-},{"./toArray":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/toArray.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createFullPageComponent.js":[function(require,module,exports){
+},{"./toArray":200}],159:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -19990,7 +20358,7 @@ function createFullPageComponent(tag) {
 module.exports = createFullPageComponent;
 
 }).call(this,require('_process'))
-},{"./ReactCompositeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactCompositeComponent.js","./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createNodesFromMarkup.js":[function(require,module,exports){
+},{"./ReactCompositeComponent":82,"./ReactElement":100,"./invariant":183,"_process":16}],160:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20080,7 +20448,7 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./createArrayFrom":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/createArrayFrom.js","./getMarkupWrap":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getMarkupWrap.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/cx.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65,"./createArrayFrom":158,"./getMarkupWrap":175,"./invariant":183,"_process":16}],161:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20119,7 +20487,7 @@ function cx(classNames) {
 
 module.exports = cx;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/dangerousStyleValue.js":[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20177,7 +20545,7 @@ function dangerousStyleValue(name, value) {
 
 module.exports = dangerousStyleValue;
 
-},{"./CSSProperty":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/CSSProperty.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/deprecated.js":[function(require,module,exports){
+},{"./CSSProperty":47}],163:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20228,7 +20596,7 @@ function deprecated(namespace, oldName, newName, ctx, fn) {
 module.exports = deprecated;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js":[function(require,module,exports){
+},{"./Object.assign":71,"./warning":203,"_process":16}],164:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20262,7 +20630,7 @@ emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyObject.js":[function(require,module,exports){
+},{}],165:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20286,7 +20654,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = emptyObject;
 
 }).call(this,require('_process'))
-},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/escapeTextForBrowser.js":[function(require,module,exports){
+},{"_process":16}],166:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20327,7 +20695,7 @@ function escapeTextForBrowser(text) {
 
 module.exports = escapeTextForBrowser;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/flattenChildren.js":[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20396,7 +20764,7 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 
 }).call(this,require('_process'))
-},{"./ReactTextComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactTextComponent.js","./traverseAllChildren":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/traverseAllChildren.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/focusNode.js":[function(require,module,exports){
+},{"./ReactTextComponent":129,"./traverseAllChildren":201,"./warning":203,"_process":16}],168:[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -20425,7 +20793,7 @@ function focusNode(node) {
 
 module.exports = focusNode;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/forEachAccumulated.js":[function(require,module,exports){
+},{}],169:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20456,7 +20824,7 @@ var forEachAccumulated = function(arr, cb, scope) {
 
 module.exports = forEachAccumulated;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getActiveElement.js":[function(require,module,exports){
+},{}],170:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20485,7 +20853,7 @@ function getActiveElement() /*?DOMElement*/ {
 
 module.exports = getActiveElement;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js":[function(require,module,exports){
+},{}],171:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20537,7 +20905,7 @@ function getEventCharCode(nativeEvent) {
 
 module.exports = getEventCharCode;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventKey.js":[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20642,7 +21010,7 @@ function getEventKey(nativeEvent) {
 
 module.exports = getEventKey;
 
-},{"./getEventCharCode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventCharCode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventModifierState.js":[function(require,module,exports){
+},{"./getEventCharCode":171}],173:[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -20689,7 +21057,7 @@ function getEventModifierState(nativeEvent) {
 
 module.exports = getEventModifierState;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getEventTarget.js":[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20720,7 +21088,7 @@ function getEventTarget(nativeEvent) {
 
 module.exports = getEventTarget;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getMarkupWrap.js":[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -20837,7 +21205,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getNodeForCharacterOffset.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65,"./invariant":183,"_process":16}],176:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20912,7 +21280,7 @@ function getNodeForCharacterOffset(root, offset) {
 
 module.exports = getNodeForCharacterOffset;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getReactRootElementInContainer.js":[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20947,7 +21315,7 @@ function getReactRootElementInContainer(container) {
 
 module.exports = getReactRootElementInContainer;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getTextContentAccessor.js":[function(require,module,exports){
+},{}],178:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -20984,7 +21352,7 @@ function getTextContentAccessor() {
 
 module.exports = getTextContentAccessor;
 
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/getUnboundedScrollPosition.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65}],179:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21024,7 +21392,7 @@ function getUnboundedScrollPosition(scrollable) {
 
 module.exports = getUnboundedScrollPosition;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenate.js":[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21057,7 +21425,7 @@ function hyphenate(string) {
 
 module.exports = hyphenate;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenateStyleName.js":[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21098,7 +21466,7 @@ function hyphenateStyleName(string) {
 
 module.exports = hyphenateStyleName;
 
-},{"./hyphenate":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/hyphenate.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/instantiateReactComponent.js":[function(require,module,exports){
+},{"./hyphenate":180}],182:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -21212,7 +21580,7 @@ function instantiateReactComponent(element, parentCompositeType) {
 module.exports = instantiateReactComponent;
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactEmptyComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactEmptyComponent.js","./ReactLegacyElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactLegacyElement.js","./ReactNativeComponent":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactNativeComponent.js","./warning":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js":[function(require,module,exports){
+},{"./ReactElement":100,"./ReactEmptyComponent":102,"./ReactLegacyElement":109,"./ReactNativeComponent":115,"./warning":203,"_process":16}],183:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -21269,7 +21637,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isEventSupported.js":[function(require,module,exports){
+},{"_process":16}],184:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21334,7 +21702,7 @@ function isEventSupported(eventNameSuffix, capture) {
 
 module.exports = isEventSupported;
 
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isNode.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65}],185:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21362,7 +21730,7 @@ function isNode(object) {
 
 module.exports = isNode;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextInputElement.js":[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21406,7 +21774,7 @@ function isTextInputElement(elem) {
 
 module.exports = isTextInputElement;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isTextNode.js":[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21431,7 +21799,7 @@ function isTextNode(object) {
 
 module.exports = isTextNode;
 
-},{"./isNode":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/isNode.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/joinClasses.js":[function(require,module,exports){
+},{"./isNode":185}],188:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21472,7 +21840,7 @@ function joinClasses(className/*, ... */) {
 
 module.exports = joinClasses;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyMirror.js":[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -21527,7 +21895,7 @@ var keyMirror = function(obj) {
 module.exports = keyMirror;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],190:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21563,7 +21931,7 @@ var keyOf = function(oneKeyObj) {
 
 module.exports = keyOf;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/mapObject.js":[function(require,module,exports){
+},{}],191:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21616,7 +21984,7 @@ function mapObject(object, callback, context) {
 
 module.exports = mapObject;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/memoizeStringOnly.js":[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21650,7 +22018,7 @@ function memoizeStringOnly(callback) {
 
 module.exports = memoizeStringOnly;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/monitorCodeUse.js":[function(require,module,exports){
+},{}],193:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -21684,7 +22052,7 @@ function monitorCodeUse(eventName, data) {
 module.exports = monitorCodeUse;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/onlyChild.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],194:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -21724,7 +22092,7 @@ function onlyChild(children) {
 module.exports = onlyChild;
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performance.js":[function(require,module,exports){
+},{"./ReactElement":100,"./invariant":183,"_process":16}],195:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21752,7 +22120,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = performance || {};
 
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performanceNow.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65}],196:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21780,7 +22148,7 @@ var performanceNow = performance.now.bind(performance);
 
 module.exports = performanceNow;
 
-},{"./performance":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/performance.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/setInnerHTML.js":[function(require,module,exports){
+},{"./performance":195}],197:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21858,7 +22226,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setInnerHTML;
 
-},{"./ExecutionEnvironment":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shallowEqual.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":65}],198:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21902,7 +22270,7 @@ function shallowEqual(objA, objB) {
 
 module.exports = shallowEqual;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/shouldUpdateReactComponent.js":[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21940,7 +22308,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 
 module.exports = shouldUpdateReactComponent;
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/toArray.js":[function(require,module,exports){
+},{}],200:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -22012,7 +22380,7 @@ function toArray(obj) {
 module.exports = toArray;
 
 }).call(this,require('_process'))
-},{"./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/traverseAllChildren.js":[function(require,module,exports){
+},{"./invariant":183,"_process":16}],201:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22195,7 +22563,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 
 }).call(this,require('_process'))
-},{"./ReactElement":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/ReactInstanceHandles.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/update.js":[function(require,module,exports){
+},{"./ReactElement":100,"./ReactInstanceHandles":108,"./invariant":183,"_process":16}],202:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2014, Facebook, Inc.
@@ -22363,7 +22731,7 @@ function update(value, spec) {
 module.exports = update;
 
 }).call(this,require('_process'))
-},{"./Object.assign":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/Object.assign.js","./invariant":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/invariant.js","./keyOf":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/keyOf.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/warning.js":[function(require,module,exports){
+},{"./Object.assign":71,"./invariant":183,"./keyOf":190,"_process":16}],203:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014, Facebook, Inc.
@@ -22390,7 +22758,7 @@ var emptyFunction = require("./emptyFunction");
 var warning = emptyFunction;
 
 if ("production" !== process.env.NODE_ENV) {
-  warning = function(condition, format ) {var args=Array.prototype.slice.call(arguments,2);
+  warning = function(condition, format ) {for (var args=[],$__0=2,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
     if (format === undefined) {
       throw new Error(
         '`warning(condition, format, ...args)` requires a warning ' +
@@ -22408,10 +22776,10 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"./emptyFunction":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/emptyFunction.js","_process":"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/react/react.js":[function(require,module,exports){
+},{"./emptyFunction":164,"_process":16}],204:[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":"/Users/koba04/work/github/react-boilerplate/node_modules/react/lib/React.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/lib/client.js":[function(require,module,exports){
+},{"./lib/React":73}],205:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -23462,7 +23830,7 @@ request.put = function(url, data, fn){
 
 module.exports = request;
 
-},{"emitter":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/component-emitter/index.js","reduce":"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/reduce-component/index.js"}],"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/component-emitter/index.js":[function(require,module,exports){
+},{"emitter":206,"reduce":207}],206:[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -23628,7 +23996,7 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/superagent/node_modules/reduce-component/index.js":[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 
 /**
  * Reduce `arr` with `fn`.
@@ -23653,395 +24021,4 @@ module.exports = function(arr, fn, initial){
   
   return curr;
 };
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-function EventEmitter() {
-  this._events = this._events || {};
-  this._maxListeners = this._maxListeners || undefined;
-}
-module.exports = EventEmitter;
-
-// Backwards-compat with node 0.10.x
-EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.prototype._events = undefined;
-EventEmitter.prototype._maxListeners = undefined;
-
-// By default EventEmitters will print a warning if more than 10 listeners are
-// added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
-
-// Obviously not all Emitters should be limited to 10. This function allows
-// that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function(n) {
-  if (!isNumber(n) || n < 0 || isNaN(n))
-    throw TypeError('n must be a positive number');
-  this._maxListeners = n;
-  return this;
-};
-
-EventEmitter.prototype.emit = function(type) {
-  var er, handler, len, args, i, listeners;
-
-  if (!this._events)
-    this._events = {};
-
-  // If there is no 'error' event listener then throw.
-  if (type === 'error') {
-    if (!this._events.error ||
-        (isObject(this._events.error) && !this._events.error.length)) {
-      er = arguments[1];
-      if (er instanceof Error) {
-        throw er; // Unhandled 'error' event
-      }
-      throw TypeError('Uncaught, unspecified "error" event.');
-    }
-  }
-
-  handler = this._events[type];
-
-  if (isUndefined(handler))
-    return false;
-
-  if (isFunction(handler)) {
-    switch (arguments.length) {
-      // fast cases
-      case 1:
-        handler.call(this);
-        break;
-      case 2:
-        handler.call(this, arguments[1]);
-        break;
-      case 3:
-        handler.call(this, arguments[1], arguments[2]);
-        break;
-      // slower
-      default:
-        len = arguments.length;
-        args = new Array(len - 1);
-        for (i = 1; i < len; i++)
-          args[i - 1] = arguments[i];
-        handler.apply(this, args);
-    }
-  } else if (isObject(handler)) {
-    len = arguments.length;
-    args = new Array(len - 1);
-    for (i = 1; i < len; i++)
-      args[i - 1] = arguments[i];
-
-    listeners = handler.slice();
-    len = listeners.length;
-    for (i = 0; i < len; i++)
-      listeners[i].apply(this, args);
-  }
-
-  return true;
-};
-
-EventEmitter.prototype.addListener = function(type, listener) {
-  var m;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events)
-    this._events = {};
-
-  // To avoid recursion in the case that type === "newListener"! Before
-  // adding it to the listeners, first emit "newListener".
-  if (this._events.newListener)
-    this.emit('newListener', type,
-              isFunction(listener.listener) ?
-              listener.listener : listener);
-
-  if (!this._events[type])
-    // Optimize the case of one listener. Don't need the extra array object.
-    this._events[type] = listener;
-  else if (isObject(this._events[type]))
-    // If we've already got an array, just append.
-    this._events[type].push(listener);
-  else
-    // Adding the second element, need to change to array.
-    this._events[type] = [this._events[type], listener];
-
-  // Check for listener leak
-  if (isObject(this._events[type]) && !this._events[type].warned) {
-    var m;
-    if (!isUndefined(this._maxListeners)) {
-      m = this._maxListeners;
-    } else {
-      m = EventEmitter.defaultMaxListeners;
-    }
-
-    if (m && m > 0 && this._events[type].length > m) {
-      this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
-                    'leak detected. %d listeners added. ' +
-                    'Use emitter.setMaxListeners() to increase limit.',
-                    this._events[type].length);
-      if (typeof console.trace === 'function') {
-        // not supported in IE 10
-        console.trace();
-      }
-    }
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-EventEmitter.prototype.once = function(type, listener) {
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  var fired = false;
-
-  function g() {
-    this.removeListener(type, g);
-
-    if (!fired) {
-      fired = true;
-      listener.apply(this, arguments);
-    }
-  }
-
-  g.listener = listener;
-  this.on(type, g);
-
-  return this;
-};
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener = function(type, listener) {
-  var list, position, length, i;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events || !this._events[type])
-    return this;
-
-  list = this._events[type];
-  length = list.length;
-  position = -1;
-
-  if (list === listener ||
-      (isFunction(list.listener) && list.listener === listener)) {
-    delete this._events[type];
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-
-  } else if (isObject(list)) {
-    for (i = length; i-- > 0;) {
-      if (list[i] === listener ||
-          (list[i].listener && list[i].listener === listener)) {
-        position = i;
-        break;
-      }
-    }
-
-    if (position < 0)
-      return this;
-
-    if (list.length === 1) {
-      list.length = 0;
-      delete this._events[type];
-    } else {
-      list.splice(position, 1);
-    }
-
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.removeAllListeners = function(type) {
-  var key, listeners;
-
-  if (!this._events)
-    return this;
-
-  // not listening for removeListener, no need to emit
-  if (!this._events.removeListener) {
-    if (arguments.length === 0)
-      this._events = {};
-    else if (this._events[type])
-      delete this._events[type];
-    return this;
-  }
-
-  // emit removeListener for all listeners on all events
-  if (arguments.length === 0) {
-    for (key in this._events) {
-      if (key === 'removeListener') continue;
-      this.removeAllListeners(key);
-    }
-    this.removeAllListeners('removeListener');
-    this._events = {};
-    return this;
-  }
-
-  listeners = this._events[type];
-
-  if (isFunction(listeners)) {
-    this.removeListener(type, listeners);
-  } else {
-    // LIFO order
-    while (listeners.length)
-      this.removeListener(type, listeners[listeners.length - 1]);
-  }
-  delete this._events[type];
-
-  return this;
-};
-
-EventEmitter.prototype.listeners = function(type) {
-  var ret;
-  if (!this._events || !this._events[type])
-    ret = [];
-  else if (isFunction(this._events[type]))
-    ret = [this._events[type]];
-  else
-    ret = this._events[type].slice();
-  return ret;
-};
-
-EventEmitter.listenerCount = function(emitter, type) {
-  var ret;
-  if (!emitter._events || !emitter._events[type])
-    ret = 0;
-  else if (isFunction(emitter._events[type]))
-    ret = 1;
-  else
-    ret = emitter._events[type].length;
-  return ret;
-};
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-
-},{}],"/Users/koba04/work/github/react-boilerplate/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canMutationObserver = typeof window !== 'undefined'
-    && window.MutationObserver;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    var queue = [];
-
-    if (canMutationObserver) {
-        var hiddenDiv = document.createElement("div");
-        var observer = new MutationObserver(function () {
-            var queueList = queue.slice();
-            queue.length = 0;
-            queueList.forEach(function (fn) {
-                fn();
-            });
-        });
-
-        observer.observe(hiddenDiv, { attributes: true });
-
-        return function nextTick(fn) {
-            if (!queue.length) {
-                hiddenDiv.setAttribute('yes', 'no');
-            }
-            queue.push(fn);
-        };
-    }
-
-    if (canPost) {
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-
-},{}]},{},["/Users/koba04/work/github/react-boilerplate/app/index.js"]);
+},{}]},{},[13]);

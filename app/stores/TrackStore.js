@@ -40,5 +40,4 @@ TrackStore.dispatchToken = AppDispatcher.register( payload => {
   }
 });
 
-module.exports = TrackStore;
-
+export default TrackStore;
