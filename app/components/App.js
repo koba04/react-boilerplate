@@ -23,7 +23,7 @@ export default React.createClass({
           <RouteHandler />
         </div>
       </body>
-      <script src="bundle.js?v=20150113"></script>
+      <script src="bundle.js?v=20150130"></script>
       </html>
     );
   }

@@ -92,7 +92,7 @@ module.exports = React.createClass({
           React.createElement(RouteHandler, null)
         )
       ),
-      React.createElement("script", { src: "bundle.js?v=20150113" })
+      React.createElement("script", { src: "bundle.js?v=20150130" })
     );
   }
 });
