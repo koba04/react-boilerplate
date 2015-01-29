@@ -3,9 +3,9 @@
   "version": "0.3.0",
   "description": "my React.js boilerplate",
   "scripts": {
-    "watch": "watchify app/index.js -o dist/bundle.js -v",
-    "build": "browserify app/index.js > dist/bundle.js",
-    "start": "6to5-node server",
+    "watch": "watchify app/browser.js -o dist/bundle.js -v",
+    "build": "browserify app/browser.js > dist/bundle.js",
+    "start": "6to5-node app/server",
     "test": "jest"
   },
   "repository": {
@@ -35,12 +35,14 @@
     "flux": "^2.0.1",
     "object-assign": "^2.0.0",
     "react": "^0.12.0",
-    "react-router-component": "STRML/react-router-component#react-0.12",
+    "react-router": "^0.11.6",
     "superagent": "^0.18.2"
   },
   "browserify": {
     "transform": [
-      [ "6to5ify" ]
+      [
+        "6to5ify"
+      ]
     ]
   },
   "jest": {
