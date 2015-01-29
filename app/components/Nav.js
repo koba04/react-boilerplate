@@ -1,7 +1,7 @@
 'use strict';
 
 import React  from 'react';
-import {Link} from 'react-router-component';
+import {Link} from 'react-router';
 
 export default React.createClass({
   displayName: 'Nav',
@@ -23,8 +23,8 @@ export default React.createClass({
     });
     return (
       <ul className="nav nav-pills nav-justified" style={style.nav}>
-        <li className={artistClassName}><Link href="/artist">Artist</Link></li>
-        <li className={countryClassName}><Link href="/country">Country</Link></li>
+        <li className={artistClassName}><Link to="artist">Artist</Link></li>
+        <li className={countryClassName}><Link to="country">Country</Link></li>
       </ul>
     );
   }

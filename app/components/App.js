@@ -1,10 +1,7 @@
 'use strict';
 
-import React                  from 'react';
-import {Locations, Location}  from 'react-router-component';
-import Top                    from './Top';
-import Artist                 from './Artist';
-import Country                from './Country';
+import React          from 'react';
+import {RouteHandler} from 'react-router';
 
 export default React.createClass({
   displayName: 'App',
@@ -23,11 +20,7 @@ export default React.createClass({
       </head>
       <body>
         <div id="app" className="container">
-          <Locations path={this.props.path}>
-            <Location path="/"        handler={Top}     />
-            <Location path="/artist"  handler={Artist}  />
-            <Location path="/country" handler={Country} />
-          </Locations>
+          <RouteHandler />
         </div>
       </body>
       <script src="bundle.js?v=20150113"></script>
