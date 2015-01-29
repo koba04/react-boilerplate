@@ -10,7 +10,7 @@ sever side rendering & Flux
 ES6 style
 
 * react
-  * react-router-component
+* react-router
 * express
 * browserify
 * 6to5
@@ -27,7 +27,7 @@ npm run watch
 
 ## run server
 ```
-npm run start
+npm start
 ```
 
 ## manual build
