@@ -6,8 +6,10 @@ import Router   from 'react-router';
 import routes   from './routes';
 
 let app = express();
-console.log(__dirname);
+
 app.use(express.static(__dirname+'/../dist'));
+app.get('/favicon.ico', (req, res) => { res.send('') });
+
 app.use((req, res) => {
   Router.run(routes, req.path, (Handler) => {
     res.send(React.renderToString(<Handler path={req.path} />));

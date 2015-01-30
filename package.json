@@ -22,21 +22,21 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
-    "6to5-jest": "^1.0.0",
-    "6to5ify": "^3.1.2",
-    "browserify": "^5.11.0",
+    "6to5-jest": "^3.0.0",
+    "6to5ify": "^4.0.0",
+    "browserify": "^8.1.1",
     "jest-cli": "^0.2.0",
-    "watchify": "^2.1.1"
+    "watchify": "^2.2.1"
   },
   "dependencies": {
-    "6to5": "^2.9.4",
+    "6to5": "^3.1.1",
     "backbone": "~1.1.2",
-    "express": "^4.10.1",
+    "express": "^4.11.1",
     "flux": "^2.0.1",
     "object-assign": "^2.0.0",
     "react": "^0.12.0",
     "react-router": "^0.11.6",
-    "superagent": "^0.18.2"
+    "superagent": "^0.21.0"
   },
   "browserify": {
     "transform": [
