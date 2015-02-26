@@ -13,7 +13,7 @@ ES6 style
 * react-router
 * express
 * browserify
-* 6to5
+* babel
 
 ## setup
 ```
