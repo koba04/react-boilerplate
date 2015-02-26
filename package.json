@@ -1,11 +1,11 @@
 {
   "name": "react-boilerplate",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "my React.js boilerplate",
   "scripts": {
     "watch": "watchify app/browser.js -o dist/bundle.js -v",
     "build": "browserify app/browser.js > dist/bundle.js",
-    "start": "6to5-node app/server",
+    "start": "babel-node app/server",
     "test": "jest"
   },
   "repository": {
@@ -22,36 +22,35 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
-    "6to5-jest": "^3.0.0",
-    "6to5ify": "^4.0.0",
-    "browserify": "^8.1.1",
-    "jest-cli": "^0.2.0",
+    "babel-jest": "^4.0.0",
+    "babelify": "^5.0.3",
+    "browserify": "^9.0.3",
+    "jest-cli": "^0.4.0",
     "watchify": "^2.2.1"
   },
   "dependencies": {
-    "6to5": "^3.1.1",
-    "backbone": "~1.1.2",
+    "babel": "^4.5.5",
     "express": "^4.11.1",
     "flux": "^2.0.1",
     "object-assign": "^2.0.0",
     "react": "^0.12.0",
-    "react-router": "^0.11.6",
+    "react-router": "^0.12.4",
     "superagent": "^0.21.0"
   },
   "browserify": {
     "transform": [
       [
-        "6to5ify"
+        "babelify"
       ]
     ]
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/6to5-jest",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
       "node_modules/react"
     ]
   },
   "engines": {
-    "node": "0.10.33"
+    "node": "0.12.0"
   }
 }
