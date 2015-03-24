@@ -6,7 +6,8 @@
     "watch": "watchify -d app/browser.js -o dist/bundle.js -v",
     "build": "browserify -d app/browser.js > dist/bundle.js",
     "start": "babel-node app/server",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
