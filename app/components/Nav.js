@@ -2,6 +2,7 @@
 
 import React  from 'react';
 import {Link} from 'react-router';
+import classSet from 'classnames';
 
 export default React.createClass({
   displayName: 'Nav',
@@ -15,10 +16,10 @@ export default React.createClass({
         borderBottom: 'solid #eee'
       }
     };
-    let artistClassName = React.addons.classSet({
+    let artistClassName = classSet({
       active: this.props.current === "artist"
     });
-    let countryClassName = React.addons.classSet({
+    let countryClassName = classSet({
       active: this.props.current === "country"
     });
     return (

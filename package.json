@@ -3,8 +3,8 @@
   "version": "0.4.0",
   "description": "my React.js boilerplate",
   "scripts": {
-    "watch": "watchify app/browser.js -o dist/bundle.js -v",
-    "build": "browserify app/browser.js > dist/bundle.js",
+    "watch": "watchify -d app/browser.js -o dist/bundle.js -v",
+    "build": "browserify -d app/browser.js > dist/bundle.js",
     "start": "babel-node app/server",
     "test": "jest"
   },
@@ -23,19 +23,20 @@
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
     "babel-jest": "^4.0.0",
-    "babelify": "^5.0.3",
+    "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "jest-cli": "^0.4.0",
-    "watchify": "^2.2.1"
+    "watchify": "^2.6.0"
   },
   "dependencies": {
-    "babel": "^4.5.5",
-    "express": "^4.11.1",
+    "babel": "^4.7.16",
+    "classnames": "^1.2.0",
+    "express": "^4.12.3",
     "flux": "^2.0.1",
     "object-assign": "^2.0.0",
-    "react": "^0.12.0",
-    "react-router": "^0.12.4",
-    "superagent": "^0.21.0"
+    "react": "^0.13.1",
+    "react-router": "^0.13.1",
+    "superagent": "^1.1.0"
   },
   "browserify": {
     "transform": [
