@@ -24,12 +24,12 @@
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
     "babel-jest": "^4.0.0",
-    "babelify": "^5.0.4",
-    "browserify": "^9.0.3",
     "jest-cli": "^0.4.0",
     "watchify": "^2.6.0"
   },
   "dependencies": {
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
     "babel": "^4.7.16",
     "classnames": "^1.2.0",
     "express": "^4.12.3",
