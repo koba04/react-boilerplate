@@ -8,16 +8,16 @@ export default React.createClass({
     current: React.PropTypes.string
   },
   render() {
-    let style = {
+    const style = {
       nav: {
         marginBottom: 20,
         borderBottom: 'solid #eee'
       }
     };
-    let artistClassName = classSet({
+    const artistClassName = classSet({
       active: this.props.current === "artist"
     });
-    let countryClassName = classSet({
+    const countryClassName = classSet({
       active: this.props.current === "country"
     });
     return (

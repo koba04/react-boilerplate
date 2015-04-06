@@ -18,7 +18,7 @@ export default React.createClass({
     this.setState({ tracks: TrackStore.getAll() });
   },
   render() {
-    let style = {
+    const style = {
       track: {
         fontSize: 20,
         marginRight: 10
@@ -28,7 +28,7 @@ export default React.createClass({
         marginRight: 10
       }
     };
-    let tracks = this.state.tracks.map( (track, index) => {
+    const tracks = this.state.tracks.map( (track, index) => {
       return (
         <li className="list-group-item" key={index}>
           <span className="label label-info">{index+1}</span>

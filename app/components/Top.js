@@ -5,7 +5,7 @@ import Footer from './Footer';
 export default React.createClass({
   displayName: 'Top',
   render() {
-    let style = {
+    const style = {
       title: {
         fontFamily: "'Playfair Display SC', serif"
       }

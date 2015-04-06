@@ -8,7 +8,7 @@ import TrackStore   from '../stores/TrackStore';
 export default React.createClass({
   displayName: 'Artist',
   render() {
-    let style = {
+    const style = {
       title: {
         fontFamily: "'Poiret One', cursive"
       }

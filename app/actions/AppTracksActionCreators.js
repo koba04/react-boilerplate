@@ -2,8 +2,8 @@ import request        from 'superagent';
 import AppDispatcher  from '../dispatcher/AppDispatcher';
 import AppConstants   from '../constants/AppConstants';
 
-let ActionTypes = AppConstants.ActionTypes;
-let urlRoot = "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&";
+const ActionTypes = AppConstants.ActionTypes;
+const urlRoot = "http://ws.audioscrobbler.com/2.0/?api_key=b867bf0fdfe95e6c6dc31a275535f765&format=json&";
 
 // TODO Loading
 export default {

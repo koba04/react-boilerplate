@@ -16,13 +16,13 @@ export default React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    let country = this.state.selectCountry;
+    const country = this.state.selectCountry;
     if (country) {
       AppTracksActionCreators.fetchByCountry(country);
     }
   },
   render() {
-    let countries = this.props.countries.map( country => {
+    const countries = this.props.countries.map( country => {
       return (
         <option value={country} key={country}>{country}</option>
       );

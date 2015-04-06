@@ -11,7 +11,7 @@ export default React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    let artist = this.state.inputArtist;
+    const artist = this.state.inputArtist;
     if (artist) {
       AppTracksActionCreators.fetchByArtist(artist);
     }

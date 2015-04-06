@@ -3,11 +3,11 @@ import assign         from 'object-assign';
 import AppDispatcher  from '../dispatcher/AppDispatcher';
 import AppConstants   from '../constants/AppConstants';
 
-let ActionTypes = AppConstants.ActionTypes;
-let CHANGE_EVENT = 'change';
+const ActionTypes = AppConstants.ActionTypes;
+const CHANGE_EVENT = 'change';
 let tracks = [];
 
-let TrackStore = assign({}, EventEmitter.prototype, {
+const TrackStore = assign({}, EventEmitter.prototype, {
 
   emitChange() {
     this.emit(CHANGE_EVENT);
@@ -24,7 +24,7 @@ let TrackStore = assign({}, EventEmitter.prototype, {
 });
 
 TrackStore.dispatchToken = AppDispatcher.register( payload => {
-  let action = payload.action;
+  const action = payload.action;
 
   switch (action.type) {
     case ActionTypes.RECEIVE_TRACKS_BY_ARTIST:

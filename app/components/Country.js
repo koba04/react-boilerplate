@@ -8,7 +8,7 @@ import TrackStore     from '../stores/TrackStore';
 export default React.createClass({
   displayName: 'Country',
   render() {
-    let style = {
+    const style = {
       title: {
         fontFamily: "'Roboto Condensed', sans-serif"
       }
