@@ -1,5 +1,3 @@
-'use strict';
-
 import React      from 'react';
 import TrackStore from '../stores/TrackStore';
 

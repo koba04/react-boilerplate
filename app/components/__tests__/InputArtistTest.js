@@ -1,5 +1,3 @@
-'use strict';
-
 jest.dontMock('../InputArtist');
 
 import React                    from 'react/addons';

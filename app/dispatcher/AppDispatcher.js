@@ -1,5 +1,3 @@
-'use strict';
-
 import {Dispatcher} from 'flux';
 import assign       from 'object-assign';
 import AppConstants from '../constants/AppConstants';

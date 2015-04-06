@@ -1,5 +1,3 @@
-'use strict';
-
 import request        from 'superagent';
 import AppDispatcher  from '../dispatcher/AppDispatcher';
 import AppConstants   from '../constants/AppConstants';
