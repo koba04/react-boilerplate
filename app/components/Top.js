@@ -2,8 +2,7 @@ import React  from 'react';
 import Nav    from './Nav';
 import Footer from './Footer';
 
-export default React.createClass({
-  displayName: 'Top',
+export default class Top extends React.Component {
   render() {
     const style = {
       title: {
@@ -23,4 +22,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

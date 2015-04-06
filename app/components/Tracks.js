@@ -1,22 +1,22 @@
 import React      from 'react';
 import TrackStore from '../stores/TrackStore';
 
-export default React.createClass({
-  displayName: 'Tracks',
-  getInitialState() {
-    return {
-      tracks: TrackStore.getAll(),
-    };
-  },
-  componentDidMount: function() {
-    TrackStore.addChangeListener(this._onChange);
-  },
-  componentWillUnmount: function() {
-    TrackStore.removeChangeListener(this._onChange);
-  },
-  _onChange: function() {
+export default class Tracks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tracks: TrackStore.getAll()
+    }
+  }
+  componentDidMount() {
+    TrackStore.addChangeListener(this._onChange.bind(this));
+  }
+  componentWillUnmount() {
+    TrackStore.removeChangeListener(this._onChange.bind(this));
+  }
+  _onChange() {
     this.setState({ tracks: TrackStore.getAll() });
-  },
+  }
   render() {
     const style = {
       track: {
@@ -46,4 +46,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

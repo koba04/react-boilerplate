@@ -5,8 +5,7 @@ import InputArtist  from './InputArtist';
 import Tracks       from './Tracks';
 import TrackStore   from '../stores/TrackStore';
 
-export default React.createClass({
-  displayName: 'Artist',
+export default class Artist extends React.Component {
   render() {
     const style = {
       title: {
@@ -27,4 +26,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

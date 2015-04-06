@@ -2,11 +2,12 @@ import React  from 'react';
 import {Link} from 'react-router';
 import classSet from 'classnames';
 
-export default React.createClass({
-  displayName: 'Nav',
-  propTypes: {
-    current: React.PropTypes.string
-  },
+export default class Nav extends React.Component {
+  static get propTypes() {
+    return {
+      current: React.PropTypes.string
+    }
+  }
   render() {
     const style = {
       nav: {
@@ -27,4 +28,4 @@ export default React.createClass({
       </ul>
     );
   }
-});
+}

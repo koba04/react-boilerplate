@@ -5,8 +5,7 @@ import SelectCountry  from './SelectCountry';
 import Tracks         from './Tracks';
 import TrackStore     from '../stores/TrackStore';
 
-export default React.createClass({
-  displayName: 'Country',
+export default class Country extends React.Component {
   render() {
     const style = {
       title: {
@@ -27,4 +26,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

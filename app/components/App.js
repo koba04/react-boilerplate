@@ -1,8 +1,7 @@
 import React          from 'react';
 import {RouteHandler} from 'react-router';
 
-export default React.createClass({
-  displayName: 'App',
+export default class App extends React.Component {
   render() {
     const title = `Artist Top Tracks (${ this.props.path })`;
     return (
@@ -25,4 +24,4 @@ export default React.createClass({
       </html>
     );
   }
-});
+}
