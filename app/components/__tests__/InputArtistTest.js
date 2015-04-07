@@ -21,7 +21,7 @@ describe("inputArtist", () => {
     beforeEach(() => {
       preventDefault = jest.genMockFunction();
       inputArtist.setState({ inputArtist: 'travis' });
-      React.addons.TestUtils.Simulate.submit(inputArtist.getDOMNode(), {
+      React.addons.TestUtils.Simulate.submit(React.findDOMNode(inputArtist), {
         preventDefault: preventDefault
       });
     });
