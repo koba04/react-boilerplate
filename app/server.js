@@ -10,7 +10,7 @@ app.get('/favicon.ico', (req, res) => { res.send('') });
 
 app.use((req, res) => {
   Router.run(routes, req.path, (Handler) => {
-    res.send(React.renderToString(<Handler path={req.path} />));
+    res.send('<!DOCTYPE html>' + React.renderToString(<Handler path={req.path} />));
   });
 });
 
