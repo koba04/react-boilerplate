@@ -7,12 +7,13 @@ export default class Tracks extends React.Component {
     this.state = {
       tracks: TrackStore.getAll()
     }
+    this._onChange = this._onChange.bind(this)
   }
   componentDidMount() {
-    TrackStore.addChangeListener(this._onChange.bind(this));
+    TrackStore.addChangeListener(this._onChange);
   }
   componentWillUnmount() {
-    TrackStore.removeChangeListener(this._onChange.bind(this));
+    TrackStore.removeChangeListener(this._onChange);
   }
   _onChange() {
     this.setState({ tracks: TrackStore.getAll() });
