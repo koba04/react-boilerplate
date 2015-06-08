@@ -1,9 +1,11 @@
 import {EventEmitter} from 'events';
 import assign         from 'object-assign';
 import AppDispatcher  from '../dispatcher/AppDispatcher';
-import AppConstants   from '../constants/AppConstants';
+import {
+  RECEIVE_TRACKS_BY_ARTIST,
+  RECEIVE_TRACKS_BY_COUNTRY
+} from '../constants/AppConstants';
 
-const ActionTypes = AppConstants.ActionTypes;
 const CHANGE_EVENT = 'change';
 let tracks = [];
 
@@ -23,15 +25,14 @@ const TrackStore = assign({}, EventEmitter.prototype, {
   },
 });
 
-TrackStore.dispatchToken = AppDispatcher.register( payload => {
-  const action = payload.action;
+TrackStore.dispatchToken = AppDispatcher.register( action => {
 
   switch (action.type) {
-    case ActionTypes.RECEIVE_TRACKS_BY_ARTIST:
+    case RECEIVE_TRACKS_BY_ARTIST:
       tracks = action.tracks;
       TrackStore.emitChange();
       break;
-    case ActionTypes.RECEIVE_TRACKS_BY_COUNTRY:
+    case RECEIVE_TRACKS_BY_COUNTRY:
       tracks = action.tracks;
       TrackStore.emitChange();
       break;
