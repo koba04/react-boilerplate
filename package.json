@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
-    "babel-jest": "^5.2.0",
-    "jest-cli": "^0.4.10",
+    "babel-jest": "^4.0.0",
+    "jest-cli": "0.4.0",
     "watchify": "^3.2.2"
   },
   "dependencies": {
