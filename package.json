@@ -8,7 +8,8 @@
     "start": "babel-node app/server",
     "test": "jest",
     "lint": "eslint app",
-    "postinstall": "npm run build"
+    "doc": "esdoc -c esdoc.json",
+    "postinstall": "npm run build && npm run doc"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "babel-eslint": "^3.1.18",
     "babel-jest": "^4.0.0",
+    "esdoc": "^0.1.2",
     "eslint": "^0.23.0",
     "eslint-plugin-react": "^2.5.2",
     "jest-cli": "0.4.0",

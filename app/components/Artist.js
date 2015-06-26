@@ -4,7 +4,14 @@ import Footer from './Footer';
 import InputArtist from './InputArtist';
 import Tracks from './Tracks';
 
+/**
+ * Artist page Component
+ */
 export default class Artist extends React.Component {
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     const style = {
       title: {

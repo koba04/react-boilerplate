@@ -1,7 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+/**
+ * footer Component
+ */
 export default class Footer extends React.Component {
+  /**
+   * render
+   * return {ReactElement} markup
+   */
   render() {
     return (
       <footer>
