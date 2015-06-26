@@ -2,12 +2,23 @@ import React from 'react';
 import {Link} from 'react-router';
 import classSet from 'classnames';
 
+/**
+ * nav Component
+ */
 export default class Nav extends React.Component {
+  /**
+   * propTypes
+   * @property {string} current current page type (artist or country)
+   */
   static get propTypes() {
     return {
       current: React.PropTypes.string
     };
   }
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     const style = {
       nav: {

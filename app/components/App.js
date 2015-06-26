@@ -1,12 +1,23 @@
 import React from 'react';
 import {RouteHandler} from 'react-router';
 
+/**
+ * Application component
+ */
 export default class App extends React.Component {
+  /**
+   * propTypes
+   * @property {string} path URL path
+   */
   static get propTypes() {
     return {
       path: React.PropTypes.string
     };
   }
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     const {path} = this.props;
     const title = `Artist Top Tracks (${path})`;

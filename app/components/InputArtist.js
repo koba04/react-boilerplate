@@ -1,23 +1,45 @@
 import React from 'react';
-import AppTracksActionCreators from '../actions/AppTracksActionCreators';
+import {fetchByArtist} from '../actions/AppTracksActionCreators';
 
+/**
+ * input form commponent for artist name
+ */
 export default class InputArtist extends React.Component {
+  /**
+   * constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
+    /**
+     * @private
+     */
     this.state = {
       inputArtist: 'radiohead'
     };
   }
+  /**
+   * handle submit form event
+   * @param {SytheticEvent} e
+   */
   handleSubmit(e) {
     e.preventDefault();
     const artist = this.state.inputArtist;
-    if (artist) AppTracksActionCreators.fetchByArtist(artist);
+    if (artist) fetchByArtist(artist);
   }
+  /**
+   * handle change event at input form
+   * @param {SytheticEvent} e
+   */
   onInputChange(e) {
     this.setState({
       inputArtist: e.target.value
     });
   }
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     return (
       <form className="form-horizontal" role="form" onSubmit={this.handleSubmit.bind(this)} >

@@ -1,38 +1,66 @@
 import React from 'react';
-import AppTracksActionCreators from '../actions/AppTracksActionCreators';
+import {fetchByCountry} from '../actions/AppTracksActionCreators';
 
+/**
+ * select country Component
+ */
 export default class SelectCountry extends React.Component {
+  /**
+   * propTypes
+   * @property {array} selectable counrty list
+   */
   static get propTypes() {
     return {
       countries: React.PropTypes.array
     };
   }
+  /**
+   * default props values
+   */
   static get defaultProps() {
     return {
       countries: ['Japan', 'United States', 'United Kingdom']
     };
   }
+  /**
+   * constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
+    /**
+     * @private
+     */
     this.state = {
       selectCountry: props.countries[0]
     };
   }
+  /**
+   * handle submit form event
+   * @param {SyntheticEvent} e
+   */
   handleSubmit(e) {
     e.preventDefault();
     const country = this.state.selectCountry;
-    if (country) AppTracksActionCreators.fetchByCountry(country);
+    if (country) fetchByCountry(country);
   }
+  /**
+   * handle change event on select options
+   * @param {SyntheticEvent} e
+   */
   onSelectChange(e) {
     this.setState({
       selectCountry: e.target.value
     });
   }
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     const countries = this.props.countries.map(country => (
       <option value={country} key={country}>{country}</option>
     ));
-
     return (
       <form className="form-horizontal" role="form" onSubmit={this.handleSubmit.bind(this)} >
         <div className="form-group">

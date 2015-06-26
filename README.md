@@ -49,3 +49,13 @@ npm test
 ```
 npm run lint
 ```
+
+## documentation
+
+* using ESDoc
+
+```
+npm run doc
+```
+
+* you can see the documentation at http://localhost:5000/esdoc/

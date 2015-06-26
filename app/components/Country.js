@@ -4,7 +4,14 @@ import Footer from './Footer';
 import SelectCountry from './SelectCountry';
 import Tracks from './Tracks';
 
+/**
+ * Country page Component
+ */
 export default class Country extends React.Component {
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     const style = {
       title: {

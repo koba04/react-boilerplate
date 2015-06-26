@@ -1,23 +1,46 @@
 import React from 'react';
 import TrackStore from '../stores/TrackStore';
 
+/**
+ * tracks list Component
+ */
 export default class Tracks extends React.Component {
+  /**
+   * constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
+    /**
+     * @type {object}
+     * @property {array} tracks all tracks
+     */
     this.state = {
       tracks: TrackStore.getAll()
     };
     this._onChange = this._onChange.bind(this);
   }
+
+   /**
+    * @listens {TrackStore} change event
+    */
   componentDidMount() {
     TrackStore.addChangeListener(this._onChange);
   }
+
+  /**
+   * clean up event listener
+   */
   componentWillUnmount() {
     TrackStore.removeChangeListener(this._onChange);
   }
   _onChange() {
     this.setState({ tracks: TrackStore.getAll() });
   }
+  /**
+   * render
+   * @return {ReactElement} markup
+   */
   render() {
     const style = {
       track: {
