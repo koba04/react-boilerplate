@@ -12,8 +12,11 @@ ES6 style
 * react
 * react-router
 * express
+* jest
 * browserify
 * babel
+* eslint
+* esdoc
 
 ## setup
 ```
@@ -51,6 +54,8 @@ npm run lint
 ```
 
 ## documentation
+
+http://react-serverside-rendering.herokuapp.com/esdoc/
 
 * using ESDoc
 

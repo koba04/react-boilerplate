@@ -12,7 +12,8 @@ export default class InputArtist extends React.Component {
   constructor(props) {
     super(props);
     /**
-     * @private
+     * @type {object}
+     * @property {string} inputArtist search artist
      */
     this.state = {
       inputArtist: 'radiohead'

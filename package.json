@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint app",
     "doc": "esdoc -c esdoc.json",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build && npm run doc"
   },
   "repository": {
     "type": "git",

@@ -29,7 +29,8 @@ export default class SelectCountry extends React.Component {
   constructor(props) {
     super(props);
     /**
-     * @private
+     * @type {object}
+     * @property {string} selectCountry selected country
      */
     this.state = {
       selectCountry: props.countries[0]
