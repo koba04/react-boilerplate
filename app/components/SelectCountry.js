@@ -2,10 +2,15 @@ import React from 'react';
 import AppTracksActionCreators from '../actions/AppTracksActionCreators';
 
 export default class SelectCountry extends React.Component {
+  static get propTypes() {
+    return {
+      countries: React.PropTypes.array
+    };
+  }
   static get defaultProps() {
     return {
       countries: ['Japan', 'United States', 'United Kingdom']
-    }
+    };
   }
   constructor(props) {
     super(props);
@@ -16,19 +21,17 @@ export default class SelectCountry extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const country = this.state.selectCountry;
-    if (country) {
-      AppTracksActionCreators.fetchByCountry(country);
-    }
+    if (country) AppTracksActionCreators.fetchByCountry(country);
   }
   onSelectChange(e) {
     this.setState({
       selectCountry: e.target.value
-    })
-  } 
-  render() {
-    const countries = this.props.countries.map( country => {
-      return <option value={country} key={country}>{country}</option>
     });
+  }
+  render() {
+    const countries = this.props.countries.map(country => (
+      <option value={country} key={country}>{country}</option>
+    ));
 
     return (
       <form className="form-horizontal" role="form" onSubmit={this.handleSubmit.bind(this)} >

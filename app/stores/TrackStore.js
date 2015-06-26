@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events';
-import assign         from 'object-assign';
-import AppDispatcher  from '../dispatcher/AppDispatcher';
+import assign from 'object-assign';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   RECEIVE_TRACKS_BY_ARTIST,
   RECEIVE_TRACKS_BY_COUNTRY
@@ -22,7 +22,7 @@ const TrackStore = assign({}, EventEmitter.prototype, {
   },
   getAll() {
     return tracks;
-  },
+  }
 });
 
 TrackStore.dispatchToken = AppDispatcher.register( action => {

@@ -1,0 +1,56 @@
+---
+parser: babel-eslint
+
+plugins:
+  - react
+
+env:
+  browser: true
+  node: true
+  mocha: true
+
+globals:
+  jest: true
+  expect: true
+
+rules:
+  indent: [2, 2, indentSwitchCase: true]
+  brace-style: 2
+  space-after-keywords: 2
+  strict: [2, never]
+  comma-dangle: [2, never]
+  no-unused-expressions: 2
+  eol-last: 2
+  dot-notation: 2
+  dot-location: [2, property]
+  consistent-return: 2
+  no-unused-vars: [2, args: none]
+  quotes: [2, single, avoid-escape]
+  no-shadow: 2
+  no-multi-spaces: 2
+  no-underscore-dangle: 0
+  new-cap: 0
+  no-use-before-define: 0
+  key-spacing: 0
+  no-empty: 0
+  no-undef-init: 0
+  curly: [2, multi]
+  block-scoped-var: 0
+
+  react/display-name: 0
+  react/jsx-boolean-value: [2, always]
+  react/jsx-no-undef: 2
+  react/jsx-quotes: [2, double]
+  react/jsx-sort-prop-types: 0
+  react/jsx-sort-props: 0
+  react/jsx-uses-react: 2
+  react/jsx-uses-vars: 2
+  react/no-did-mount-set-state: 2
+  react/no-did-update-set-state: 2
+  react/no-multi-comp: 2
+  react/no-unknown-property: 2
+  react/prop-types: 2
+  react/react-in-jsx-scope: 2
+  react/self-closing-comp: 2
+  react/sort-comp: 0
+  react/wrap-multilines: [2, {declaration: false, assignment: false}]

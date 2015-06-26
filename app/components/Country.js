@@ -1,9 +1,8 @@
-import React          from 'react';
-import Nav            from './Nav';
-import Footer         from './Footer';
-import SelectCountry  from './SelectCountry';
-import Tracks         from './Tracks';
-import TrackStore     from '../stores/TrackStore';
+import React from 'react';
+import Nav from './Nav';
+import Footer from './Footer';
+import SelectCountry from './SelectCountry';
+import Tracks from './Tracks';
 
 export default class Country extends React.Component {
   render() {
@@ -11,7 +10,7 @@ export default class Country extends React.Component {
       title: {
         fontFamily: "'Roboto Condensed', sans-serif"
       }
-    }
+    };
     return (
       <div>
         <header className="page-header">
