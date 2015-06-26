@@ -41,3 +41,11 @@ npm run build
 ```
 npm test
 ```
+
+## lint
+
+* using ESDoc
+
+```
+npm run lint
+```

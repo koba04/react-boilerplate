@@ -7,6 +7,7 @@
     "build": "browserify -d app/browser.js > dist/bundle.js",
     "start": "babel-node app/server",
     "test": "jest",
+    "lint": "eslint app",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -23,7 +24,10 @@
   },
   "homepage": "https://github.com/koba04/react-boilerplate",
   "devDependencies": {
+    "babel-eslint": "^3.1.18",
     "babel-jest": "^4.0.0",
+    "eslint": "^0.23.0",
+    "eslint-plugin-react": "^2.5.2",
     "jest-cli": "0.4.0",
     "watchify": "^3.2.2"
   },

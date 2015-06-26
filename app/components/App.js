@@ -1,9 +1,15 @@
-import React          from 'react';
+import React from 'react';
 import {RouteHandler} from 'react-router';
 
 export default class App extends React.Component {
+  static get propTypes() {
+    return {
+      path: React.PropTypes.string
+    };
+  }
   render() {
-    const title = `Artist Top Tracks (${ this.props.path })`;
+    const {path} = this.props;
+    const title = `Artist Top Tracks (${path})`;
     return (
       <html lang="ja">
       <head>

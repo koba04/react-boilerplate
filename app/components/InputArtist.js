@@ -1,24 +1,22 @@
-import React                    from 'react';
-import AppTracksActionCreators  from '../actions/AppTracksActionCreators';
+import React from 'react';
+import AppTracksActionCreators from '../actions/AppTracksActionCreators';
 
 export default class InputArtist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       inputArtist: 'radiohead'
-    }
+    };
   }
   handleSubmit(e) {
     e.preventDefault();
     const artist = this.state.inputArtist;
-    if (artist) {
-      AppTracksActionCreators.fetchByArtist(artist);
-    }
+    if (artist) AppTracksActionCreators.fetchByArtist(artist);
   }
   onInputChange(e) {
     this.setState({
       inputArtist: e.target.value
-    })
+    });
   }
   render() {
     return (
@@ -32,7 +30,7 @@ export default class InputArtist extends React.Component {
               placeholder="Input Atrist Name"
               value={this.state.inputArtist}
               onChange={this.onInputChange.bind(this)}
-              required
+              required={true}
             />
           </div>
         </div>

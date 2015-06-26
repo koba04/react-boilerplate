@@ -1,9 +1,8 @@
-import React        from 'react';
-import Nav          from './Nav';
-import Footer       from './Footer';
-import InputArtist  from './InputArtist';
-import Tracks       from './Tracks';
-import TrackStore   from '../stores/TrackStore';
+import React from 'react';
+import Nav from './Nav';
+import Footer from './Footer';
+import InputArtist from './InputArtist';
+import Tracks from './Tracks';
 
 export default class Artist extends React.Component {
   render() {
