@@ -44,7 +44,7 @@ npm test
 
 ## lint
 
-* using ESDoc
+* using ESLint
 
 ```
 npm run lint
