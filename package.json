@@ -47,9 +47,7 @@
   },
   "browserify": {
     "transform": [
-      [
-        "babelify"
-      ]
+      "babelify"
     ]
   },
   "jest": {
