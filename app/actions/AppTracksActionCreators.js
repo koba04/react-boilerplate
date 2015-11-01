@@ -34,7 +34,7 @@ export function fetchByCountry(country) {
     if (err) return console.log(err);
     AppDispatcher.dispatch({
       type: RECEIVE_TRACKS_BY_COUNTRY,
-      tracks: res.body.toptracks.track
+      tracks: res.body.tracks.track
     });
   });
 }
